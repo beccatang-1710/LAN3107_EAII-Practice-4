@@ -141,15 +141,21 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
 
 .meeting-meta {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 6px;
   background: #f4f8ff;
-  padding: 12px 18px;
+  padding: 14px 18px;
   border-radius: 8px;
   border: 1px solid #dbe7f7;
   margin: 10px 0;
   color: #2c4a8f;
   font-weight: 600;
+}
+
+.meeting-meta .m-university {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1c3865;
 }
 
 /* ---- Possible Response / dialogue ---- */
@@ -341,6 +347,83 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
 
 .feature-box ul { padding-left: 20px; margin: 8px 0; }
 .feature-box li { margin-bottom: 6px; }
+
+/* ---- Audio player ---- */
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0 10px;
+}
+.play-all-btn {
+  background: #2c4a8f; color: #fff; border: none; border-radius: 8px;
+  padding: 8px 18px; font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: background 0.2s;
+}
+.play-all-btn:hover { background: #1c3865; }
+.pause-btn {
+  background: #d4a043; color: #fff; border: none; border-radius: 8px;
+  padding: 8px 14px; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.pause-btn:hover { background: #b8892e; }
+.stop-btn {
+  background: #c0392b; color: #fff; border: none; border-radius: 8px;
+  padding: 8px 14px; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.stop-btn:hover { background: #a93226; }
+.speed-label { font-size: 13px; color: #5573b8; margin-left: auto; }
+.speed-select {
+  font-size: 13px; padding: 4px 8px; border: 1px solid #d4e2f5;
+  border-radius: 6px; background: #f4f8ff; color: #33415e; cursor: pointer;
+}
+.now-playing {
+  background: linear-gradient(135deg, #2c4a8f 0%, #5573b8 100%);
+  border-radius: 12px; padding: 12px 18px; margin-bottom: 16px;
+  display: none; animation: fadeUp 0.3s ease both;
+}
+.now-playing.active { display: block; }
+.now-playing-label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.15em; color: rgba(255,255,255,0.65); margin-bottom: 5px;
+}
+.now-playing-text { font-size: 16px; color: #fff; line-height: 1.5; }
+
+.dialogue-table tr.script-row.active { background: #e8f0e0; box-shadow: inset 4px 0 0 #2c4a8f; }
+
+.speaker-btn {
+  width: 42px; height: 42px; border-radius: 10px; border: none; cursor: pointer;
+  font-weight: 700; font-size: 15px; color: #fff; transition: all 0.2s ease;
+  flex-shrink: 0; position: relative; overflow: hidden;
+}
+.speaker-btn:hover { opacity: 0.85; }
+.speaker-btn:active { transform: scale(0.93); }
+.speaker-btn.role-A { background: #5c8260; }
+.speaker-btn.role-B { background: #8c7355; }
+.speaker-btn.role-C { background: #4a6c8f; }
+.speaker-btn.role-D { background: #8a5a3a; }
+.speaker-btn.role-ALL {
+  background: linear-gradient(135deg, #7a9e7e, #4a6c8f);
+  font-size: 11px; letter-spacing: 0.05em;
+}
+.audio-pulse {
+  display: none; width: 8px; height: 8px; border-radius: 50%;
+  background: #f1c40f; position: absolute; top: 4px; right: 4px;
+  animation: pulse 1s infinite;
+}
+.speaker-btn.playing .audio-pulse { display: block; }
+
+.word-wrap { display: inline; }
+.word-wrap .word {
+  display: inline-block; position: relative; transition: color 0.15s; cursor: pointer;
+}
+.word-wrap .word:hover { background: rgba(122,158,126,0.15); border-radius: 4px; }
+.word-wrap .word.speaking { color: #c0392b; font-weight: 700; }
+.word-wrap .word.active { color: #2d6a4f; font-weight: 700; }
+.word-wrap .word.active::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 3px; background: #f1c40f; border-radius: 2px;
+}
 </style>
 </head>
 <body>
@@ -351,11 +434,17 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
 
 <div class="page-header">
   <h1>Essential Workplace Communication: Effective Oral Interaction (LAN3107)</h1>
-  <p>EAII Practice 4 — Meetings: IT Gadgets Fair 2024</p>
+  <p>EAII Practice 4 — Meetings: IT Gadgets Fair 2026</p>
   <p class="presented-by">Presented by Rebecca Tang</p>
 </div>
 
 <div class="container">
+  <div class="cn-toggle-wrap">
+    <label class="cn-toggle">
+      <input type="checkbox" onchange="toggleAllCN(this.checked)">
+      <span>中文翻译</span>
+    </label>
+  </div>
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab(0)">TAB 1 — Task Overview</button>
     <button class="tab-btn" onclick="switchTab(1)">TAB 2 — Possible Response</button>
@@ -364,57 +453,57 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
 
   <!-- ============ TAB 1: TASK OVERVIEW ============ -->
   <div class="tab-content active" id="tab-0">
-    <h1>Task Overview</h1>
+    <h1 data-cn="任務概覽">Task Overview</h1>
 
     <div class="task-section">
-      <p>
+      <p data-cn="你是先鋒大學資訊科技團隊的成員，先鋒大學是香港一所知名大學。你和同事將舉行會議，討論舉辦 IT 產品展2026的計劃。你應該：">
         You are on the information technology team of <strong>Pioneer University</strong>, a prestigious
         university in Hong Kong. You and your colleagues are going to hold a meeting to discuss the launch of
-        the <strong>IT Gadgets Fair 2024</strong>. You should:
+        the <strong>IT Gadgets Fair 2026</strong>. You should:
       </p>
       <ul style="padding-left:20px; margin:10px 0;">
-        <li>give your own suggestion(s) on the agenda items</li>
-        <li>explain the reason(s) for your suggestion(s)</li>
-        <li>listen actively and respond to others' suggestions by expressing preferences, agreement, or disagreement</li>
-        <li>reach a consensus on agenda items 2–4</li>
+        <li data-cn="就各議程項目提出你自己的建議">give your own suggestion(s) on the agenda items</li>
+        <li data-cn="解釋你提出建議的理由">explain the reason(s) for your suggestion(s)</li>
+        <li data-cn="積極聆聽，並透過表達喜好、同意或不同意來回應他人的建議">listen actively and respond to others' suggestions by expressing preferences, agreement, or disagreement</li>
+        <li data-cn="就議程第2至4項達成共識">reach a consensus on agenda items 2–4</li>
       </ul>
-      <p>As a group, you must cover all the agenda items below.</p>
+      <p data-cn="作為一組，你們必須涵蓋以下所有議程項目。">As a group, you must cover all the agenda items below.</p>
     </div>
 
-    <div class="task-section">
-      <h2>Meeting Details</h2>
+    <div class="task-section" style="text-align:center;">
+      <h2 data-cn="會議詳情">Meeting Details</h2>
       <div class="meeting-meta">
-        <span>Pioneer University</span>
-        <span>Information Technology Team</span>
-        <span>16 December 20-- at 2:30 pm in the Meeting Room</span>
+        <span class="m-university">Pioneer University</span>
+        <span data-cn="資訊科技團隊">Information Technology Team</span>
+        <span data-cn="12月16日20--年 下午2時30分 會議室">16 December 20-- at 2:30 pm in the Meeting Room</span>
       </div>
     </div>
 
     <div class="task-section">
-      <h3>Agenda</h3>
+      <h3 data-cn="議程">Agenda</h3>
       <div class="agenda-box">
         <ol style="padding-left:22px;">
-          <li>Open the meeting</li>
-          <li>Fair date</li>
+          <li data-cn="會議開始">Open the meeting</li>
+          <li data-cn="展覽日期">Fair date</li>
           <li>
-            <span style="font-weight:600;">Arrangements of the fair</span>
-            <p style="margin-top:4px; font-weight:600; color:#2c4a8f;">Possible arrangements:</p>
+            <span style="font-weight:600;" data-cn="展覽的安排">Arrangements of the fair</span>
+            <p style="margin-top:4px; font-weight:600; color:#2c4a8f;" data-cn="可能的安排：">Possible arrangements:</p>
             <ul style="padding-left:20px;">
-              <li>On-campus venue</li>
-              <li>Types of gadgets exhibited</li>
-              <li>Special offers for students</li>
-              <li>Promotional gifts</li>
+              <li data-cn="校內場地">On-campus venue</li>
+              <li data-cn="展出產品的類型">Types of gadgets exhibited</li>
+              <li data-cn="學生特別優惠">Special offers for students</li>
+              <li data-cn="宣傳禮物">Promotional gifts</li>
             </ul>
           </li>
           <li>
-            <span style="font-weight:600;">AOB</span>
-            <p style="margin-top:4px; font-weight:600; color:#2c4a8f;">Ways to inform students:</p>
+            <span style="font-weight:600;" data-cn="其他事項">AOB</span>
+            <p style="margin-top:4px; font-weight:600; color:#2c4a8f;" data-cn="通知學生的方法：">Ways to inform students:</p>
             <ul style="padding-left:20px;">
-              <li>Mass student emails</li>
-              <li>SMS</li>
+              <li data-cn="大量學生電郵">Mass student emails</li>
+              <li data-cn="SMS">SMS</li>
             </ul>
           </li>
-          <li>Close the meeting</li>
+          <li data-cn="會議結束">Close the meeting</li>
         </ol>
       </div>
     </div>
@@ -422,14 +511,14 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
 
   <!-- ============ TAB 2: POSSIBLE RESPONSE ============ -->
   <div class="tab-content" id="tab-1">
-    <h1>Possible Response</h1>
-    <p style="color:#666; margin-bottom:16px;">
+    <h1 data-cn="模擬回應">Possible Response</h1>
+    <p style="color:#666; margin-bottom:16px;" data-cn="建議的會議對話（完整答案）。每輪發言上方的「斜體藍字」列明溝通功能；「綠色標籤」解釋每輪發言中語言的使用。">
       Suggested meeting conversation (full answer). Communicative functions are shown in the
       <em>italic blue</em> line above each turn; <strong>green tags</strong> explain the use of
       language in each turn.
     </p>
     <div class="legend">
-      <span class="lbl">Highlight colour key</span>
+      <span class="lbl" data-cn="高亮顏色圖例">Highlight colour key</span>
       <span class="chip m">Modal verb + bare infinitive</span>
       <span class="chip c">Contraction</span>
       <span class="chip h">Cohesive device</span>
@@ -437,11 +526,27 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
       <span class="chip r">Giving reasons</span>
       <span class="chip n">1st conditional</span>
     </div>
-    <p style="color:#666; margin:0 0 12px;">Hover over any <mark class="lang-hl m">highlighted item</mark> in the script to see its explanation.</p>
+    <p style="color:#666; margin:0 0 12px;" data-cn="將鼠標移到對話中任何高亮項目上，即可查看其解釋。">Hover over any <mark class="lang-hl m">highlighted item</mark> in the script to see its explanation.</p>
+    <div class="player-controls">
+      <button class="play-all-btn" onclick="playAll()">▶ Play All</button>
+      <button class="pause-btn" onclick="pausePlay()">⏸ Pause</button>
+      <button class="stop-btn" onclick="stopPlay()">⏹ Stop</button>
+      <span class="speed-label">Speed</span>
+      <select class="speed-select" onchange="setSpeed(this.value)">
+        <option value="0.75">0.75×</option>
+        <option value="1" selected>1×</option>
+        <option value="1.25">1.25×</option>
+        <option value="1.5">1.5×</option>
+      </select>
+    </div>
+    <div class="now-playing" id="nowPlaying">
+      <div class="now-playing-label">Now Playing</div>
+      <div class="now-playing-text" id="nowPlayingText">—</div>
+    </div>
     <div id="dialogueBody"></div>
 
-    <h2 style="margin-top:30px;">Language Features</h2>
-    <p style="color:#666; margin-bottom:16px;">
+    <h2 style="margin-top:30px;" data-cn="語言特點">Language Features</h2>
+    <p style="color:#666; margin-bottom:16px;" data-cn="對話中的綠色標籤顯示語言的運用解釋（情態動詞＋不定式、連接詞、縮寫、建議句式等）。✗ 標記錯誤形式（例如 can + bought），應為不定式（例如 can buy）。">
       Green tags in the conversation show <strong>explanations of the use of language</strong>
       (modal verbs + bare infinitive, cohesive devices, contractions, suggestion patterns, etc.).
       A <span class="xv" style="font-weight:700;">✗</span> marks the <strong>incorrect</strong> form
@@ -449,55 +554,55 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
     </p>
 
     <div class="feature-box">
-      <h3>Language functions in bold print</h3>
-      <p>Communicative functions (e.g. making suggestions, showing agreement, giving reasons) are highlighted in the <strong>italic blue</strong> line above each speaker's turn.</p>
+      <h3 data-cn="粗體字顯示的語言功能">Language functions in bold print</h3>
+      <p data-cn="溝通功能（例如提出建議、表示同意、提出理由）以每輪發言上方的「斜體藍字」顯示。">Communicative functions (e.g. making suggestions, showing agreement, giving reasons) are highlighted in the <strong>italic blue</strong> line above each speaker's turn.</p>
     </div>
 
     <div class="feature-box">
-      <h3>Cohesive devices / Linking words</h3>
+      <h3 data-cn="連接詞／轉接語">Cohesive devices / Linking words</h3>
       <ul>
-        <li>Besides / Moreover / Furthermore</li>
-        <li>In addition / Additionally</li>
-        <li>Therefore / Thus / Hence / So</li>
-        <li>But / However</li>
+        <li data-cn="此外／再者／另外">Besides / Moreover / Furthermore</li>
+        <li data-cn="此外／另外">In addition / Additionally</li>
+        <li data-cn="因此／所以／故此／所以">Therefore / Thus / Hence / So</li>
+        <li data-cn="但是／然而">But / However</li>
       </ul>
     </div>
 
     <div class="feature-box">
-      <h3>Contractions</h3>
-      <p>I'm (I am) / It'll (It will) / We've (We have) / Let's (Let us) / That's (That is)</p>
+      <h3 data-cn="縮寫">Contractions</h3>
+      <p data-cn="I'm（I am）／It'll（It will）／We've（We have）／Let's（Let us）／That's（That is）">I'm (I am) / It'll (It will) / We've (We have) / Let's (Let us) / That's (That is)</p>
     </div>
 
     <div class="feature-box">
-      <h3>Thinking words (air fillers)</h3>
-      <p>Well… Ummm… uhhhh…</p>
+      <h3 data-cn="思考詞（語氣填充）">Thinking words (air fillers)</h3>
+      <p data-cn="Well… Ummm… uhhhh…">Well… Ummm… uhhhh…</p>
     </div>
 
     <div class="feature-box">
-      <h3>Modal verbs</h3>
+      <h3 data-cn="情態動詞">Modal verbs</h3>
       <ul>
-        <li><strong>Ability:</strong> can &nbsp; <strong>Possibility:</strong> may, might</li>
-        <li><strong>Permission:</strong> Can, May &nbsp; <strong>Obligation:</strong> must, have to</li>
-        <li><strong>Prohibition:</strong> Can't, Mustn't &nbsp; <strong>Offers:</strong> Will, Would</li>
-        <li><strong>Suggestions:</strong> Shall, Should &nbsp; <strong>Requests:</strong> Could, Would</li>
-        <li><strong>Future Possibility:</strong> Will, Shall &nbsp; <strong>Past Probability:</strong> Could have, Would have</li>
+        <li data-cn="能力：can　可能性：may, might"><strong>Ability:</strong> can &nbsp; <strong>Possibility:</strong> may, might</li>
+        <li data-cn="許可：Can, May　責任：must, have to"><strong>Permission:</strong> Can, May &nbsp; <strong>Obligation:</strong> must, have to</li>
+        <li data-cn="禁止：Can't, Mustn't　提供：Will, Would"><strong>Prohibition:</strong> Can't, Mustn't &nbsp; <strong>Offers:</strong> Will, Would</li>
+        <li data-cn="建議：Shall, Should　請求：Could, Would"><strong>Suggestions:</strong> Shall, Should &nbsp; <strong>Requests:</strong> Could, Would</li>
+        <li data-cn="未來可能性：Will, Shall　過去可能性：Could have, Would have"><strong>Future Possibility:</strong> Will, Shall &nbsp; <strong>Past Probability:</strong> Could have, Would have</li>
       </ul>
-      <p style="margin-top:6px;">+ action verb (bare infinitive) + object (noun clause), e.g. Students can buy the gadgets at a cheaper price.</p>
+      <p style="margin-top:6px;" data-cn="＋行動動詞（不定式）＋受詞（名詞子句），例如：Students can buy the gadgets at a cheaper price.">+ action verb (bare infinitive) + object (noun clause), e.g. Students can buy the gadgets at a cheaper price.</p>
     </div>
 
     <div class="feature-box">
-      <h3>Making suggestions (action verbs: suggest + propose + recommend)</h3>
-      <p>I suggest / propose / recommend <s>to watch a K-pop concert</s>. &nbsp;✗</p>
-      <p>I suggest / propose / recommend <strong>watching a K-pop concert</strong>. &nbsp;✓</p>
+      <h3 data-cn="提出建議（行動動詞：suggest + propose + recommend）">Making suggestions (action verbs: suggest + propose + recommend)</h3>
+      <p data-cn="I suggest / propose / recommend to watch a K-pop concert. ✗">I suggest / propose / recommend <s>to watch a K-pop concert</s>. &nbsp;✗</p>
+      <p data-cn="I suggest / propose / recommend watching a K-pop concert. ✓">I suggest / propose / recommend <strong>watching a K-pop concert</strong>. &nbsp;✓</p>
     </div>
   </div>
 
   <!-- ============ TAB 3: VIDEO ============ -->
   <div class="tab-content" id="tab-2">
-    <h1>Sample Conversation Video</h1>
-    <p style="color:#666; margin-bottom:16px;">Watch a meeting about launching the IT Gadgets Fair 2024.</p>
+    <h1 data-cn="示範對話影片">Sample Conversation Video</h1>
+    <p style="color:#666; margin-bottom:16px;" data-cn="觀看一個關於舉辦 IT 產品展2026的會議。">Watch a meeting about launching the IT Gadgets Fair 2026.</p>
     <div class="video-box">
-      <div class="video-placeholder">Video coming soon</div>
+      <div class="video-placeholder" data-cn="影片即將推出">Video coming soon</div>
     </div>
   </div>
 </div>
@@ -506,45 +611,45 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
 (function() {
 
 var DIALOGUE = [
-  { sp: "D", fn: "Greetings \u00b7 Welcoming participants \u00b7 Opening the meeting", t: "Good morning, everyone. Welcome to the meeting today. Shall we start the meeting now? / Let's start now." },
-  { sp: "All", t: "Yes. / Sure. / Certainly. (more polite)" },
-  { sp: "C", fn: "Introducing the agenda", t: "Has everyone received (formal) / got (informal) a copy of the agenda?" },
-  { sp: "All", t: "Yes. / We do. Thanks." },
-  { sp: "B", fn: "Purpose of the meeting", t: "Great / Terrific! The aim / purpose of today's meeting is to discuss the launch of IT Gadgets Fair 2024 in our university." },
-  { sp: "A", fn: "Introducing the agenda", t: "We will cover three agenda items: fair date, arrangements of the fair, and any other business that you would like to discuss.", hi: [ { m: "will cover", l: "Modal verb + bare infinitive" }, { m: "would like to discuss", l: "Modal verb + bare infinitive" } ] },
-  { sp: "D", fn: "Making suggestions + Giving reasons", t: "We'll start with the fair date. I propose holding the fair in May for two weeks since / because / as it is the semester 2 break. Students are more relaxed after their exams (examinations). They'll be (will be) in a good mood to do some shopping. Moreover, there're (are) still five months ahead, so we'll have (will have) sufficient preparation time.", hi: [ { m: "We'll", l: "Contraction (We will)" }, { m: "I propose holding", l: "Making suggestions (propose + V-ing)" }, { m: "since / because / as", l: "Giving reasons (S + V + O)" }, { m: "They'll be", l: "Contraction (They will)" }, { m: "Moreover", l: "Cohesive device" }, { m: "there're", l: "Contraction (There are)" }, { m: "we'll have", l: "Contraction (We will)" } ] },
-  { sp: "C", fn: "Showing disagreement \u00b7 Making a counter-proposal \u00b7 Elaborating opinions", t: "I'm afraid that's not the way I see it. The break after semester 2 is short. It's not worth doing lots of preparation and holding the fair for just two weeks. We may consider mid to late August instead. It is the ideal time for our students to think of buying new IT gadgets for use in the next academic year, such as tablets. The fair can last three weeks. Do you agree with me / What do you think?", hi: [ { m: "I'm", l: "Contraction (I am)" }, { m: "that's", l: "Contraction (That is)" }, { m: "It's", l: "Contraction (It is)" }, { m: "may consider", l: "Modal verb + bare infinitive" }, { m: "can last", l: "Modal verb + bare infinitive" } ] },
-  { sp: "B", fn: "Showing agreement \u00b7 Making suggestions", t: "That's an excellent idea. It's definitely a suitable time. Scheduling it in December is another possible option. There are usually more discounts and special offers near the Christmas time. Students can surely buy the gadgets at a cheaper price.", hi: [ { m: "That's", l: "Contraction (That is)" }, { m: "It's", l: "Contraction (It is)" }, { m: "can surely buy", l: "Modal verb + bare infinitive (NOT can + bought \u2717 / can + buying \u2717)" } ] },
-  { sp: "A", fn: "Showing agreement \u00b7 Stating preferences \u00b7 Making suggestions \u00b7 Sharing your views", t: "Absolutely! I'd (I) prefer this option to August. Could we also consider September? Some students won't be back till semester 1 begins. I believe that more students can come to (attend) the fair if we choose September.", hi: [ { m: "I'd", l: "Contraction (I would)" }, { m: "Could we also consider", l: "Modal verb + bare infinitive" }, { m: "won't", l: "Contraction (will not)" }, { m: "can come to", l: "Modal verb + bare infinitive" } ] },
-  { sp: "C", fn: "Partial agreement \u00b7 Giving reasons \u00b7 Making a counter-proposal", t: "That's a possibility (possible), but I don't think September is a feasible suggestion. All campus staff are busy when semester 1 begins. I don't think we can have any spare manpower (staffing) for the fair. Mid to late August is a more practical idea." },
-  { sp: "D", fn: "Showing uncertainty \u00b7 Drawing consensus", t: "Ok, so we've come up with a few suggestions. Can we now decide on the fair date? It seems mid to late August and December is the most agreeable suggestion. Can we all agree to present (that we should) present this option to the management team?", hi: [ { m: "we've come up", l: "Contraction (we have come up)" }, { m: "Can we now decide", l: "Modal verb + bare infinitive (NOT can + decided \u2717 / can + deciding \u2717)" }, { m: "we should", l: "Modal verb + bare infinitive" } ] },
-  { sp: "All", t: "Sure. / We can. / Let's do that. / Certainly. / Yes / Why not!? / Can't be better!" },
-  { sp: "C", fn: "Switching topic", t: "Excellent! Let's move onto the second item on the agenda.", hi: [ { m: "Let's", l: "Contraction (Let us)" } ] },
-  { sp: "B", fn: "Inviting opinions", t: "May I have your opinions on the arrangements of the fair?", hi: [ { m: "May I have", l: "Modal verb + bare infinitive" } ] },
-  { sp: "A", fn: "Making suggestions + Giving reasons \u00b7 Highlighting the benefit outcome", t: "For the on-campus venue, how about holding the fair at the Campus Central Square? Since it is in the middle of the campus, students can reach it conveniently. Moreover, the spacious open area would allow us to set up booths according to different types of IT products sold.", hi: [ { m: "how about holding", l: "Making suggestions (how about + V-ing)" }, { m: "Since it is", l: "Giving reasons (cohesive device)" }, { m: "can reach", l: "Modal verb + bare infinitive" }, { m: "Moreover", l: "Cohesive device" }, { m: "would allow", l: "Modal verb + bare infinitive" } ] },
-  { sp: "D", fn: "Strong agreement \u00b7 Making suggestions \u00b7 Elaborating opinions", t: "I agree with you entirely. Campus Central Square is where our students must pass by every day. Regarding / In terms of the types of gadgets exhibited, I would propose selling tablets. From the next academic year onwards, students need to use e-books in their English lessons. If they have one, it would be more convenient for them to attempt in-class tasks. Moreover, I recommend / giving (that we should give) special offers for the students as well.", hi: [ { m: "must pass", l: "Modal verb + bare infinitive (obligation)" }, { m: "I would propose selling", l: "Making suggestions (propose + V-ing)" }, { m: "would be more convenient", l: "Modal verb + bare infinitive" }, { m: "Moreover", l: "Cohesive device" }, { m: "I recommend / giving (that we should give)", l: "Making suggestions (recommend + V-ing)" } ] },
-  { sp: "B", fn: "Showing agreement \u00b7 Giving a condition (1st conditional)", t: "You're right. Perhaps we should give them cash coupons according to their academic results. For instance, if a student obtains a GPA of 4 or above, they will receive a $200 cash coupon. This way, it would be beneficial to both the students themselves and the hardware wholesaler.", hi: [ { m: "You're", l: "Contraction (You are)" }, { m: "we should give", l: "Modal verb + bare infinitive (NOT should + gave \u2717 / should + giving \u2717)" }, { m: "if a student obtains", l: "Giving a condition (1st conditional)" }, { m: "they will receive", l: "1st conditional result (will + bare infinitive)" }, { m: "would be beneficial", l: "Modal verb + bare infinitive" } ] },
-  { sp: "All", t: "Sure. / Fantastic. / Exactly." },
-  { sp: "C", fn: "Making suggestions", t: "May I propose another idea? What about distributing promotional gifts to our students? We could design gifts with our university logo. A mouse pad would be very practical to them.", hi: [ { m: "May I propose", l: "Making suggestions (propose + ...)" }, { m: "What about distributing", l: "Making suggestions (what about + V-ing)" }, { m: "could design", l: "Modal verb + bare infinitive (NOT could + designed \u2717 / could + designing \u2717)" }, { m: "would be very practical", l: "Modal verb + bare infinitive" } ] },
-  { sp: "A", fn: "Partial agreement \u00b7 Making suggestions \u00b7 Giving own opinion", t: "I see your point, but most students use notebook computers or tablets, so they do not need a mouse pad. Shall we give out a USB stick instead? Students can use it to store e-books and their handouts. It is also a useful tool for handling their assignments and group projects. I believe that every student will welcome it.", hi: [ { m: "Shall we give out", l: "Making suggestions (shall + V; NOT shall + gave \u2717 / shall + giving \u2717)" }, { m: "can use", l: "Modal verb + bare infinitive" }, { m: "will welcome", l: "Modal verb + bare infinitive" } ] },
-  { sp: "D", fn: "Partial agreement + Giving reasons", t: "I see your point, but the cost of producing a massive number of USB sticks is high, and I think the gift cannot achieve the promotional effect as anticipated." },
-  { sp: "C", fn: "Drawing consensus", t: "Can we decide on the fair arrangements now? Do you agree that we should hold the fair at the Campus Central Square, focusing on promoting tablets and distributing coupons to students?", hi: [ { m: "Can we decide", l: "Modal verb + bare infinitive (NOT can + decided \u2717 / can + deciding \u2717)" }, { m: "we should hold", l: "Modal verb + bare infinitive" } ] },
-  { sp: "All", t: "Yes. / Sure. / Great." },
-  { sp: "B", fn: "Revisiting the agenda item in the next meeting", t: "Since we cannot reach a consensus on promotional gifts, let's discuss it further in our next meeting.", hi: [ { m: "Since", l: "Cohesive device" }, { m: "let's discuss", l: "Contraction (Let us discuss)" } ] },
-  { sp: "All", t: "Yes. / Sure. / Of course." },
-  { sp: "A", fn: "Switching topic \u2192 next agenda item", t: "Great! Is there any other business that you'd like (would like) to discuss?" },
-  { sp: "C", fn: "Initiating the discussion \u00b7 Making suggestions", t: "Yes. I would like to discuss ways to inform students of the fair. An effective way is sending out mass student emails. I suggest sending these emails two weeks before the commencement date of the fair. Do you think it is feasible?", hi: [ { m: "would like to discuss", l: "Modal verb + bare infinitive" }, { m: "I suggest sending", l: "Making suggestions (suggest + V-ing / gerund)" } ] },
-  { sp: "D", fn: "Making a counter-offer \u00b7 Giving explanations \u00b7 Making comparisons", t: "Your idea is good, but can we also ask class tutors to inform students verbally besides mass student emails? This way, students who do not usually check emails could also be informed. These two channels are comparatively more efficient than just sending emails or putting up posters." },
-  { sp: "B", fn: "Showing agreement", t: "Fantastic! We will adopt both ways to notify students then. Do you all agree?" },
-  { sp: "All", t: "Yes. / Sure. / Marvellous." },
-  { sp: "A", fn: "Making suggestions \u00b7 Giving explanations & highlighting potential benefits", t: "Shall we consider sending SMS to students? In my opinion, this is the most direct way to inform students. I reckon all students read SMS messages on their mobile phones every day. Even if they miss both the mass email and the tutor's announcement, we can ensure we haven't missed anyone." },
-  { sp: "B", fn: "Showing agreement", t: "Absolutely! Let's send SMS messages which incorporate information about the fair date, venue and special offers.", hi: [ { m: "Let's send", l: "Contraction (Let us send)" } ] },
-  { sp: "D", fn: "Showing agreement \u00b7 Inviting opinions", t: "You're right. Let's (Let us) present this idea to the management too. Any other suggestions?" },
-  { sp: "All", t: "No. / I don't. / Not right now." },
-  { sp: "A", fn: "Making a summary", t: "So, we have decided to send mass student emails, and we are going to send SMS messages and seek class tutors' help to inform their students." },
-  { sp: "D", t: "Well, I think that's all we need to discuss today. We've (have) made decisions to be presented to the management. Is there anything you'd like to add?", hi: [ { m: "that's", l: "Contraction (That is)" }, { m: "We've", l: "Contraction (We have)" }, { m: "you'd", l: "Contraction (you would)" } ] },
-  { sp: "All", t: "No. / I don. / Not right now. / Not for me / Not for this moment." },
-  { sp: "B", fn: "Thanking participants \u00b7 Closing the meeting", t: "That's good! I think we can finish here. Thank you (Thanks) very much for coming today, everybody. Your ideas are brilliant!", hi: [ { m: "That's", l: "Contraction (That is)" }, { m: "can finish", l: "Modal verb + bare infinitive (NOT can + finished \u2717 / can + finishing \u2717)" } ] }
+  { sp: "D", fn: "Greetings \u00b7 Welcoming participants \u00b7 Opening the meeting", t: "Good morning, everyone. Welcome to the meeting today. Shall we start the meeting now? / Let's start now.", f: "D1.mp3", cn: "各位，早晨好。歡迎出席今天的會議。我們現在開始好嗎？／我們現在開始吧。" },
+  { sp: "All", t: "Yes. / Sure. / Certainly. (more polite)", f: "ALL1.mp3", cn: "好。／當然可以。／好的。（更禮貌）" },
+  { sp: "C", fn: "Introducing the agenda", t: "Has everyone received (formal) / got (informal) a copy of the agenda?", f: "C1.mp3", cn: "大家都有議程的副本嗎？" },
+  { sp: "All", t: "Yes. / We do. Thanks.", f: "ALL2.mp3", cn: "有。／我們有。謝謝。" },
+  { sp: "B", fn: "Purpose of the meeting", t: "Great / Terrific! The aim / purpose of today's meeting is to discuss the launch of IT Gadgets Fair 2026 in our university.", f: "B1.mp3", cn: "很好／太棒了！今天會議的目的是／今天的會議旨在討論在我們大學舉辦 IT 產品展2026的計劃。" },
+  { sp: "A", fn: "Introducing the agenda", t: "We will cover three agenda items: fair date, arrangements of the fair, and any other business that you would like to discuss.", hi: [ { m: "will cover", l: "Modal verb + bare infinitive" }, { m: "would like to discuss", l: "Modal verb + bare infinitive" } ], f: "A1.mp3", cn: "我們會涵蓋三個議程項目：展覽日期、展覽的安排，以及你們想討論的任何其他事項。" },
+  { sp: "D", fn: "Making suggestions + Giving reasons", t: "We'll start with the fair date. I propose holding the fair in May for two weeks since / because / as it is the semester 2 break. Students are more relaxed after their exams (examinations). They'll be (will be) in a good mood to do some shopping. Moreover, there're (are) still five months ahead, so we'll have (will have) sufficient preparation time.", hi: [ { m: "We'll", l: "Contraction (We will)" }, { m: "I propose holding", l: "Making suggestions (propose + V-ing)" }, { m: "since / because / as", l: "Giving reasons (S + V + O)" }, { m: "They'll be", l: "Contraction (They will)" }, { m: "Moreover", l: "Cohesive device" }, { m: "there're", l: "Contraction (There are)" }, { m: "we'll have", l: "Contraction (We will)" } ], f: "D2.mp3", cn: "我們先從展覽日期開始。我建議在五月舉行展覽，為期兩星期，因為這是學期二的假期。學生考完試後會比較輕鬆，也會有心情去購物。而且，距離現在還有五個月，我們有充足的準備時間。" },
+  { sp: "C", fn: "Showing disagreement \u00b7 Making a counter-proposal \u00b7 Elaborating opinions", t: "I'm afraid that's not the way I see it. The break after semester 2 is short. It's not worth doing lots of preparation and holding the fair for just two weeks. We may consider mid to late August instead. It is the ideal time for our students to think of buying new IT gadgets for use in the next academic year, such as tablets. The fair can last three weeks. Do you agree with me / What do you think?", hi: [ { m: "I'm", l: "Contraction (I am)" }, { m: "that's", l: "Contraction (That is)" }, { m: "It's", l: "Contraction (It is)" }, { m: "may consider", l: "Modal verb + bare infinitive" }, { m: "can last", l: "Modal verb + bare infinitive" } ], f: "C2.mp3", cn: "恐怕我不這樣看。學期二的假期很短。不值得花大量準備工夫去舉行一個只有兩星期的展覽。我們可以考慮改為八月下旬。那時正是學生考慮為下一個學年購買新 IT 產品（例如平板電腦）的理想時機。展覽可以持續三星期。你們同意我嗎？／你們怎麼看？" },
+  { sp: "B", fn: "Showing agreement \u00b7 Making suggestions", t: "That's an excellent idea. It's definitely a suitable time. Scheduling it in December is another possible option. There are usually more discounts and special offers near the Christmas time. Students can surely buy the gadgets at a cheaper price.", hi: [ { m: "That's", l: "Contraction (That is)" }, { m: "It's", l: "Contraction (It is)" }, { m: "can surely buy", l: "Modal verb + bare infinitive (NOT can + bought \u2717 / can + buying \u2717)" } ], f: "B2.mp3", cn: "這是個很好的主意。這肯定是合適的時間。安排在十二月是另一個可行選擇。臨近聖誕通常有更多折扣和特別優惠。學生肯定可以以更便宜的價格買到產品。" },
+  { sp: "A", fn: "Showing agreement \u00b7 Stating preferences \u00b7 Making suggestions \u00b7 Sharing your views", t: "Absolutely! I'd (I) prefer this option to August. Could we also consider September? Some students won't be back till semester 1 begins. I believe that more students can come to (attend) the fair if we choose September.", hi: [ { m: "I'd", l: "Contraction (I would)" }, { m: "Could we also consider", l: "Modal verb + bare infinitive" }, { m: "won't", l: "Contraction (will not)" }, { m: "can come to", l: "Modal verb + bare infinitive" } ], f: "A2.mp3", cn: "絕對同意！我較喜歡這個選擇多於八月。我們也可以考慮九月嗎？有些學生要等到學期一開始才回來。我相信如果選擇九月，會有更多學生可以參加展覽。" },
+  { sp: "C", fn: "Partial agreement \u00b7 Giving reasons \u00b7 Making a counter-proposal", t: "That's a possibility (possible), but I don't think September is a feasible suggestion. All campus staff are busy when semester 1 begins. I don't think we can have any spare manpower (staffing) for the fair. Mid to late August is a more practical idea.", f: "C3.mp3", cn: "這是有可能的，但我認為九月不是可行的建議。學期一開始時所有校園職員都很忙。我不認為我們有任何額外人手負責展覽。八月下旬是更實際的想法。" },
+  { sp: "D", fn: "Showing uncertainty \u00b7 Drawing consensus", t: "Ok, so we've come up with a few suggestions. Can we now decide on the fair date? It seems mid to late August and December is the most agreeable suggestion. Can we all agree to present (that we should) present this option to the management team?", hi: [ { m: "we've come up", l: "Contraction (we have come up)" }, { m: "Can we now decide", l: "Modal verb + bare infinitive (NOT can + decided \u2717 / can + deciding \u2717)" }, { m: "we should", l: "Modal verb + bare infinitive" } ], f: "D3.mp3", cn: "好吧，我們已提出了幾個建議。我們現在可以決定展覽日期嗎？八月下旬和十二月似乎是最受歡迎的建議。我們能否一致同意把這個選擇呈交管理團隊？" },
+  { sp: "All", t: "Sure. / We can. / Let's do that. / Certainly. / Yes / Why not!? / Can't be better!", f: "ALL3.mp3", cn: "好。／可以。／就那樣做吧。／當然可以。／好啊，為什麼不呢！／再好不過了！" },
+  { sp: "C", fn: "Switching topic", t: "Excellent! Let's move onto the second item on the agenda.", hi: [ { m: "Let's", l: "Contraction (Let us)" } ], f: "C4.mp3", cn: "很好！我們繼續討論第二項議程。" },
+  { sp: "B", fn: "Inviting opinions", t: "May I have your opinions on the arrangements of the fair?", hi: [ { m: "May I have", l: "Modal verb + bare infinitive" } ], f: "B3.mp3", cn: "我可以聽取你們對展覽安排的意見嗎？" },
+  { sp: "A", fn: "Making suggestions + Giving reasons \u00b7 Highlighting the benefit outcome", t: "For the on-campus venue, how about holding the fair at the Campus Central Square? Since it is in the middle of the campus, students can reach it conveniently. Moreover, the spacious open area would allow us to set up booths according to different types of IT products sold.", hi: [ { m: "how about holding", l: "Making suggestions (how about + V-ing)" }, { m: "Since it is", l: "Giving reasons (cohesive device)" }, { m: "can reach", l: "Modal verb + bare infinitive" }, { m: "Moreover", l: "Cohesive device" }, { m: "would allow", l: "Modal verb + bare infinitive" } ], f: "A3.mp3", cn: "關於校內場地，在 Campus Central Square 舉行展覽如何？由於它位於校園中央，學生可以方便地到達。而且，寬敞的開放空間讓我們可以按照不同類型的 IT 產品設置攤位。" },
+  { sp: "D", fn: "Strong agreement \u00b7 Making suggestions \u00b7 Elaborating opinions", t: "I agree with you entirely. Campus Central Square is where our students must pass by every day. Regarding / In terms of the types of gadgets exhibited, I would propose selling tablets. From the next academic year onwards, students need to use e-books in their English lessons. If they have one, it would be more convenient for them to attempt in-class tasks. Moreover, I recommend / giving (that we should give) special offers for the students as well.", hi: [ { m: "must pass", l: "Modal verb + bare infinitive (obligation)" }, { m: "I would propose selling", l: "Making suggestions (propose + V-ing)" }, { m: "would be more convenient", l: "Modal verb + bare infinitive" }, { m: "Moreover", l: "Cohesive device" }, { m: "I recommend / giving (that we should give)", l: "Making suggestions (recommend + V-ing)" } ], f: "D4.mp3", cn: "我完全同意你。Campus Central Square 是我們學生每天必經之地。關於展出產品類型，我建議售賣平板電腦。由下一個學年開始，學生需要在英文課堂使用電子書。如果他們有平板電腦，嘗試課堂任務會更方便。而且，我也建議為學生提供特別優惠。" },
+  { sp: "B", fn: "Showing agreement \u00b7 Giving a condition (1st conditional)", t: "You're right. Perhaps we should give them cash coupons according to their academic results. For instance, if a student obtains a GPA of 4 or above, they will receive a $200 cash coupon. This way, it would be beneficial to both the students themselves and the hardware wholesaler.", hi: [ { m: "You're", l: "Contraction (You are)" }, { m: "we should give", l: "Modal verb + bare infinitive (NOT should + gave \u2717 / should + giving \u2717)" }, { m: "if a student obtains", l: "Giving a condition (1st conditional)" }, { m: "they will receive", l: "1st conditional result (will + bare infinitive)" }, { m: "would be beneficial", l: "Modal verb + bare infinitive" } ], f: "B4.mp3", cn: "你說得對。也許我們應該按學業成績向他們派發現金券。例如，如果學生的 GPA 達4或以上，他們會收到二百元現金券。這樣，對學生本身和硬件批發商都有利。" },
+  { sp: "All", t: "Sure. / Fantastic. / Exactly.", f: "ALL4.mp3", cn: "好。／太好了。／正是。" },
+  { sp: "C", fn: "Making suggestions", t: "May I propose another idea? What about distributing promotional gifts to our students? We could design gifts with our university logo. A mouse pad would be very practical to them.", hi: [ { m: "May I propose", l: "Making suggestions (propose + ...)" }, { m: "What about distributing", l: "Making suggestions (what about + V-ing)" }, { m: "could design", l: "Modal verb + bare infinitive (NOT could + designed \u2717 / could + designing \u2717)" }, { m: "would be very practical", l: "Modal verb + bare infinitive" } ], f: "C5.mp3", cn: "我可以提出另一個主意嗎？向學生派發宣傳禮物如何？我們可以設計印有大學標誌的禮物。滑鼠墊對他們來說會很實用。" },
+  { sp: "A", fn: "Partial agreement \u00b7 Making suggestions \u00b7 Giving own opinion", t: "I see your point, but most students use notebook computers or tablets, so they do not need a mouse pad. Shall we give out a USB stick instead? Students can use it to store e-books and their handouts. It is also a useful tool for handling their assignments and group projects. I believe that every student will welcome it.", hi: [ { m: "Shall we give out", l: "Making suggestions (shall + V; NOT shall + gave \u2717 / shall + giving \u2717)" }, { m: "can use", l: "Modal verb + bare infinitive" }, { m: "will welcome", l: "Modal verb + bare infinitive" } ], f: "A4.mp3", cn: "我明白你的觀點，但大多數學生使用筆記型電腦或平板電腦，所以他們不需要滑鼠墊。我們派發 USB 手指如何？學生可以用它儲存電子書和筆記。它也是處理作業和小組項目的有用工具。我相信每個學生都會歡迎它。" },
+  { sp: "D", fn: "Partial agreement + Giving reasons", t: "I see your point, but the cost of producing a massive number of USB sticks is high, and I think the gift cannot achieve the promotional effect as anticipated.", f: "D5.mp3", cn: "我明白你的觀點，但生產大量 USB 手指的成本很高，而且我認為這禮物不能達到預期的宣傳效果。" },
+  { sp: "C", fn: "Drawing consensus", t: "Can we decide on the fair arrangements now? Do you agree that we should hold the fair at the Campus Central Square, focusing on promoting tablets and distributing coupons to students?", hi: [ { m: "Can we decide", l: "Modal verb + bare infinitive (NOT can + decided \u2717 / can + deciding \u2717)" }, { m: "we should hold", l: "Modal verb + bare infinitive" } ], f: "C6.mp3", cn: "我們現在可以決定展覽安排嗎？你們同意我們在 Campus Central Square 舉行展覽、重點推廣平板電腦並向學生派發現金券嗎？" },
+  { sp: "All", t: "Yes. / Sure. / Great.", f: "ALL5.mp3", cn: "好。／當然可以。／太好了。" },
+  { sp: "B", fn: "Revisiting the agenda item in the next meeting", t: "Since we cannot reach a consensus on promotional gifts, let's discuss it further in our next meeting.", hi: [ { m: "Since", l: "Cohesive device" }, { m: "let's discuss", l: "Contraction (Let us discuss)" } ], f: "B5.mp3", cn: "由於我們未能就宣傳禮物達成共識，讓我們在下一次會議進一步討論。" },
+  { sp: "All", t: "Yes. / Sure. / Of course.", f: "ALL6.mp3", cn: "好。／當然可以。／好的。" },
+  { sp: "A", fn: "Switching topic \u2192 next agenda item", t: "Great! Is there any other business that you'd like (would like) to discuss?", f: "A5.mp3", cn: "很好！你們有沒有其他事項想討論？" },
+  { sp: "C", fn: "Initiating the discussion \u00b7 Making suggestions", t: "Yes. I would like to discuss ways to inform students of the fair. An effective way is sending out mass student emails. I suggest sending these emails two weeks before the commencement date of the fair. Do you think it is feasible?", hi: [ { m: "would like to discuss", l: "Modal verb + bare infinitive" }, { m: "I suggest sending", l: "Making suggestions (suggest + V-ing / gerund)" } ], f: "C7.mp3", cn: "有。我想討論向學生宣傳展覽的方法。一個有效的方法是發送大量學生電郵。我建議在展覽開始前兩星期發送這些電郵。你們認為可行嗎？" },
+  { sp: "D", fn: "Making a counter-offer \u00b7 Giving explanations \u00b7 Making comparisons", t: "Your idea is good, but can we also ask class tutors to inform students verbally besides mass student emails? This way, students who do not usually check emails could also be informed. These two channels are comparatively more efficient than just sending emails or putting up posters.", f: "D6.mp3", cn: "你的主意不錯，但除了大量學生電郵外，我們也可以請班導師口頭通知學生嗎？這樣，通常不查看電郵的學生也能收到通知。這兩個渠道比只發送電郵或張貼海報更有效。" },
+  { sp: "B", fn: "Showing agreement", t: "Fantastic! We will adopt both ways to notify students then. Do you all agree?", f: "B6.mp3", cn: "太好了！那麼我們會同時採用兩種方式通知學生。你們都同意嗎？" },
+  { sp: "All", t: "Yes. / Sure. / Marvellous.", f: "ALL7.mp3", cn: "好。／當然可以。／好極了。" },
+  { sp: "A", fn: "Making suggestions \u00b7 Giving explanations & highlighting potential benefits", t: "Shall we consider sending SMS to students? In my opinion, this is the most direct way to inform students. I reckon all students read SMS messages on their mobile phones every day. Even if they miss both the mass email and the tutor's announcement, we can ensure we haven't missed anyone.", f: "A6.mp3", cn: "我們可以考慮向學生發送 SMS 嗎？我認為這是最直接通知學生的方法。我相信所有學生每天都會閱讀手機上的 SMS 訊息。即使他們錯過大量電郵和導師的宣佈，我們也可以確保沒有遺漏任何人。" },
+  { sp: "B", fn: "Showing agreement", t: "Absolutely! Let's send SMS messages which incorporate information about the fair date, venue and special offers.", hi: [ { m: "Let's send", l: "Contraction (Let us send)" } ], f: "B7.mp3", cn: "絕對同意！讓我們發送包含展覽日期、場地和特別優惠資料的 SMS 訊息。" },
+  { sp: "D", fn: "Showing agreement \u00b7 Inviting opinions", t: "You're right. Let's (Let us) present this idea to the management too. Any other suggestions?", f: "D7.mp3", cn: "你說得對。讓我們也把這個想法呈交管理層。還有其他建議嗎？" },
+  { sp: "All", t: "No. / I don't. / Not right now.", f: "ALL8.mp3", cn: "沒有。／我沒有。／暫時沒有。" },
+  { sp: "A", fn: "Making a summary", t: "So, we have decided to send mass student emails, and we are going to send SMS messages and seek class tutors' help to inform their students.", f: "A7.mp3", cn: "那麼，我們已決定發送大量學生電郵，並會發送 SMS 訊息，同時尋求班導師協助通知他們的學生。" },
+  { sp: "D", t: "Well, I think that's all we need to discuss today. We've (have) made decisions to be presented to the management. Is there anything you'd like to add?", hi: [ { m: "that's", l: "Contraction (That is)" }, { m: "We've", l: "Contraction (We have)" }, { m: "you'd", l: "Contraction (you would)" } ], f: "D8.mp3", cn: "好吧，我想今天我們要討論的就是這些。我們已作出決定，準備呈交管理層。各位有沒有其他補充？" },
+  { sp: "All", t: "No. / I don't. / Not right now. / Not for me / Not for this moment.", f: "ALL9.mp3", cn: "沒有。／我沒有。／暫時沒有。／我不需要。／這一刻沒有。" },
+  { sp: "B", fn: "Thanking participants \u00b7 Closing the meeting", t: "That's good! I think we can finish here. Thank you (Thanks) very much for coming today, everybody. Your ideas are brilliant!", hi: [ { m: "That's", l: "Contraction (That is)" }, { m: "can finish", l: "Modal verb + bare infinitive (NOT can + finished \u2717 / can + finishing \u2717)" } ], f: "B8.mp3", cn: "很好！我想我們可以到此結束。非常感謝各位今天出席，你們的主意很棒！" }
 ];
 
 function renderDialogue() {
@@ -580,9 +685,13 @@ function renderDialogue() {
     hl += esc(text.substring(pos));
     var exps = [];
     (ut.hi || []).forEach(function(h) { exps.push('<span class="exp-item">' + esc(h.l) + '</span>'); });
-    html += '<tr>'
-      + '<td class="c-stu"><span class="speaker">' + ut.sp + '</span></td>'
-      + '<td class="c-script">' + hl + '</td>'
+    var role = ut.sp === 'All' ? 'ALL' : ut.sp;
+    var label = role;
+    var btn = '<button class="speaker-btn role-' + role + '" onclick="play(\'' + ut.f + '\', this)" title="Play">'
+      + label + '<div class="audio-pulse"></div></button>';
+    html += '<tr class="script-row" data-file="' + ut.f + '">'
+      + '<td class="c-stu">' + btn + '</td>'
+      + '<td class="c-script"><span class="script-text" data-cn="' + esc(ut.cn || '') + '">' + hl + '</span></td>'
       + '<td class="c-exp">' + (exps.length ? exps.join(' ') : '<span class="muted">&mdash;</span>') + '</td>'
       + '<td class="c-fn">' + (ut.fn ? esc(ut.fn) : '<span class="muted">&mdash;</span>') + '</td>'
       + '</tr>';
@@ -600,8 +709,213 @@ window.switchTab = function(i) {
   buttons[i].classList.add('active');
 };
 
+// ---- Audio player ----
+var currentAudio = null;
+var currentBtn = null;
+var playAllTimer = null;
+var speed = 1;
+
+function getAllBtns() {
+  return Array.prototype.slice.call(document.querySelectorAll('.speaker-btn'));
+}
+
+function clearRowActive() {
+  document.querySelectorAll('.script-row.active').forEach(function(r) { r.classList.remove('active'); });
+}
+
+function clearNowPlaying() {
+  var np = document.getElementById('nowPlaying');
+  np.classList.remove('active');
+  document.getElementById('nowPlayingText').textContent = '\u2014';
+}
+
+function clearWordTrack() {
+  document.querySelectorAll('.word-wrap .word.active').forEach(function(w) { w.classList.remove('active'); });
+  document.querySelectorAll('.script-text[data-orig-html]').forEach(function(el) {
+    el.innerHTML = el.dataset.origHtml;
+    delete el.dataset.origHtml;
+  });
+}
+
+function startWordTrack(btn, audio) {
+  var row = btn.closest('.script-row');
+  if (!row) return;
+  var textEl = row.querySelector('.script-text');
+  if (!textEl) return;
+
+  textEl.dataset.origHtml = textEl.innerHTML;
+  var text = textEl.textContent.trim();
+  var words = text.split(/\s+/);
+  var wordWrap = document.createElement('span');
+  wordWrap.className = 'word-wrap';
+  wordWrap.innerHTML = words.map(function(w) { return '<span class="word">' + w + '</span>'; }).join(' ');
+  textEl.innerHTML = '';
+  textEl.appendChild(wordWrap);
+  var wordSpans = textEl.querySelectorAll('.word');
+
+  var lastIdx = -1;
+  var handler = function() {
+    var dur = audio.duration;
+    if (!dur || isNaN(dur)) return;
+    var pct = audio.currentTime / dur;
+    var idx = Math.min(Math.floor(pct * words.length), words.length - 1);
+    if (idx !== lastIdx) {
+      if (lastIdx >= 0) wordSpans[lastIdx].classList.remove('active');
+      wordSpans[idx].classList.add('active');
+      lastIdx = idx;
+    }
+  };
+  audio.addEventListener('timeupdate', handler);
+  audio.addEventListener('ended', function() {
+    audio.removeEventListener('timeupdate', handler);
+    if (textEl.dataset.origHtml !== undefined) {
+      textEl.innerHTML = textEl.dataset.origHtml;
+      delete textEl.dataset.origHtml;
+    }
+  }, { once: true });
+}
+
+function setNowPlaying(btn) {
+  var row = btn.closest('.script-row');
+  if (!row) return;
+  document.querySelectorAll('.script-row.active').forEach(function(r) { r.classList.remove('active'); });
+  row.classList.add('active');
+  row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  var textEl = row.querySelector('.script-text');
+  if (textEl) {
+    var np = document.getElementById('nowPlaying');
+    var npText = document.getElementById('nowPlayingText');
+    npText.textContent = textEl.textContent.trim();
+    np.classList.add('active');
+  }
+}
+
+function stopCurrentAudio() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+  if (currentBtn) { currentBtn.classList.remove('playing'); currentBtn = null; }
+}
+
+window.play = function(file, btn) {
+  stopCurrentAudio();
+  clearPlayAll();
+
+  var audio = new Audio('audio/' + file);
+  audio.playbackRate = speed;
+  currentAudio = audio;
+  currentBtn = btn;
+  btn.classList.add('playing');
+  setNowPlaying(btn);
+  startWordTrack(btn, audio);
+  audio.play().catch(function(e) {
+    console.warn('Audio not found: audio/' + file);
+    btn.classList.remove('playing');
+    clearNowPlaying();
+    clearWordTrack();
+  });
+  audio.addEventListener('ended', function() {
+    btn.classList.remove('playing');
+    clearRowActive();
+    clearNowPlaying();
+    clearWordTrack();
+    currentBtn = null;
+    currentAudio = null;
+  });
+};
+
+window.playAll = function() {
+  var btns = getAllBtns();
+  var idx = 0;
+
+  function playNext() {
+    if (idx >= btns.length) {
+      currentBtn = null;
+      return;
+    }
+    var btn = btns[idx];
+    var row = btn.closest('.script-row');
+    var file = row ? row.getAttribute('data-file') : null;
+    if (!file) { idx++; playNext(); return; }
+
+    stopCurrentAudio();
+    var audio = new Audio('audio/' + file);
+    audio.playbackRate = speed;
+    currentAudio = audio;
+    currentBtn = btn;
+    btn.classList.add('playing');
+    setNowPlaying(btn);
+    startWordTrack(btn, audio);
+
+    audio.play().catch(function(e) {
+      btn.classList.remove('playing');
+      idx++;
+      playNext();
+      return;
+    });
+    audio.addEventListener('ended', function() {
+      btn.classList.remove('playing');
+      clearRowActive();
+      clearWordTrack();
+      idx++;
+      playAllTimer = setTimeout(function() {
+        clearNowPlaying();
+        playNext();
+      }, 600);
+    });
+  }
+  clearPlayAll();
+  playNext();
+};
+
+function clearPlayAll() {
+  if (playAllTimer) {
+    clearTimeout(playAllTimer);
+    playAllTimer = null;
+  }
+}
+
+window.pausePlay = function() {
+  if (currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+    if (currentBtn) currentBtn.classList.remove('playing');
+  }
+  clearPlayAll();
+};
+
+window.stopPlay = function() {
+  stopCurrentAudio();
+  clearPlayAll();
+  clearRowActive();
+  clearWordTrack();
+  clearNowPlaying();
+};
+
+window.setSpeed = function(val) {
+  speed = parseFloat(val);
+  if (currentAudio) currentAudio.playbackRate = speed;
+};
+
+window.toggleAllCN = function(show) {
+  document.querySelector('.container').classList.toggle('cn-active', show);
+};
+
+function initTranslations() {
+  document.querySelectorAll('.tab-content [data-cn]').forEach(function(el) {
+    if (el.dataset.cnProcessed) return;
+    el.dataset.cnProcessed = '1';
+    var trans = document.createElement('div');
+    trans.className = 'cn-translation';
+    trans.textContent = el.dataset.cn;
+    el.after(trans);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   renderDialogue();
+  initTranslations();
 });
 
 })();

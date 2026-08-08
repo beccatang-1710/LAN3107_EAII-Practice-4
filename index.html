@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAN3107 EAII Practice 4 — Possible Response</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #c7d8ee;
+  color: #333;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background:
+    radial-gradient(circle at 12% 25%, rgba(255,255,255,0.35) 4px, transparent 5px),
+    radial-gradient(circle at 30% 70%, rgba(255,255,255,0.3) 6px, transparent 7px),
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.25) 8px, transparent 9px),
+    radial-gradient(circle at 70% 55%, rgba(255,255,255,0.35) 4px, transparent 5px),
+    radial-gradient(circle at 85% 30%, rgba(255,255,255,0.3) 5px, transparent 6px),
+    radial-gradient(circle at 95% 75%, rgba(255,255,255,0.35) 6px, transparent 7px),
+    radial-gradient(circle at 20% 90%, rgba(255,255,255,0.25) 7px, transparent 8px),
+    radial-gradient(circle at 60% 90%, rgba(255,255,255,0.3) 5px, transparent 6px);
+  animation: bubbles 18s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M20 120 C60 30 140 30 180 120' fill='none' stroke='%232c4a8f' stroke-width='2'/%3E%3Cpath d='M40 150 C80 70 140 70 170 150' fill='none' stroke='%232c4a8f' stroke-width='1.5'/%3E%3Cpath d='M60 180 C90 110 130 110 155 180' fill='none' stroke='%232c4a8f' stroke-width='1'/%3E%3C/svg%3E") repeat;
+}
+
+@keyframes bubbles {
+  0% { transform: translateY(0); opacity: 0.5; }
+  100% { transform: translateY(-32px); opacity: 1; }
+}
+
+.banner {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  animation: kenburns 10s ease-in-out infinite alternate;
+  transform-origin: center center;
+  clip-path: inset(0 0 12% 0);
+}
+
+@keyframes kenburns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+.page-header {
+  text-align: center;
+  padding: 20px 20px 0;
+  background: white;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.page-header h1 { font-size: 24px; color: #1f3865; margin-bottom: 4px; }
+.page-header p { font-size: 16px; color: #2c4a8f; margin-bottom: 4px; }
+.page-header .presented-by { font-size: 14px; color: #5573b8; font-style: italic; margin-top: 6px; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.tabs { display: flex; gap: 0; margin-bottom: 0; flex-wrap: wrap; }
+
+.tab-btn {
+  padding: 14px 26px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: #bed0ea;
+  color: #4a5876;
+  border-radius: 10px 10px 0 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn:hover { background: #adc2e2; }
+.tab-btn.active { background: white; color: #2c4a8f; }
+
+.tab-content {
+  display: none;
+  background: white;
+  padding: 30px;
+  border-radius: 0 10px 10px 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  line-height: 1.7;
+}
+
+.tab-content.active { display: block; }
+
+h1 { font-size: 22px; color: #1c3865; margin-bottom: 6px; }
+h2 { font-size: 18px; color: #2c4a8f; margin: 20px 0 10px; }
+h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
+
+.task-section { margin-bottom: 30px; }
+
+.agenda-box {
+  background: #eef4fd;
+  border-left: 4px solid #2c4a8f;
+  padding: 16px 22px;
+  margin: 14px 0;
+  border-radius: 0 8px 8px 0;
+  color: #33415e;
+}
+
+.agenda-box ul { padding-left: 20px; margin: 8px 0; }
+.agenda-box li { margin-bottom: 6px; }
+
+.meeting-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: #f4f8ff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: 1px solid #dbe7f7;
+  margin: 10px 0;
+  color: #2c4a8f;
+  font-weight: 600;
+}
+
+/* ---- Possible Response / dialogue ---- */
+.exchange {
+  margin-bottom: 14px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #e1eaf7;
+  background: #fbfdff;
+}
+
+.exchange .meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1c3865;
+}
+
+.exchange .speaker {
+  background: #2c4a8f;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.exchange .function { font-size: 12px; color: #5573b8; font-style: italic; font-weight: 500; }
+
+.exchange .text { font-size: 16px; color: #333; margin-top: 2px; line-height: 1.9; }
+
+.cn-translation {
+  display: none;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #fff8f0;
+  border-left: 3px solid #e8a87c;
+  border-radius: 0 6px 6px 0;
+  font-size: 14px;
+  color: #8b5a2b;
+  line-height: 1.6;
+}
+
+.cn-active .cn-translation { display: block; }
+
+.cn-toggle-wrap { text-align: right; margin-bottom: 10px; }
+
+.cn-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c4a8f;
+  user-select: none;
+}
+
+.cn-toggle input {
+  width: 40px;
+  height: 22px;
+  appearance: none;
+  background: #bed0ea;
+  border-radius: 11px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.cn-toggle input::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s;
+}
+
+.cn-toggle input:checked { background: #2c4a8f; }
+.cn-toggle input:checked::before { transform: translateX(18px); }
+
+.video-box { max-width: 1000px; }
+.video-box video {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  display: block;
+  background: #000;
+  object-fit: contain;
+}
+
+.video-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 320px;
+  border: 2px dashed #9db7dd;
+  border-radius: 12px;
+  background: #f4f8ff;
+  color: #5573b8;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.feature-box {
+  background: #f4f8ff;
+  border: 1px solid #d4e2f5;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  color: #33415e;
+}
+
+.feature-box ul { padding-left: 20px; margin: 8px 0; }
+.feature-box li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <img src="banner.png" alt="Banner">
+</div>
+
+<div class="page-header">
+  <h1>Essential Workplace Communication: Effective Oral Interaction (LAN3107)</h1>
+  <p>EAII Practice 4 — Meetings: IT Gadgets Fair 2024</p>
+  <p class="presented-by">Presented by Rebecca Tang</p>
+</div>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(0)">TAB 1 — Task Overview</button>
+    <button class="tab-btn" onclick="switchTab(1)">TAB 2 — Possible Response</button>
+    <button class="tab-btn" onclick="switchTab(2)">TAB 3 — Video</button>
+  </div>
+
+  <!-- ============ TAB 1: TASK OVERVIEW ============ -->
+  <div class="tab-content active" id="tab-0">
+    <h1>Task Overview</h1>
+
+    <div class="task-section">
+      <p>
+        You are on the information technology team of <strong>Pioneer University</strong>, a prestigious
+        university in Hong Kong. You and your colleagues are going to hold a meeting to discuss the launch of
+        the <strong>IT Gadgets Fair 2024</strong>. You should:
+      </p>
+      <ul style="padding-left:20px; margin:10px 0;">
+        <li>give your own suggestion(s) on the agenda items</li>
+        <li>explain the reason(s) for your suggestion(s)</li>
+        <li>listen actively and respond to others' suggestions by expressing preferences, agreement, or disagreement</li>
+        <li>reach a consensus on agenda items 2–4</li>
+      </ul>
+      <p>As a group, you must cover all the agenda items below.</p>
+    </div>
+
+    <div class="task-section">
+      <h2>Meeting Details</h2>
+      <div class="meeting-meta">
+        <span>Pioneer University</span>
+        <span>Information Technology Team</span>
+        <span>16 December 20-- at 2:30 pm in the Meeting Room</span>
+      </div>
+    </div>
+
+    <div class="task-section">
+      <h3>Agenda</h3>
+      <div class="agenda-box">
+        <ol style="padding-left:22px;">
+          <li>Open the meeting</li>
+          <li>Fair date</li>
+          <li>
+            <span style="font-weight:600;">Arrangements of the fair</span>
+            <p style="margin-top:4px; font-weight:600; color:#2c4a8f;">Possible arrangements:</p>
+            <ul style="padding-left:20px;">
+              <li>On-campus venue</li>
+              <li>Types of gadgets exhibited</li>
+              <li>Special offers for students</li>
+              <li>Promotional gifts</li>
+            </ul>
+          </li>
+          <li>
+            <span style="font-weight:600;">AOB</span>
+            <p style="margin-top:4px; font-weight:600; color:#2c4a8f;">Ways to inform students:</p>
+            <ul style="padding-left:20px;">
+              <li>Mass student emails</li>
+              <li>SMS</li>
+            </ul>
+          </li>
+          <li>Close the meeting</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 2: POSSIBLE RESPONSE ============ -->
+  <div class="tab-content" id="tab-1">
+    <h1>Possible Response</h1>
+    <p style="color:#666; margin-bottom:16px;">
+      Suggested meeting conversation (full answer). Communicative functions are shown for reference.
+    </p>
+    <div id="dialogueBody"></div>
+
+    <h2 style="margin-top:30px;">Language Features</h2>
+
+    <div class="feature-box">
+      <h3>Cohesive devices / Linking words</h3>
+      <ul>
+        <li>Besides / Moreover / Furthermore</li>
+        <li>In addition / Additionally</li>
+        <li>Therefore / Thus / Hence / So</li>
+        <li>But / However</li>
+      </ul>
+    </div>
+
+    <div class="feature-box">
+      <h3>Contractions</h3>
+      <p>I'm (I am) / It'll (It will) / We've (We have) / Let's (Let us) / That's (That is)</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Modal verbs</h3>
+      <ul>
+        <li><strong>Ability:</strong> can &nbsp; <strong>Possibility:</strong> may, might</li>
+        <li><strong>Permission:</strong> Can, May &nbsp; <strong>Obligation:</strong> must, have to</li>
+        <li><strong>Prohibition:</strong> Can't, Mustn't &nbsp; <strong>Offers:</strong> Will, Would</li>
+        <li><strong>Suggestions:</strong> Shall, Should &nbsp; <strong>Requests:</strong> Could, Would</li>
+        <li><strong>Future Possibility:</strong> Will, Shall &nbsp; <strong>Past Probability:</strong> Could have, Would have</li>
+      </ul>
+      <p style="margin-top:6px;">+ action verb (bare infinitive) + object (noun clause), e.g. Students can buy the gadgets at a cheaper price.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Making suggestions (action verbs: suggest + propose + recommend)</h3>
+      <p>I suggest / propose / recommend <s>to watch a K-pop concert</s>. &nbsp;✗</p>
+      <p>I suggest / propose / recommend <strong>watching a K-pop concert</strong>. &nbsp;✓</p>
+    </div>
+  </div>
+
+  <!-- ============ TAB 3: VIDEO ============ -->
+  <div class="tab-content" id="tab-2">
+    <h1>Sample Conversation Video</h1>
+    <p style="color:#666; margin-bottom:16px;">Watch a meeting about launching the IT Gadgets Fair 2024.</p>
+    <div class="video-box">
+      <div class="video-placeholder">Video coming soon</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+
+var DIALOGUE = [
+  { sp: "D", fn: "Greetings · Welcoming participants · Opening the meeting", t: "Good morning, everyone. Welcome to the meeting today. Shall we start the meeting now? / Let's start now." },
+  { sp: "All", t: "Yes. / Sure. / Certainly. (more polite)" },
+  { sp: "C", fn: "Introducing the agenda", t: "Has everyone received (formal) / got (informal) a copy of the agenda?" },
+  { sp: "All", t: "Yes. / We do. Thanks." },
+  { sp: "B", fn: "Purpose of the meeting", t: "Great / Terrific! The aim / purpose of today's meeting is to discuss the launch of IT Gadgets Fair 2024 in our university." },
+  { sp: "A", t: "We will cover three agenda items: fair date, arrangements of the fair, and any other business that you would like to discuss." },
+  { sp: "D", fn: "Making suggestions + Giving reasons", t: "We'll start with the fair date. I propose holding the fair in May for two weeks since / because / as it is the semester 2 break. Students are more relaxed after their exams (examinations). They'll be (will be) in a good mood to do some shopping. Moreover, there're (are) still five months ahead, so we'll have (will have) sufficient preparation time." },
+  { sp: "C", fn: "Showing disagreement · Making a counter-proposal · Elaborating opinions", t: "I'm afraid that's not the way I see it. The break after semester 2 is short. It's not worth doing lots of preparation and holding the fair for just two weeks. We may consider mid to late August instead. It is the ideal time for our students to think of buying new IT gadgets for use in the next academic year, such as tablets. The fair can last three weeks. Do you agree with me / What do you think?" },
+  { sp: "B", fn: "Showing agreement · Making suggestions", t: "That's an excellent idea. It's definitely a suitable time. Scheduling it in December is another possible option. There are usually more discounts and special offers near the Christmas time. Students can surely buy the gadgets at a cheaper price." },
+  { sp: "A", fn: "Showing agreement · Stating preferences · Making suggestions · Sharing your views", t: "Absolutely! I'd (I) prefer this option to August. Could we also consider September? Some students won't be back till semester 1 begins. I believe that more students can come to (attend) the fair if we choose September." },
+  { sp: "C", fn: "Partial agreement · Giving reasons · Making a counter-proposal", t: "That's a possibility (possible), but I don't think September is a feasible suggestion. All campus staff are busy when semester 1 begins. I don't think we can have any spare manpower (staffing) for the fair. Mid to late August is a more practical idea." },
+  { sp: "D", fn: "Showing uncertainty · Drawing consensus", t: "Ok, so we've come up with a few suggestions. Can we now decide on the fair date? It seems mid to late August and December is the most agreeable suggestion. Can we all agree to present (that we should) present this option to the management team?" },
+  { sp: "All", t: "Sure. / We can. / Let's do that. / Certainly. / Yes / Why not!? / Can't be better!" },
+  { sp: "C", fn: "Switching topic", t: "Excellent! Let's move onto the second item on the agenda." },
+  { sp: "B", fn: "Inviting opinions", t: "May I have your opinions on the arrangements of the fair?" },
+  { sp: "A", fn: "Making suggestions + Giving reasons · Highlighting the benefit outcome", t: "For the on-campus venue, how about holding the fair at the Campus Central Square? Since it is in the middle of the campus, students can reach it conveniently. Moreover, the spacious open area would allow us to set up booths according to different types of IT products sold." },
+  { sp: "D", fn: "Strong agreement · Making suggestions · Elaborating opinions", t: "I agree with you entirely. Campus Central Square is where our students must pass by every day. Regarding / In terms of the types of gadgets exhibited, I would propose selling tablets. From the next academic year onwards, students need to use e-books in their English lessons. If they have one, it would be more convenient for them to attempt in-class tasks. Moreover, I recommend / giving (that we should give) special offers for the students as well." },
+  { sp: "B", fn: "Showing agreement · Giving a condition (1st conditional)", t: "You're right. Perhaps we should give them cash coupons according to their academic results. For instance, if a student obtains a GPA of 4 or above, they will receive a $200 cash coupon. This way, it would be beneficial to both the students themselves and the hardware wholesaler." },
+  { sp: "All", t: "Sure. / Fantastic. / Exactly." },
+  { sp: "C", fn: "Making suggestions", t: "May I propose another idea? What about distributing promotional gifts to our students? We could design gifts with our university logo. A mouse pad would be very practical to them." },
+  { sp: "A", fn: "Partial agreement · Making suggestions · Giving own opinion", t: "I see your point, but most students use notebook computers or tablets, so they do not need a mouse pad. Shall we give out a USB stick instead? Students can use it to store e-books and their handouts. It is also a useful tool for handling their assignments and group projects. I believe that every student will welcome it." },
+  { sp: "D", fn: "Partial agreement + Giving reasons", t: "I see your point, but the cost of producing a massive number of USB sticks is high, and I think the gift cannot achieve the promotional effect as anticipated." },
+  { sp: "C", fn: "Drawing consensus", t: "Can we decide on the fair arrangements now? Do you agree that we should hold the fair at the Campus Central Square, focusing on promoting tablets and distributing coupons to students?" },
+  { sp: "All", t: "Yes. / Sure. / Great." },
+  { sp: "B", fn: "Revisiting the agenda item in the next meeting", t: "Since we cannot reach a consensus on promotional gifts, let's discuss it further in our next meeting." },
+  { sp: "All", t: "Yes. / Sure. / Of course." },
+  { sp: "A", fn: "Switching topic → next agenda item", t: "Great! Is there any other business that you'd like (would like) to discuss?" },
+  { sp: "C", fn: "Initiating the discussion · Making suggestions", t: "Yes. I would like to discuss ways to inform students of the fair. An effective way is sending out mass student emails. I suggest sending these emails two weeks before the commencement date of the fair. Do you think it is feasible?" },
+  { sp: "D", fn: "Making a counter-offer · Giving explanations · Making comparisons", t: "Your idea is good, but can we also ask class tutors to inform students verbally besides mass student emails? This way, students who do not usually check emails could also be informed. These two channels are comparatively more efficient than just sending emails or putting up posters." },
+  { sp: "B", fn: "Showing agreement", t: "Fantastic! We will adopt both ways to notify students then. Do you all agree?" },
+  { sp: "All", t: "Yes. / Sure. / Marvellous." },
+  { sp: "A", fn: "Making suggestions · Giving explanations & highlighting potential benefits", t: "Shall we consider sending SMS to students? In my opinion, this is the most direct way to inform students. I reckon all students read SMS messages on their mobile phones every day. Even if they miss both the mass email and the tutor's announcement, we can ensure we haven't missed anyone." },
+  { sp: "B", fn: "Showing agreement", t: "Absolutely! Let's send SMS messages which incorporate information about the fair date, venue and special offers." },
+  { sp: "D", fn: "Showing agreement · Inviting opinions", t: "You're right. Let's (Let us) present this idea to the management too. Any other suggestions?" },
+  { sp: "All", t: "No. / I don't. / Not right now." },
+  { sp: "A", fn: "Making a summary", t: "So, we have decided to send mass student emails, and we are going to send SMS messages and seek class tutors' help to inform their students." },
+  { sp: "D", t: "Well, I think that's all we need to discuss today. We've (have) made decisions to be presented to the management. Is there anything you'd like to add?" },
+  { sp: "All", t: "No. / I don't. / Not right now. / Not for me / Not for this moment." },
+  { sp: "B", fn: "Thanking participants · Closing the meeting", t: "That's good! I think we can finish here. Thank you (Thanks) very much for coming today, everybody. Your ideas are brilliant!" }
+];
+
+function renderDialogue() {
+  var html = '';
+  DIALOGUE.forEach(function(ut) {
+    html += '<div class="exchange">'
+      + '<div class="meta">'
+      + '<span class="speaker">' + ut.sp + '</span>'
+      + (ut.fn ? '<span class="function">' + ut.fn + '</span>' : '')
+      + '</div>'
+      + '<div class="text">' + ut.t + '</div>'
+      + '</div>';
+  });
+  document.getElementById('dialogueBody').innerHTML = html;
+}
+
+window.switchTab = function(i) {
+  var contents = document.querySelectorAll('.tab-content');
+  var buttons = document.querySelectorAll('.tab-btn');
+  contents.forEach(function(c) { c.classList.remove('active'); });
+  buttons.forEach(function(b) { b.classList.remove('active'); });
+  contents[i].classList.add('active');
+  buttons[i].classList.add('active');
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderDialogue();
+});
+
+})();
+</script>
+
+</body>
+</html>

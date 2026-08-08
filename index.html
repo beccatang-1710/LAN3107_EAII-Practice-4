@@ -183,6 +183,34 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
 
 .exchange .text { font-size: 16px; color: #333; margin-top: 2px; line-height: 1.9; }
 
+.exchange .lang {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed #cfe0c2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.exchange .lang .tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2f6b3a;
+  background: #eaf5e7;
+  border: 1px solid #c9e3c2;
+  border-radius: 10px;
+  padding: 2px 9px;
+  line-height: 1.5;
+}
+
+.exchange .lang .tag .xv {
+  color: #c0392b;
+}
+
+.exchange .lang .tag .ok {
+  color: #2f6b3a;
+}
+
 .cn-translation {
   display: none;
   margin-top: 8px;
@@ -356,11 +384,24 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
   <div class="tab-content" id="tab-1">
     <h1>Possible Response</h1>
     <p style="color:#666; margin-bottom:16px;">
-      Suggested meeting conversation (full answer). Communicative functions are shown for reference.
+      Suggested meeting conversation (full answer). Communicative functions are shown in the
+      <em>italic blue</em> line above each turn; <strong>green tags</strong> explain the use of
+      language in each turn.
     </p>
     <div id="dialogueBody"></div>
 
     <h2 style="margin-top:30px;">Language Features</h2>
+    <p style="color:#666; margin-bottom:16px;">
+      Green tags in the conversation show <strong>explanations of the use of language</strong>
+      (modal verbs + bare infinitive, cohesive devices, contractions, suggestion patterns, etc.).
+      A <span class="xv" style="font-weight:700;">✗</span> marks the <strong>incorrect</strong> form
+      (e.g. <em>can + bought</em>), which should be the bare infinitive (e.g. <em>can buy</em>).
+    </p>
+
+    <div class="feature-box">
+      <h3>Language functions in bold print</h3>
+      <p>Communicative functions (e.g. making suggestions, showing agreement, giving reasons) are highlighted in the <strong>italic blue</strong> line above each speaker's turn.</p>
+    </div>
 
     <div class="feature-box">
       <h3>Cohesive devices / Linking words</h3>
@@ -375,6 +416,11 @@ h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
     <div class="feature-box">
       <h3>Contractions</h3>
       <p>I'm (I am) / It'll (It will) / We've (We have) / Let's (Let us) / That's (That is)</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Thinking words (air fillers)</h3>
+      <p>Well… Ummm… uhhhh…</p>
     </div>
 
     <div class="feature-box">
@@ -415,40 +461,40 @@ var DIALOGUE = [
   { sp: "C", fn: "Introducing the agenda", t: "Has everyone received (formal) / got (informal) a copy of the agenda?" },
   { sp: "All", t: "Yes. / We do. Thanks." },
   { sp: "B", fn: "Purpose of the meeting", t: "Great / Terrific! The aim / purpose of today's meeting is to discuss the launch of IT Gadgets Fair 2024 in our university." },
-  { sp: "A", t: "We will cover three agenda items: fair date, arrangements of the fair, and any other business that you would like to discuss." },
-  { sp: "D", fn: "Making suggestions + Giving reasons", t: "We'll start with the fair date. I propose holding the fair in May for two weeks since / because / as it is the semester 2 break. Students are more relaxed after their exams (examinations). They'll be (will be) in a good mood to do some shopping. Moreover, there're (are) still five months ahead, so we'll have (will have) sufficient preparation time." },
-  { sp: "C", fn: "Showing disagreement · Making a counter-proposal · Elaborating opinions", t: "I'm afraid that's not the way I see it. The break after semester 2 is short. It's not worth doing lots of preparation and holding the fair for just two weeks. We may consider mid to late August instead. It is the ideal time for our students to think of buying new IT gadgets for use in the next academic year, such as tablets. The fair can last three weeks. Do you agree with me / What do you think?" },
-  { sp: "B", fn: "Showing agreement · Making suggestions", t: "That's an excellent idea. It's definitely a suitable time. Scheduling it in December is another possible option. There are usually more discounts and special offers near the Christmas time. Students can surely buy the gadgets at a cheaper price." },
-  { sp: "A", fn: "Showing agreement · Stating preferences · Making suggestions · Sharing your views", t: "Absolutely! I'd (I) prefer this option to August. Could we also consider September? Some students won't be back till semester 1 begins. I believe that more students can come to (attend) the fair if we choose September." },
+  { sp: "A", fn: "Introducing the agenda", ln: ["Modal verb + bare infinitive"], t: "We will cover three agenda items: fair date, arrangements of the fair, and any other business that you would like to discuss." },
+  { sp: "D", fn: "Making suggestions + Giving reasons", ln: ["because (S + V + O) → giving reasons", "Cohesive device", "Contraction (commonly used in spoken language)"], t: "We'll start with the fair date. I propose holding the fair in May for two weeks since / because / as it is the semester 2 break. Students are more relaxed after their exams (examinations). They'll be (will be) in a good mood to do some shopping. Moreover, there're (are) still five months ahead, so we'll have (will have) sufficient preparation time." },
+  { sp: "C", fn: "Showing disagreement · Making a counter-proposal · Elaborating opinions", ln: ["Contraction", "Modal verb + bare infinitive"], t: "I'm afraid that's not the way I see it. The break after semester 2 is short. It's not worth doing lots of preparation and holding the fair for just two weeks. We may consider mid to late August instead. It is the ideal time for our students to think of buying new IT gadgets for use in the next academic year, such as tablets. The fair can last three weeks. Do you agree with me / What do you think?" },
+  { sp: "B", fn: "Showing agreement · Making suggestions", ln: ["Contraction", "Modal verb + bare infinitive", "can + bought ✗", "can + buying ✗"], t: "That's an excellent idea. It's definitely a suitable time. Scheduling it in December is another possible option. There are usually more discounts and special offers near the Christmas time. Students can surely buy the gadgets at a cheaper price." },
+  { sp: "A", fn: "Showing agreement · Stating preferences · Making suggestions · Sharing your views", ln: ["Modal verb + bare infinitive"], t: "Absolutely! I'd (I) prefer this option to August. Could we also consider September? Some students won't be back till semester 1 begins. I believe that more students can come to (attend) the fair if we choose September." },
   { sp: "C", fn: "Partial agreement · Giving reasons · Making a counter-proposal", t: "That's a possibility (possible), but I don't think September is a feasible suggestion. All campus staff are busy when semester 1 begins. I don't think we can have any spare manpower (staffing) for the fair. Mid to late August is a more practical idea." },
-  { sp: "D", fn: "Showing uncertainty · Drawing consensus", t: "Ok, so we've come up with a few suggestions. Can we now decide on the fair date? It seems mid to late August and December is the most agreeable suggestion. Can we all agree to present (that we should) present this option to the management team?" },
+  { sp: "D", fn: "Showing uncertainty · Drawing consensus", ln: ["Contraction", "Modal verb + bare infinitive"], t: "Ok, so we've come up with a few suggestions. Can we now decide on the fair date? It seems mid to late August and December is the most agreeable suggestion. Can we all agree to present (that we should) present this option to the management team?" },
   { sp: "All", t: "Sure. / We can. / Let's do that. / Certainly. / Yes / Why not!? / Can't be better!" },
-  { sp: "C", fn: "Switching topic", t: "Excellent! Let's move onto the second item on the agenda." },
-  { sp: "B", fn: "Inviting opinions", t: "May I have your opinions on the arrangements of the fair?" },
-  { sp: "A", fn: "Making suggestions + Giving reasons · Highlighting the benefit outcome", t: "For the on-campus venue, how about holding the fair at the Campus Central Square? Since it is in the middle of the campus, students can reach it conveniently. Moreover, the spacious open area would allow us to set up booths according to different types of IT products sold." },
-  { sp: "D", fn: "Strong agreement · Making suggestions · Elaborating opinions", t: "I agree with you entirely. Campus Central Square is where our students must pass by every day. Regarding / In terms of the types of gadgets exhibited, I would propose selling tablets. From the next academic year onwards, students need to use e-books in their English lessons. If they have one, it would be more convenient for them to attempt in-class tasks. Moreover, I recommend / giving (that we should give) special offers for the students as well." },
-  { sp: "B", fn: "Showing agreement · Giving a condition (1st conditional)", t: "You're right. Perhaps we should give them cash coupons according to their academic results. For instance, if a student obtains a GPA of 4 or above, they will receive a $200 cash coupon. This way, it would be beneficial to both the students themselves and the hardware wholesaler." },
+  { sp: "C", fn: "Switching topic", ln: ["Contraction"], t: "Excellent! Let's move onto the second item on the agenda." },
+  { sp: "B", fn: "Inviting opinions", ln: ["Modal verb + bare infinitive"], t: "May I have your opinions on the arrangements of the fair?" },
+  { sp: "A", fn: "Making suggestions + Giving reasons · Highlighting the benefit outcome", ln: ["Cohesive devices (Moreover)"], t: "For the on-campus venue, how about holding the fair at the Campus Central Square? Since it is in the middle of the campus, students can reach it conveniently. Moreover, the spacious open area would allow us to set up booths according to different types of IT products sold." },
+  { sp: "D", fn: "Strong agreement · Making suggestions · Elaborating opinions", ln: ["Cohesive devices (Moreover)", "Making suggestions"], t: "I agree with you entirely. Campus Central Square is where our students must pass by every day. Regarding / In terms of the types of gadgets exhibited, I would propose selling tablets. From the next academic year onwards, students need to use e-books in their English lessons. If they have one, it would be more convenient for them to attempt in-class tasks. Moreover, I recommend / giving (that we should give) special offers for the students as well." },
+  { sp: "B", fn: "Showing agreement · Giving a condition (1st conditional)", ln: ["Modal verb + bare infinitive", "should + gave ✗", "should + giving ✗", "Elaborating opinions by stating possible results"], t: "You're right. Perhaps we should give them cash coupons according to their academic results. For instance, if a student obtains a GPA of 4 or above, they will receive a $200 cash coupon. This way, it would be beneficial to both the students themselves and the hardware wholesaler." },
   { sp: "All", t: "Sure. / Fantastic. / Exactly." },
-  { sp: "C", fn: "Making suggestions", t: "May I propose another idea? What about distributing promotional gifts to our students? We could design gifts with our university logo. A mouse pad would be very practical to them." },
-  { sp: "A", fn: "Partial agreement · Making suggestions · Giving own opinion", t: "I see your point, but most students use notebook computers or tablets, so they do not need a mouse pad. Shall we give out a USB stick instead? Students can use it to store e-books and their handouts. It is also a useful tool for handling their assignments and group projects. I believe that every student will welcome it." },
+  { sp: "C", fn: "Making suggestions", ln: ["Modal verb + bare infinitive", "could + designed ✗", "could + designing ✗"], t: "May I propose another idea? What about distributing promotional gifts to our students? We could design gifts with our university logo. A mouse pad would be very practical to them." },
+  { sp: "A", fn: "Partial agreement · Making suggestions · Giving own opinion", ln: ["Modal verb + bare infinitive", "shall + gave ✗", "shall + giving ✗"], t: "I see your point, but most students use notebook computers or tablets, so they do not need a mouse pad. Shall we give out a USB stick instead? Students can use it to store e-books and their handouts. It is also a useful tool for handling their assignments and group projects. I believe that every student will welcome it." },
   { sp: "D", fn: "Partial agreement + Giving reasons", t: "I see your point, but the cost of producing a massive number of USB sticks is high, and I think the gift cannot achieve the promotional effect as anticipated." },
-  { sp: "C", fn: "Drawing consensus", t: "Can we decide on the fair arrangements now? Do you agree that we should hold the fair at the Campus Central Square, focusing on promoting tablets and distributing coupons to students?" },
+  { sp: "C", fn: "Drawing consensus", ln: ["Modal verb + bare infinitive", "can + decided ✗", "can + deciding ✗"], t: "Can we decide on the fair arrangements now? Do you agree that we should hold the fair at the Campus Central Square, focusing on promoting tablets and distributing coupons to students?" },
   { sp: "All", t: "Yes. / Sure. / Great." },
-  { sp: "B", fn: "Revisiting the agenda item in the next meeting", t: "Since we cannot reach a consensus on promotional gifts, let's discuss it further in our next meeting." },
+  { sp: "B", fn: "Revisiting the agenda item in the next meeting", ln: ["Contraction"], t: "Since we cannot reach a consensus on promotional gifts, let's discuss it further in our next meeting." },
   { sp: "All", t: "Yes. / Sure. / Of course." },
   { sp: "A", fn: "Switching topic → next agenda item", t: "Great! Is there any other business that you'd like (would like) to discuss?" },
-  { sp: "C", fn: "Initiating the discussion · Making suggestions", t: "Yes. I would like to discuss ways to inform students of the fair. An effective way is sending out mass student emails. I suggest sending these emails two weeks before the commencement date of the fair. Do you think it is feasible?" },
+  { sp: "C", fn: "Initiating the discussion · Making suggestions", ln: ["Modal verb + bare infinitive", "S + suggest + gerund (…ing)"], t: "Yes. I would like to discuss ways to inform students of the fair. An effective way is sending out mass student emails. I suggest sending these emails two weeks before the commencement date of the fair. Do you think it is feasible?" },
   { sp: "D", fn: "Making a counter-offer · Giving explanations · Making comparisons", t: "Your idea is good, but can we also ask class tutors to inform students verbally besides mass student emails? This way, students who do not usually check emails could also be informed. These two channels are comparatively more efficient than just sending emails or putting up posters." },
   { sp: "B", fn: "Showing agreement", t: "Fantastic! We will adopt both ways to notify students then. Do you all agree?" },
   { sp: "All", t: "Yes. / Sure. / Marvellous." },
   { sp: "A", fn: "Making suggestions · Giving explanations & highlighting potential benefits", t: "Shall we consider sending SMS to students? In my opinion, this is the most direct way to inform students. I reckon all students read SMS messages on their mobile phones every day. Even if they miss both the mass email and the tutor's announcement, we can ensure we haven't missed anyone." },
-  { sp: "B", fn: "Showing agreement", t: "Absolutely! Let's send SMS messages which incorporate information about the fair date, venue and special offers." },
+  { sp: "B", fn: "Showing agreement", ln: ["Modal verb + bare infinitive", "should + sent ✗", "should + sending ✗"], t: "Absolutely! Let's send SMS messages which incorporate information about the fair date, venue and special offers." },
   { sp: "D", fn: "Showing agreement · Inviting opinions", t: "You're right. Let's (Let us) present this idea to the management too. Any other suggestions?" },
   { sp: "All", t: "No. / I don't. / Not right now." },
   { sp: "A", fn: "Making a summary", t: "So, we have decided to send mass student emails, and we are going to send SMS messages and seek class tutors' help to inform their students." },
-  { sp: "D", t: "Well, I think that's all we need to discuss today. We've (have) made decisions to be presented to the management. Is there anything you'd like to add?" },
-  { sp: "All", t: "No. / I don't. / Not right now. / Not for me / Not for this moment." },
-  { sp: "B", fn: "Thanking participants · Closing the meeting", t: "That's good! I think we can finish here. Thank you (Thanks) very much for coming today, everybody. Your ideas are brilliant!" }
+  { sp: "D", ln: ["Contraction"], t: "Well, I think that's all we need to discuss today. We've (have) made decisions to be presented to the management. Is there anything you'd like to add?" },
+  { sp: "All", t: "No. / I don. / Not right now. / Not for me / Not for this moment." },
+  { sp: "B", fn: "Thanking participants · Closing the meeting", ln: ["Modal verb + bare infinitive", "can + finished ✗", "can + finishing ✗"], t: "That's good! I think we can finish here. Thank you (Thanks) very much for coming today, everybody. Your ideas are brilliant!" }
 ];
 
 function renderDialogue() {
@@ -460,6 +506,11 @@ function renderDialogue() {
       + (ut.fn ? '<span class="function">' + ut.fn + '</span>' : '')
       + '</div>'
       + '<div class="text">' + ut.t + '</div>'
+      + (ut.ln ? '<div class="lang">' + ut.ln.map(function(n) {
+          var v = n.replace(/✗$/, '').trim();
+          var marked = n.charAt(n.length - 1) === '✗';
+          return '<span class="tag">' + v + (marked ? ' <span class="xv">✗</span>' : '') + '</span>';
+        }).join('') + '</div>' : '')
       + '</div>';
   });
   document.getElementById('dialogueBody').innerHTML = html;

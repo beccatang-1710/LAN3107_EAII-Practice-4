@@ -1,925 +1,2655 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LAN3107 EAII Practice 4 — Possible Response</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2c4a8f">
+<title>LAN3107 EAII Practice 4: IT Gadgets Fair 2026 (Slide Deck)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --sage: #2c4a8f;
+            --sage-light: #bed0ea;
+            --sage-pale: #eef4fd;
+            --earth: #1c3865;
+            --earth-mid: #5573b8;
+            --earth-light: #dbe7f7;
+            --cream: #f4f8ff;
+            --white: #ffffff;
+            --text: #333333;
+            --text-muted: #5573b8;
+            --divider: #d4e2f5;
+        }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #c7d8ee;
-  color: #333;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5e4ea;
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Practice 4 original floating bubbles & wave background patterns */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+            background:
+                radial-gradient(circle at 12% 25%, rgba(255,255,255,0.35) 4px, transparent 5px),
+                radial-gradient(circle at 30% 70%, rgba(255,255,255,0.3) 6px, transparent 7px),
+                radial-gradient(circle at 50% 20%, rgba(255,255,255,0.25) 8px, transparent 9px),
+                radial-gradient(circle at 70% 55%, rgba(255,255,255,0.35) 4px, transparent 5px),
+                radial-gradient(circle at 85% 30%, rgba(255,255,255,0.3) 5px, transparent 6px),
+                radial-gradient(circle at 95% 75%, rgba(255,255,255,0.35) 6px, transparent 7px),
+                radial-gradient(circle at 20% 90%, rgba(255,255,255,0.25) 7px, transparent 8px),
+                radial-gradient(circle at 60% 90%, rgba(255,255,255,0.3) 5px, transparent 6px);
+            animation: bubbles 18s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.06;
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M20 120 C60 30 140 30 180 120' fill='none' stroke='%232c4a8f' stroke-width='2'/%3E%3Cpath d='M40 150 C80 70 140 70 170 150' fill='none' stroke='%232c4a8f' stroke-width='1.5'/%3E%3Cpath d='M60 180 C90 110 130 110 155 180' fill='none' stroke='%232c4a8f' stroke-width='1'/%3E%3C/svg%3E") repeat;
+        }
+
+        @keyframes bubbles {
+            0% { transform: translateY(0); opacity: 0.5; }
+            100% { transform: translateY(-32px); opacity: 1; }
+        }
+
+        @keyframes kenburns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .slide-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 60px 24px 52px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 56px;
+            animation: fadeDown 0.8s ease both;
+        }
+
+        .header-eyebrow {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #1c3865;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .header-eyebrow::before,
+        .header-eyebrow::after {
+            content: '';
+            height: 1px;
+            width: 40px;
+            background: var(--sage-light);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 5vw, 46px);
+            font-weight: 700;
+            color: #1c3865;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        h1 span {
+            color: #2c4a8f;
+            font-style: italic;
+        }
+
+        .presenter-tag {
+            font-size: 16px;
+            color: var(--text-muted);
+            text-align: right;
+            margin-bottom: 4px;
+            font-style: italic;
+        }
+
+        /* Hero banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #1c3865 0%, #2c4a8f 55%, #5573b8 100%);
+            border-radius: 20px;
+            padding: 44px 40px;
+            margin: 0 auto 52px;
+            max-width: 66.667%;
+            position: relative;
+            overflow: hidden;
+            animation: fadeUp 0.8s 0.2s ease both;
+        }
+
+        .hero-banner::before {
+            content: '💻';
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            font-size: 120px;
+            opacity: 0.12;
+            transform: rotate(20deg);
+        }
+
+        .hero-banner::after {
+            content: '📱';
+            position: absolute;
+            right: 90px;
+            bottom: -20px;
+            font-size: 100px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+
+        .hero-banner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .hero-banner p {
+            color: rgba(255,255,255,0.85);
+            font-size: 15px;
+            max-width: 480px;
+            line-height: 1.6;
+        }
+
+        .agenda-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .chip {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 100px;
+            padding: 4px 14px;
+            font-size: 12px;
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+
+        .playback-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 12px 20px;
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid var(--divider);
+        }
+
+        .play-all-btn {
+            background: var(--sage);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .play-all-btn:hover { background: var(--earth); }
+
+        .pause-btn {
+            background: #d4a043;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .pause-btn:hover { background: #b8892e; }
+
+        .stop-btn {
+            background: #c0392b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .stop-btn:hover { background: #a93226; }
+
+        .speed-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        .speed-select {
+            font-size: 13px;
+            padding: 4px 8px;
+            border: 1px solid var(--divider);
+            border-radius: 6px;
+            background: var(--cream);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .now-playing {
+            background: linear-gradient(135deg, #2c4a8f 0%, #5573b8 100%);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            display: none;
+            animation: fadeUp 0.3s ease both;
+        }
+
+        .now-playing.active { display: block; }
+
+        .now-playing-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 6px;
+        }
+
+        .now-playing-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: white;
+            line-height: 1.5;
+        }
+
+        /* Speaker button */
+        .speaker-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            font-family: 'Playfair Display', serif;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .speaker-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: white;
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+
+        .speaker-btn:hover::after { opacity: 0.15; }
+        .speaker-btn:active { transform: scale(0.93); }
+
+        .speaker-btn.role-A { background: linear-gradient(135deg, #7a9e7e, #5c8260); color: white; }
+        .speaker-btn.role-B { background: linear-gradient(135deg, #8c7355, #6b5540); color: white; }
+        .speaker-btn.role-C { background: linear-gradient(135deg, #6a8caf, #4a6c8f); color: white; }
+        .speaker-btn.role-D { background: linear-gradient(135deg, #b07a5a, #8a5a3a); color: white; }
+        .speaker-btn.role-ALL {
+            background: linear-gradient(135deg, #7a9e7e, #4a6c8f);
+            color: white;
+            font-size: 10px;
+            letter-spacing: 0.05em;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+        }
+
+        .script-text {
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--text);
+        }
+
+        /* Audio status indicator */
+        .audio-pulse {
+            display: none;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #f1c40f;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            animation: pulse 1s infinite;
+        }
+
+        .speaker-btn.playing .audio-pulse { display: block; }
+
+        /* Closing summary card */
+        .summary-card {
+            background: linear-gradient(135deg, #1c3865 0%, #2c4a8f 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .summary-card::before {
+            content: '🎓';
+            position: absolute;
+            right: 20px;
+            bottom: -10px;
+            font-size: 90px;
+            opacity: 0.15;
+        }
+
+        .summary-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--sage-light);
+        }
+
+        .summary-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 500px) { .summary-items { grid-template-columns: 1fr; } }
+
+        .summary-item {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .summary-item strong {
+            display: block;
+            color: var(--sage-light);
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        /* Animations */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.6; }
+        }
+
+        /* ---- Task overview ---- */
+        .task-section {
+            margin-bottom: 28px;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 24px 28px;
+            border-radius: 16px;
+            border: 1px solid var(--divider);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .task-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--earth);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .task-section p { color: var(--text); font-size: 15px; line-height: 1.7; }
+        .task-section ul, .task-section ol { padding-left: 22px; margin: 10px 0; }
+        .task-section li { margin-bottom: 8px; line-height: 1.6; }
+
+        .task-box {
+            background: var(--sage-pale);
+            border-left: 4px solid var(--sage);
+            padding: 14px 18px;
+            margin: 12px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .task-box p { margin-bottom: 4px; }
+
+        .meeting-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: var(--sage-pale);
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--sage-light);
+            margin: 12px 0;
+            color: var(--sage);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .meeting-meta .m-university {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--earth);
+        }
+
+        .cn-toggle-wrap { text-align: right; margin-bottom: 12px; }
+        .cn-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--earth);
+            user-select: none;
+        }
+        .cn-toggle input {
+            width: 40px;
+            height: 22px;
+            appearance: none;
+            background: var(--sage-light);
+            border-radius: 11px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .cn-toggle input::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.2s;
+        }
+        .cn-toggle input:checked { background: var(--sage); }
+        .cn-toggle input:checked::before { transform: translateX(18px); }
+
+        .cn-translation {
+            display: none;
+            margin-top: 6px;
+            padding: 8px 12px;
+            background: #fff8f0;
+            border-left: 3px solid #e8a87c;
+            border-radius: 0 6px 6px 0;
+            font-size: 14px;
+            color: #8b5a2b;
+            line-height: 1.6;
+        }
+        .cn-active .cn-translation { display: block; }
+
+        /* Banner */
+        .banner {
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+            animation: kenburns 10s ease-in-out infinite alternate;
+            transform-origin: center center;
+        }
+
+        /* Video slide */
+        .video-wrap {
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .video-wrap video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .video-placeholder {
+            background: var(--white);
+            border-radius: 16px;
+            border: 2px dashed #9db7dd;
+            padding: 60px 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+        .video-placeholder .vp-icon { font-size: 48px; margin-bottom: 12px; }
+        .video-placeholder .vp-title { font-size: 18px; font-weight: 600; color: var(--earth); margin-bottom: 6px; }
+
+        /* ---- Possible Response: dialogue table with communicative functions ---- */
+        .dialogue-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 14px; margin: 6px 0 24px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+        .dialogue-table th {
+            background: #2c4a8f; color: #fff; padding: 10px 12px; text-align: left;
+            font-size: 13px; font-weight: 600;
+        }
+        .dialogue-table td { border: 1px solid var(--divider); padding: 10px 12px; vertical-align: top; }
+        .dialogue-table tbody tr:nth-child(even) td { background: #f7fafd; }
+        .dialogue-table tr.script-row { display: table-row; gap: normal; padding: 0; border-bottom: none; }
+        .dialogue-table tr.script-row:last-child { border-bottom: none; }
+        .dialogue-table tr.script-row:hover { background: #eef4fd; }
+        .dialogue-table tr.script-row.active { background: #e8f0e0; box-shadow: inset 4px 0 0 var(--sage); }
+        .c-stu { width: 28px; min-width: 28px; padding: 6px 1px; text-align: center; }
+        .c-script { width: 34.7%; line-height: 1.9; }
+        .c-fn { width: calc(65.3% - 28px); font-size: 12px; line-height: 1.6; }
+        .fn-label { font-style: italic; color: #2c4a8f; font-weight: 600; margin-bottom: 6px; white-space: pre-line; }
+        .muted { color: #aab7cc; }
+
+        .dialogue-table mark.lang-hl { cursor: default; }
+        .explain-marker {
+            display: inline-flex; align-items: center; justify-content: center; vertical-align: super;
+            width: 20px; height: 20px; margin: 0 2px 0 5px; padding: 0; border-radius: 50%;
+            border: 1px solid #2c4a8f; background: #fff; color: #1c3865; font: 700 11px/1 sans-serif;
+            cursor: help;
+        }
+        .explain-marker:hover, .explain-marker:focus-visible { background: #1c3865; color: #fff; outline: 2px solid #93c5fd; outline-offset: 2px; }
+        .language-tooltip {
+            position: fixed; z-index: 1000; max-width: min(360px, calc(100vw - 24px));
+            padding: 11px 14px; border-radius: 12px; background: #1c3865; color: #fff;
+            font: 500 13px/1.5 'DM Sans', sans-serif; box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+            pointer-events: none;
+        }
+        .language-tooltip[hidden] { display: none; }
+        .language-tooltip strong { font-weight: 700; color: #fff; }
+        .language-tooltip em { font-style: italic; }
+
+        .lang-hl {
+            cursor: default; padding: 2px 4px; border-radius: 5px; font-weight: 600;
+            text-decoration: none;
+        }
+        .lang-hl.m { background: #dbeafe; color: #1e40af; border: 2px solid #3b82f6; }
+        .lang-hl.c { background: #fef3c7; color: #92400e; border: 2px solid #f59e0b; }
+        .lang-hl.h { background: #dcfce7; color: #166534; border: 2px solid #22c55e; }
+        .lang-hl.g { background: #f3e8ff; color: #6b21a8; border: 2px solid #a855f7; }
+        .lang-hl.r { background: #ffedd5; color: #9a3412; border: 2px solid #f97316; }
+        .lang-hl.n { background: #ccfbf1; color: #115e59; border: 2px solid #14b8a6; }
+        .lang-hl.a { background: #ecfccb; color: #3f6212; border: 2px solid #84cc16; }
+        .lang-hl.e { background: #ffe4e6; color: #9f1239; border: 2px solid #f43f5e; }
+        .lang-hl.p { background: #fce7f3; color: #9d174d; border: 2px solid #ec4899; }
+        .lang-hl.y { background: #fef08a; color: #854d0e; border: 2px solid #facc15; }
+        .lang-hl.prep { background: #f5e6d3; color: #7c4a1e; border: 2px solid #c8956c; }
+        .lang-hl.resp { background: #e5e5e5; color: #525252; border: 2px solid #a3a3a3; }
+        .lang-hl.ex { background: #cffafe; color: #155e75; border: 2px solid #06b6d4; }
+        .lang-hl.pref { background: #fef3c7; color: #78350f; border: 2px solid #d97706; }
+        .lang-hl.lex { background: #f1f5f9; color: #334155; border: 2px solid #94a3b8; }
+        .lang-hl.coll { background: #ccfbf1; color: #115e59; border: 2px solid #14b8a6; }
+        .lang-hl.form { background: #e0e7ff; color: #3730a3; border: 2px solid #818cf8; }
+        .lang-hl .lang-hl { padding: 1px 4px; margin: 0 1px; box-shadow: 0 0 0 1.5px #fff; }
+        @media (max-width: 640px) { .explain-marker { width: 24px; height: 24px; margin-left: 6px; font-size: 12px; } }
+
+        .legend {
+            display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; align-items: center;
+            background: rgba(255,255,255,0.92); padding: 16px 20px; border-radius: 14px; border: 1px solid var(--divider);
+        }
+        .legend .lbl { font-size: 13px; font-weight: 700; color: var(--earth); margin-right: 4px; }
+        .legend .chip { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
+        .tab2-guide {
+            margin: 18px 0 12px; padding: 16px 20px; border-left: 4px solid var(--sage);
+            border-radius: 12px; background: rgba(255, 255, 255, 0.94); color: var(--earth); font-size: 13px; line-height: 1.65;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .tab2-guide strong { color: #1c3865; }
+        .chip.m { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+        .chip.c { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+        .chip.h { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .chip.g { background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
+        .chip.r { background: #ffedd5; color: #9a3412; border: 1px solid #fdba74; }
+        .chip.n { background: #ccfbf1; color: #115e59; border: 1px solid #5eead4; }
+        .chip.a { background: #ecfccb; color: #3f6212; border: 1px solid #bef264; }
+        .chip.e { background: #ffe4e6; color: #9f1239; border: 1px solid #fda4af; }
+        .chip.p { background: #fce7f3; color: #9d174d; border: 1px solid #f9a8d4; }
+        .chip.ex { background: #cffafe; color: #155e75; border: 1px solid #22d3ee; }
+        .chip.pref { background: #fef3c7; color: #78350f; border: 1px solid #fbbf24; }
+        .chip.lex { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+        .chip.coll { background: #ccfbf1; color: #115e59; border: 1px solid #5eead4; }
+        .chip.form { background: #e0e7ff; color: #3730a3; border: 1px solid #a5b4fc; }
+        .chip.resp { background: #e5e5e5; color: #525252; border: 1px solid #d4d4d4; }
+
+        .dialogue-table .script-text { font-size: 15px; }
+        .dialogue-table .c-script .cn-translation { font-size: 13px; }
+        @media (max-width: 820px) {
+            .dlg { overflow: visible; }
+            .dlg .dialogue-table { display: block; width: 100%; min-width: 0; table-layout: auto; background: transparent; box-shadow: none; }
+            .dialogue-table thead {
+                position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+                overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+            }
+            .dialogue-table tbody { display: block; width: 100%; }
+            .dialogue-table tr.script-row {
+                display: grid; grid-template-columns: 48px minmax(0, 1fr);
+                grid-template-areas: "speaker script" "function function";
+                width: 100%; margin: 0 0 12px; padding: 0; gap: 0;
+                border: 1px solid var(--divider); border-radius: 12px; overflow: hidden;
+                background: #fff; box-shadow: 0 2px 8px rgba(28, 56, 101, 0.08);
+            }
+            .dialogue-table tr.script-row:hover { background: #fff; }
+            .dialogue-table tr.script-row.active { background: #e8f0e0; box-shadow: inset 4px 0 0 var(--sage); }
+            .dialogue-table td { display: block; min-width: 0; border: 0; padding: 10px 12px; }
+            .dialogue-table .c-stu {
+                grid-area: speaker; width: auto; min-width: 0; padding: 12px 2px 8px 8px;
+                text-align: center; align-self: start;
+            }
+            .dialogue-table .c-stu::before,
+            .dialogue-table .c-script::before,
+            .dialogue-table .c-fn::before {
+                display: block; margin: 0 0 5px; color: #5573b8; font: 700 10px/1.3 'DM Sans', sans-serif;
+                letter-spacing: .04em; text-transform: uppercase;
+            }
+            .dialogue-table .c-stu::before { content: "Speaker"; }
+            .dialogue-table .c-script { grid-area: script; width: auto; padding: 12px 12px 10px 8px; line-height: 1.75; overflow-wrap: anywhere; }
+            .dialogue-table .c-script::before { content: "Conversation"; }
+            .dialogue-table .c-script .script-text { font-size: 14px; }
+            .dialogue-table .c-script .cn-translation { font-size: 12px; }
+        }
+
+        /* ---- Supplementary: language features & communicative functions ---- */
+        .note-block {
+            background: var(--white);
+            border: 1px solid var(--divider);
+            border-left: 4px solid var(--sage);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin: 12px 0;
+            line-height: 1.7;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+        .note-block code {
+            background: var(--sage-pale);
+            border: 1px solid var(--sage-light);
+            border-radius: 6px;
+            padding: 1px 6px;
+            font-size: 13px;
+            color: var(--earth);
+        }
+        .cross { color: #c0392b; font-weight: 700; }
+        .tick { color: #1a7a3d; font-weight: 700; }
+        .cf-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 6px;
+        }
+        @media (max-width: 640px) { .cf-grid { grid-template-columns: 1fr; } }
+        .cf-card {
+            background: var(--white);
+            border: 1px solid var(--divider);
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+        .cf-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            color: var(--earth);
+            margin-bottom: 8px;
+        }
+        .cf-card .tag {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+        .cf-card ul { padding-left: 18px; margin: 0; }
+        .cf-card li { margin-bottom: 6px; line-height: 1.55; font-size: 14px; }
+        .cf-card p { font-size: 14px; line-height: 1.6; }
+        .cf-wide { grid-column: 1 / -1; }
+        .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; font-size: 14px; }
+        @media (max-width: 640px) { .modal-grid { grid-template-columns: 1fr; } }
+        .cf-note { margin-top: 8px; font-size: 13px; color: var(--text-muted); font-style: italic; }
+        .form-row { display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.55; }
+        .hi-bad {
+            background: #ffedd5; color: #9a3412; text-decoration: line-through;
+            border-bottom: 2px solid #f97316; border-radius: 3px; padding: 0 3px;
+        }
+        .hi-good {
+            background: #dcfce7; color: #166534;
+            border-bottom: 2px solid #22c55e; border-radius: 3px; padding: 0 3px;
+        }
+
+        /* ====================================================================
+           RESPONSIVE LAYER (phone / tablet / laptop / large desktop)
+           ==================================================================== */
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        body {
+            -webkit-tap-highlight-color: transparent;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        button, select, .speaker-btn, .explain-marker { touch-action: manipulation; }
+        img, video { max-width: 100%; }
+        h1, .script-text, .fn-label { overflow-wrap: anywhere; }
+
+        .dialogue-table th:nth-child(1), .c-stu    { width: 64px; min-width: 64px; }
+        .dialogue-table th:nth-child(2), .c-script { width: 56%; }
+        .dialogue-table th:nth-child(3), .c-fn     { width: auto; }
+        .dialogue-table td.c-script { padding-right: 16px; }
+
+        @media (min-width: 1100px) { .slide-inner { max-width: 980px; } }
+        @media (min-width: 1500px) { .slide-inner { max-width: 1100px; } }
+
+        @media (max-width: 900px) {
+            .slide-inner { padding: 36px 18px 40px; }
+            .hero-banner { max-width: 100%; padding: 32px 28px; }
+            .playback-controls { flex-wrap: wrap; }
+
+            .dialogue-table tr.script-row { grid-template-columns: 58px minmax(0, 1fr); }
+            .dialogue-table .c-stu { padding: 12px 2px 8px 10px; }
+            .dialogue-table .speaker-btn { width: 42px; height: 42px; }
+
+            .now-playing.active {
+                position: sticky;
+                top: calc(env(safe-area-inset-top, 0px) + 8px);
+                z-index: 50;
+                max-height: 30vh;
+                overflow-y: auto;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+            }
+            .now-playing-text { font-size: 16px; }
+        }
+
+        @media (max-width: 640px) {
+            .slide-inner { padding: 16px 12px 32px; }
+            .banner { border-radius: 14px; margin-bottom: 18px; }
+            .header { margin-bottom: 28px; }
+            .header-eyebrow { font-size: 11px; letter-spacing: 0.12em; gap: 8px; line-height: 1.5; margin-bottom: 12px; }
+            .header-eyebrow::before, .header-eyebrow::after { width: 18px; flex: 0 0 18px; }
+            .presenter-tag { font-size: 14px; }
+
+            .hero-banner { padding: 24px 18px; border-radius: 16px; margin-bottom: 26px; }
+            .hero-banner h2 { font-size: 22px; }
+            .hero-banner p { font-size: 14px; }
+            .agenda-chips { gap: 6px; margin-top: 16px; }
+            .agenda-chips .chip { font-size: 11.5px; padding: 4px 11px; }
+
+            .tab2-guide { padding: 10px 12px; font-size: 12.5px; }
+            .legend { gap: 6px; }
+
+            .playback-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px 12px; }
+            .playback-controls button { min-height: 44px; padding: 8px 6px; font-size: 13px; }
+            .speed-label { grid-column: 1 / 2; margin-left: 0; align-self: center; }
+            .speed-select { grid-column: 2 / 4; min-height: 40px; font-size: 15px; }
+
+            .now-playing { padding: 12px 14px; }
+
+            .task-section { padding: 16px 18px; }
+            .task-section h2 { font-size: 18px; }
+            .task-box { padding: 12px 14px; }
+            .meeting-meta { padding: 12px 14px; }
+            .meeting-meta .m-university { font-size: 20px; }
+
+            .note-block, .cf-card { padding: 12px 14px; }
+            .summary-card { padding: 22px 18px; margin-top: 28px; border-radius: 16px; }
+            .summary-card h3 { font-size: 20px; margin-bottom: 14px; }
+        }
+
+        @media (max-width: 380px) {
+            .slide-inner { padding-left: 8px; padding-right: 8px; }
+            .dialogue-table .c-script .script-text { font-size: 13.5px; }
+        }
+
+        @media (hover: none) {
+            .explain-marker { width: 26px; height: 26px; margin: 0 3px 0 6px; font-size: 12px; }
+            .script-text .word { padding: 0 1px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
+
+        @media print {
+            body::before, body::after, .toolbar, .now-playing, .speaker-btn, .cn-toggle-wrap { display: none !important; }
+            .dialogue-table tr, .cf-card, .note-block { break-inside: avoid; }
+        }
+
+/* ===== Deck layer ===== */
+html, body { height: 100%; }
+body { overflow: hidden; }
+.deck { position: fixed; inset: 0; z-index: 1; display: flex; flex-direction: column; }
+.slides { position: relative; flex: 1; min-height: 0; }
+.slide { position: absolute; inset: 0; overflow-y: auto; display: none; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+.slide.active { display: flex; flex-direction: column; animation: slideIn .35s ease both; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+.slide-inner { padding-top: 26px; padding-bottom: 36px; }
+.header { margin-bottom: 28px; }
+.banner { margin-bottom: 20px; }
+.hero-banner { max-width: 100%; margin-bottom: 20px; }
+.slide-head { text-align: center; margin-bottom: 14px; }
+.slide-head .eyebrow { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #1c3865; font-weight: 600; }
+.slide-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(22px, 3.4vw, 32px); color: #1c3865; margin: 4px 0; }
+.slide-head p { color: var(--text-muted); font-size: 14px; }
+
+.progress { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: rgba(0,0,0,.08); z-index: 5; }
+.progress i { display: block; height: 100%; width: 0; background: #2c4a8f; transition: width .3s; }
+
+/* Toolbar */
+.toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 16px;
+  padding: 8px 14px calc(8px + env(safe-area-inset-bottom, 0px)); background: rgba(255,255,255,.96);
+  border-top: 1px solid var(--divider); box-shadow: 0 -4px 16px rgba(0,0,0,.08);
+}
+.toolbar .playback-controls { margin: 0; padding: 0; border: 0; background: none; flex-wrap: wrap; gap: 8px; }
+.toolbar .speed-label { margin-left: 0; }
+.toolbar .cn-toggle { white-space: nowrap; }
+.cn-controls { display: inline-flex; align-items: center; gap: 6px; flex-wrap: nowrap; }
+.cn-lang-switch { display: inline-flex; background: var(--sage-pale); border: 1px solid var(--sage-light); border-radius: 8px; padding: 2px; gap: 2px; }
+.cn-lang-btn { border: none; background: transparent; color: var(--earth); font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 600; padding: 3px 9px; border-radius: 6px; cursor: pointer; transition: all 0.15s; line-height: 1.3; }
+.cn-lang-btn:hover { background: rgba(44, 74, 143, 0.15); }
+.cn-lang-btn.active { background: var(--sage); color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+.nav { display: flex; align-items: center; gap: 6px; }
+.nav-btn { width: 38px; height: 34px; border: none; border-radius: 8px; background: #1c3865; color: #fff; font-size: 14px; cursor: pointer; }
+.nav-btn:hover { background: #2c4a8f; }
+.nav-btn:disabled { opacity: .35; cursor: default; }
+#jump { max-width: 190px; }
+.deck .now-playing { margin: 0; border-radius: 0; padding: 8px 18px; }
+.deck .now-playing-text { font-size: 16px; }
+.deck .now-playing-label { margin-bottom: 2px; }
+
+/* Words: hoverable everywhere */
+.slide .word { cursor: pointer; transition: color .15s, background .15s; }
+.slide .word:hover { background: rgba(44,74,143,.15); border-radius: 4px; }
+.slide .word.speaking { color: #c0392b; font-weight: 700; }
+.slide .word.active { color: #1c3865; font-weight: 700; }
+.slide .script-text .word { display: inline-block; }
+.dlg { overflow-x: auto; }
+
+/* Selected target line */
+.dialogue-table tr.script-row.target > td:first-child { box-shadow: inset 4px 0 0 #2c4a8f; }
+.dialogue-table tr.script-row { cursor: pointer; }
+
+@media (max-width: 820px) {
+  .dlg { overflow: visible; }
+  .dlg .dialogue-table { display: block; width: 100%; min-width: 0; table-layout: auto; }
+}
+
+/* Video slide */
+.video-single { max-width: 900px; margin: 0 auto; }
+.vcap { padding: 10px 14px; background: var(--sage-pale); text-align: center; font-size: 16px; font-weight: 600; color: var(--earth); }
+
+/* Toast */
+.toast { position: fixed; left: 50%; bottom: 120px; transform: translateX(-50%); background: #1c3865; color: #fff; padding: 9px 16px; border-radius: 10px; font-size: 13px; z-index: 1200; max-width: 90vw; }
+.toast[hidden] { display: none; }
+
+/* ===== Microphone / pronunciation panel ===== */
+.mic-panel {
+  position: sticky; bottom: 0; z-index: 4; margin-top: 22px; padding: 14px 16px; border-radius: 16px;
+  background: #fff; border: 1px solid var(--divider); box-shadow: 0 -2px 18px rgba(0,0,0,.12);
+}
+.mic-top { display: flex; align-items: center; gap: 14px; }
+.mic-btn {
+  flex: none; width: 54px; height: 54px; border-radius: 50%; border: none; cursor: pointer; font-size: 24px;
+  background: linear-gradient(135deg, #5573b8, #2c4a8f); color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,.2); transition: transform .15s;
+}
+.mic-btn:hover { transform: scale(1.06); }
+.mic-btn.listening { background: linear-gradient(135deg, #e0574a, #c0392b); animation: micPulse 1.1s infinite; }
+@keyframes micPulse { 0% { box-shadow: 0 0 0 0 rgba(192,57,43,.5); } 70% { box-shadow: 0 0 0 16px rgba(192,57,43,0); } 100% { box-shadow: 0 0 0 0 rgba(192,57,43,0); } }
+.mic-target { min-width: 0; }
+.mic-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+.mic-target-text { font-family: 'Playfair Display', serif; font-size: 17px; line-height: 1.45; color: var(--earth); }
+.mic-status { margin-top: 8px; font-size: 13px; color: var(--text-muted); min-height: 18px; }
+.mic-result { margin-top: 10px; border-top: 1px dashed var(--divider); padding-top: 10px; }
+.mic-result[hidden] { display: none; }
+.score-row { display: flex; align-items: center; gap: 14px; }
+.score-ring {
+  flex: none; width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 18px; color: #1c3865;
+  background: conic-gradient(var(--rc, #2c4a8f) calc(var(--pct, 0) * 1%), #e6e2d8 0);
   position: relative;
-  overflow-x: hidden;
+}
+.score-ring::before { content: ''; position: absolute; inset: 7px; border-radius: 50%; background: #fff; }
+.score-ring span { position: relative; }
+.score-meta strong { display: block; font-size: 16px; color: var(--earth); }
+.score-meta small { display: block; color: var(--text-muted); font-size: 12.5px; line-height: 1.5; }
+.word-feedback { margin: 10px 0 4px; line-height: 2; font-size: 17px; }
+.word-feedback .fb { padding: 1px 7px; margin: 0 3px 3px 0; border-radius: 8px; display: inline-block; }
+.fb-ok { background: #d9f0dc; color: #1e6b34; }
+.fb-close { background: #fdf0c8; color: #8a6a00; }
+.fb-wrong { background: #fbdcd8; color: #a3281c; }
+.fb-missed { background: #eee; color: #777; text-decoration: line-through; }
+.fb-extra { background: #e8e4f5; color: #55468a; font-size: 14px; }
+.mic-tips { margin: 4px 0 0 18px; font-size: 13px; color: var(--text); line-height: 1.6; }
+.mic-note { margin-top: 6px; font-size: 11.5px; color: var(--text-muted); }
+@media (max-width: 640px) {
+  .toolbar { gap: 6px 10px; padding-left: 8px; padding-right: 8px; }
+  .play-all-btn, .pause-btn, .stop-btn { padding: 7px 10px; font-size: 13px; }
+  #jump { max-width: 120px; }
+  .mic-btn { width: 48px; height: 48px; font-size: 21px; }
+  .mic-target-text { font-size: 15px; }
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.5;
-  background:
-    radial-gradient(circle at 12% 25%, rgba(255,255,255,0.35) 4px, transparent 5px),
-    radial-gradient(circle at 30% 70%, rgba(255,255,255,0.3) 6px, transparent 7px),
-    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.25) 8px, transparent 9px),
-    radial-gradient(circle at 70% 55%, rgba(255,255,255,0.35) 4px, transparent 5px),
-    radial-gradient(circle at 85% 30%, rgba(255,255,255,0.3) 5px, transparent 6px),
-    radial-gradient(circle at 95% 75%, rgba(255,255,255,0.35) 6px, transparent 7px),
-    radial-gradient(circle at 20% 90%, rgba(255,255,255,0.25) 7px, transparent 8px),
-    radial-gradient(circle at 60% 90%, rgba(255,255,255,0.3) 5px, transparent 6px);
-  animation: bubbles 18s ease-in-out infinite alternate;
+/* Communicative function row above each line */
+.dialogue-table tr.fn-row td.c-fnrow { padding: 9px 14px 3px; background: #eef4fd; border-top: 2px solid #c9d8e4; font-size: 13px; line-height: 1.5; }
+.dialogue-table tr.fn-row .fn-label { margin: 0; }
+.dialogue-table tr.fn-row + tr.script-row td { border-top: 0; }
+@media (max-width: 820px) {
+  .dialogue-table tr.fn-row { display: block; margin: 0; }
+  .dialogue-table tr.fn-row td.c-fnrow { display: block; border: 1px solid var(--divider); border-bottom: 0; border-radius: 12px 12px 0 0; }
+  .dialogue-table tr.fn-row + tr.script-row { border-radius: 0 0 12px 12px; border-top: 0; grid-template-areas: "speaker script"; }
+}
+@media (min-width: 821px) {
+  .dialogue-table th:first-child, .dialogue-table td.c-stu { width: 84px; text-align: center; }
+  .dialogue-table th:nth-child(2), .dialogue-table td.c-script { width: auto; }
 }
 
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.06;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M20 120 C60 30 140 30 180 120' fill='none' stroke='%232c4a8f' stroke-width='2'/%3E%3Cpath d='M40 150 C80 70 140 70 170 150' fill='none' stroke='%232c4a8f' stroke-width='1.5'/%3E%3Cpath d='M60 180 C90 110 130 110 155 180' fill='none' stroke='%232c4a8f' stroke-width='1'/%3E%3C/svg%3E") repeat;
+/* ===== Responsive scaling: content grows with the window, short slides are centred ===== */
+.deck { --z: 1; }
+.slide-inner { zoom: var(--z); width: 100%; margin: auto; flex: none; padding-top: 20px; padding-bottom: 28px; }
+.slide-inner .task-section, .slide-inner .summary-card { margin-left: auto; margin-right: auto; }
+
+.toolbar { zoom: calc(1 + (var(--z) - 1) * 0.5); }
+.deck .now-playing { zoom: calc(1 + (var(--z) - 1) * 0.5); }
+
+.user-guide { font-size: 16px; max-width: 900px; margin-left: auto; margin-right: auto; }
+.user-guide > strong { display: block; font-size: 16px; margin-bottom: 6px; }
+.user-guide h2 { font-family: 'Playfair Display', serif; font-size: 26px; color: #1c3865; margin: 0 0 10px; text-align: center; }
+.user-guide ul { margin: 0 0 0 20px; padding: 0; }
+.user-guide li { margin: 7px 0; line-height: 1.6; }
+
+/* ===== Pop-up microphone window ===== */
+.mic-fab {
+  position: absolute; right: 18px; bottom: 18px; z-index: 6; width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+  font-size: 28px; color: #fff; background: linear-gradient(135deg, #5573b8, #2c4a8f); box-shadow: 0 6px 18px rgba(0,0,0,.28);
+  transition: transform .15s; zoom: calc(1 + (var(--z) - 1) * 0.5);
 }
-
-@keyframes bubbles {
-  0% { transform: translateY(0); opacity: 0.5; }
-  100% { transform: translateY(-32px); opacity: 1; }
+.mic-fab:hover { transform: scale(1.08); }
+.mic-fab[hidden] { display: none; }
+.mic-modal { position: fixed; inset: 0; z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 14px; }
+.mic-modal[hidden] { display: none; }
+.mic-backdrop { position: absolute; inset: 0; background: rgba(20,28,45,.5); backdrop-filter: blur(2px); }
+.mic-panel {
+  position: relative; zoom: calc(1 + (var(--z) - 1) * 0.6); width: min(100%, 680px); max-height: 92vh; overflow-y: auto;
+  margin: 0; padding: 18px 20px; border-radius: 18px; background: #fff; border: 1px solid var(--divider);
+  box-shadow: 0 18px 50px rgba(0,0,0,.35); animation: popIn .22s ease both;
 }
+@keyframes popIn { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
+.mic-close { position: absolute; top: 8px; right: 12px; border: none; background: none; font-size: 30px; line-height: 1; color: #6b6b6b; cursor: pointer; }
+.mic-close:hover { color: #c0392b; }
+.mic-lines { display: flex; align-items: center; gap: 8px; margin: 0 34px 12px 0; flex-wrap: wrap; }
+.mic-step { width: 32px; height: 30px; border: none; border-radius: 8px; background: #1c3865; color: #fff; font-size: 20px; line-height: 1; cursor: pointer; }
+.mic-step:disabled { opacity: .3; cursor: default; }
+.mic-linecount { font-size: 13px; font-weight: 600; color: var(--earth); }
+.mic-listen { margin-left: auto; border: 1px solid var(--divider); background: var(--sage-pale); color: var(--earth); border-radius: 8px; padding: 5px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.mic-listen:hover { background: #dbe7f7; }
+@media (max-width: 640px) { .mic-fab { width: 54px; height: 54px; font-size: 25px; right: 12px; bottom: 12px; } }
 
-.banner {
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-  animation: kenburns 10s ease-in-out infinite alternate;
-  transform-origin: center center;
-  clip-path: inset(0 0 12% 0);
-}
-
-@keyframes kenburns {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
-}
-
-.page-header {
-  text-align: center;
-  padding: 20px 20px 0;
-  background: white;
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-.page-header h1 { font-size: 24px; color: #1f3865; margin-bottom: 4px; }
-.page-header p { font-size: 16px; color: #2c4a8f; margin-bottom: 4px; }
-.page-header .presented-by { font-size: 14px; color: #5573b8; font-style: italic; margin-top: 6px; }
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.tabs { display: flex; gap: 0; margin-bottom: 0; flex-wrap: wrap; }
-
-.tab-btn {
-  padding: 14px 26px;
-  font-size: 15px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  background: #bed0ea;
-  color: #4a5876;
-  border-radius: 10px 10px 0 0;
-  transition: background 0.2s, color 0.2s;
-}
-
-.tab-btn:hover { background: #adc2e2; }
-.tab-btn.active { background: white; color: #2c4a8f; }
-
-.tab-content {
-  display: none;
-  background: white;
-  padding: 30px;
-  border-radius: 0 10px 10px 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  line-height: 1.7;
-}
-
-.tab-content.active { display: block; }
-
-h1 { font-size: 22px; color: #1c3865; margin-bottom: 6px; }
-h2 { font-size: 18px; color: #2c4a8f; margin: 20px 0 10px; }
-h3 { font-size: 16px; color: #3c5caa; margin: 16px 0 8px; }
-
-.task-section { margin-bottom: 30px; }
-
-.agenda-box {
-  background: #eef4fd;
-  border-left: 4px solid #2c4a8f;
-  padding: 16px 22px;
-  margin: 14px 0;
-  border-radius: 0 8px 8px 0;
-  color: #33415e;
-}
-
-.agenda-box ul { padding-left: 20px; margin: 8px 0; }
-.agenda-box li { margin-bottom: 6px; }
-
-.meeting-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: #f4f8ff;
-  padding: 14px 18px;
-  border-radius: 8px;
-  border: 1px solid #dbe7f7;
-  margin: 10px 0;
-  color: #2c4a8f;
-  font-weight: 600;
-}
-
-.meeting-meta .m-university {
-  font-size: 24px;
-  font-weight: 700;
-  color: #1c3865;
-}
-
-/* ---- Possible Response / dialogue ---- */
-.exchange {
-  margin-bottom: 14px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid #e1eaf7;
-  background: #fbfdff;
-}
-
-.exchange .meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 6px;
-  font-weight: 700;
-  font-size: 14px;
-  color: #1c3865;
-}
-
-.exchange .speaker {
-  background: #2c4a8f;
-  color: white;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-}
-
-.exchange .function { font-size: 12px; color: #5573b8; font-style: italic; font-weight: 500; }
-
-.exchange .text { font-size: 16px; color: #333; margin-top: 2px; line-height: 1.9; }
-
-.exchange .lang {
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px dashed #cfe0c2;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.exchange .lang .tag {
-  font-size: 11px;
-  font-weight: 700;
-  color: #2f6b3a;
-  background: #eaf5e7;
-  border: 1px solid #c9e3c2;
-  border-radius: 10px;
-  padding: 2px 9px;
-  line-height: 1.5;
-}
-
-.exchange .lang .tag .xv {
-  color: #c0392b;
-}
-
-.exchange .lang .tag .ok {
-  color: #2f6b3a;
-}
-
-/* ---- Language-item highlighting table ---- */
-.dialogue-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-.dialogue-table th {
-  background: #2c4a8f; color: #fff; padding: 10px 12px; text-align: left;
-  font-size: 13px; font-weight: 600;
-}
-.dialogue-table td { border: 1px solid #dbe7f7; padding: 10px 12px; vertical-align: top; }
-.dialogue-table tbody tr:nth-child(even) td { background: #f7fafd; }
-.c-stu { width: 66px; }
-.c-script { width: 50%; line-height: 1.9; }
-.c-exp { width: 30%; }
-.c-fn { width: 20%; font-style: italic; color: #5573b8; font-size: 12px; line-height: 1.6; }
-.muted { color: #aab7cc; }
-
-.lang-hl {
-  cursor: help; padding: 0 2px; border-radius: 3px; font-weight: 600;
-  text-decoration: underline; text-underline-offset: 2px;
-}
-.lang-hl.m { background: #dbeafe; color: #1e40af; border-bottom: 2px solid #3b82f6; }
-.lang-hl.c { background: #fef3c7; color: #92400e; border-bottom: 2px solid #f59e0b; }
-.lang-hl.h { background: #dcfce7; color: #166534; border-bottom: 2px solid #22c55e; }
-.lang-hl.g { background: #f3e8ff; color: #6b21a8; border-bottom: 2px solid #a855f7; }
-.lang-hl.r { background: #ffedd5; color: #9a3412; border-bottom: 2px solid #f97316; }
-.lang-hl.n { background: #ccfbf1; color: #115e59; border-bottom: 2px solid #14b8a6; }
-
-.exp-item {
-  display: inline-block; background: #eaf5e7; color: #2f6b3a; border: 1px solid #c9e3c2;
-  border-radius: 10px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin: 2px;
-}
-
-.legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; align-items: center; }
-.legend .lbl { font-size: 13px; font-weight: 700; color: #33415e; margin-right: 4px; }
-.legend .chip { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
-.chip.m { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
-.chip.c { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
-.chip.h { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
-.chip.g { background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
-.chip.r { background: #ffedd5; color: #9a3412; border: 1px solid #fdba74; }
-.chip.n { background: #ccfbf1; color: #115e59; border: 1px solid #5eead4; }
-
-.cn-translation {
-  display: none;
-  margin-top: 8px;
-  padding: 8px 12px;
-  background: #fff8f0;
-  border-left: 3px solid #e8a87c;
-  border-radius: 0 6px 6px 0;
-  font-size: 14px;
-  color: #8b5a2b;
-  line-height: 1.6;
-}
-
-.cn-active .cn-translation { display: block; }
-
-.cn-toggle-wrap { text-align: right; margin-bottom: 10px; }
-
-.cn-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  color: #2c4a8f;
-  user-select: none;
-}
-
-.cn-toggle input {
-  width: 40px;
-  height: 22px;
-  appearance: none;
-  background: #bed0ea;
-  border-radius: 11px;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.2s;
-  flex-shrink: 0;
-}
-
-.cn-toggle input::before {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: white;
-  top: 2px;
-  left: 2px;
-  transition: transform 0.2s;
-}
-
-.cn-toggle input:checked { background: #2c4a8f; }
-.cn-toggle input:checked::before { transform: translateX(18px); }
-
-.video-box { max-width: 1000px; }
-.video-box video {
-  width: 100%;
-  height: auto;
-  max-height: 80vh;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  display: block;
-  background: #000;
-  object-fit: contain;
-}
-
-.video-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 320px;
-  border: 2px dashed #9db7dd;
-  border-radius: 12px;
-  background: #f4f8ff;
-  color: #5573b8;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.feature-box {
-  background: #f4f8ff;
-  border: 1px solid #d4e2f5;
-  border-radius: 8px;
-  padding: 16px 20px;
-  margin: 12px 0;
-  color: #33415e;
-}
-
-.feature-box ul { padding-left: 20px; margin: 8px 0; }
-.feature-box li { margin-bottom: 6px; }
-
-/* ---- Audio player ---- */
-.player-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 14px 0 10px;
-}
-.play-all-btn {
-  background: #2c4a8f; color: #fff; border: none; border-radius: 8px;
-  padding: 8px 18px; font-size: 14px; font-weight: 600; cursor: pointer;
-  transition: background 0.2s;
-}
-.play-all-btn:hover { background: #1c3865; }
-.pause-btn {
-  background: #d4a043; color: #fff; border: none; border-radius: 8px;
-  padding: 8px 14px; font-size: 14px; font-weight: 600; cursor: pointer;
-}
-.pause-btn:hover { background: #b8892e; }
-.stop-btn {
-  background: #c0392b; color: #fff; border: none; border-radius: 8px;
-  padding: 8px 14px; font-size: 14px; font-weight: 600; cursor: pointer;
-}
-.stop-btn:hover { background: #a93226; }
-.speed-label { font-size: 13px; color: #5573b8; margin-left: auto; }
-.speed-select {
-  font-size: 13px; padding: 4px 8px; border: 1px solid #d4e2f5;
-  border-radius: 6px; background: #f4f8ff; color: #33415e; cursor: pointer;
-}
-.now-playing {
-  background: linear-gradient(135deg, #2c4a8f 0%, #5573b8 100%);
-  border-radius: 12px; padding: 12px 18px; margin-bottom: 16px;
-  display: none; animation: fadeUp 0.3s ease both;
-}
-.now-playing.active { display: block; }
-.now-playing-label {
-  font-size: 11px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.15em; color: rgba(255,255,255,0.65); margin-bottom: 5px;
-}
-.now-playing-text { font-size: 16px; color: #fff; line-height: 1.5; }
-
-.dialogue-table tr.script-row.active { background: #e8f0e0; box-shadow: inset 4px 0 0 #2c4a8f; }
-
-.speaker-btn {
-  width: 42px; height: 42px; border-radius: 10px; border: none; cursor: pointer;
-  font-weight: 700; font-size: 15px; color: #fff; transition: all 0.2s ease;
-  flex-shrink: 0; position: relative; overflow: hidden;
-}
-.speaker-btn:hover { opacity: 0.85; }
-.speaker-btn:active { transform: scale(0.93); }
-.speaker-btn.role-A { background: #5c8260; }
-.speaker-btn.role-B { background: #8c7355; }
-.speaker-btn.role-C { background: #4a6c8f; }
-.speaker-btn.role-D { background: #8a5a3a; }
-.speaker-btn.role-ALL {
-  background: linear-gradient(135deg, #7a9e7e, #4a6c8f);
-  font-size: 11px; letter-spacing: 0.05em;
-}
-.audio-pulse {
-  display: none; width: 8px; height: 8px; border-radius: 50%;
-  background: #f1c40f; position: absolute; top: 4px; right: 4px;
-  animation: pulse 1s infinite;
-}
-.speaker-btn.playing .audio-pulse { display: block; }
-
-.word-wrap { display: inline; }
-.word-wrap .word {
-  display: inline-block; position: relative; transition: color 0.15s; cursor: pointer;
-}
-.word-wrap .word:hover { background: rgba(122,158,126,0.15); border-radius: 4px; }
-.word-wrap .word.speaking { color: #c0392b; font-weight: 700; }
-.word-wrap .word.active { color: #2d6a4f; font-weight: 700; }
-.word-wrap .word.active::after {
-  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
-  height: 3px; background: #f1c40f; border-radius: 2px;
-}
+/* Pronunciation tracer: highlight the word being read, shade the words already read */
+.slide .script-text .word.active { font-weight: inherit; color: #1c3865; background: #ffe680; border-radius: 4px; box-shadow: 0 0 0 2px #ffe680; }
+.slide .script-text .word.active::after { display: none; }
+.slide .script-text .word.read { color: #7a8fa8; }
 </style>
 </head>
 <body>
+<div id="deck" class="deck">
+  <div class="progress"><i id="progressBar"></i></div>
+  <div class="slides" id="slides">
 
-<div class="banner">
-  <img src="banner.png" alt="Banner">
-</div>
-
-<div class="page-header">
-  <h1>Essential Workplace Communication: Effective Oral Interaction (LAN3107)</h1>
-  <p>EAII Practice 4 — Meetings: IT Gadgets Fair 2026</p>
-  <p class="presented-by">Presented by Rebecca Tang</p>
-</div>
-
-<div class="container">
-  <div class="cn-toggle-wrap">
-    <label class="cn-toggle">
-      <input type="checkbox" onchange="toggleAllCN(this.checked)">
-      <span>中文翻译</span>
-    </label>
-  </div>
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab(0)">TAB 1 — Task Overview</button>
-    <button class="tab-btn" onclick="switchTab(1)">TAB 2 — Possible Response</button>
-    <button class="tab-btn" onclick="switchTab(2)">TAB 3 — Video</button>
-  </div>
-
-  <!-- ============ TAB 1: TASK OVERVIEW ============ -->
-  <div class="tab-content active" id="tab-0">
-    <h1 data-cn="任務概覽">Task Overview</h1>
-
-    <div class="task-section">
-      <p data-cn="你是先鋒大學資訊科技團隊的成員，先鋒大學是香港一所知名大學。你和同事將舉行會議，討論舉辦 IT 產品展2026的計劃。你應該：">
-        You are on the information technology team of <strong>Pioneer University</strong>, a prestigious
-        university in Hong Kong. You and your colleagues are going to hold a meeting to discuss the launch of
-        the <strong>IT Gadgets Fair 2026</strong>. You should:
-      </p>
-      <ul style="padding-left:20px; margin:10px 0;">
-        <li data-cn="就各議程項目提出你自己的建議">give your own suggestion(s) on the agenda items</li>
-        <li data-cn="解釋你提出建議的理由">explain the reason(s) for your suggestion(s)</li>
-        <li data-cn="積極聆聽，並透過表達喜好、同意或不同意來回應他人的建議">listen actively and respond to others' suggestions by expressing preferences, agreement, or disagreement</li>
-        <li data-cn="就議程第2至4項達成共識">reach a consensus on agenda items 2–4</li>
-      </ul>
-      <p data-cn="作為一組，你們必須涵蓋以下所有議程項目。">As a group, you must cover all the agenda items below.</p>
-    </div>
-
-    <div class="task-section" style="text-align:center;">
-      <h2 data-cn="會議詳情">Meeting Details</h2>
-      <div class="meeting-meta">
-        <span class="m-university">Pioneer University</span>
-        <span data-cn="資訊科技團隊">Information Technology Team</span>
-        <span data-cn="12月16日20--年 下午2時30分 會議室">16 December 20-- at 2:30 pm in the Meeting Room</span>
+    <!-- 1 · Title -->
+    <section class="slide" data-title="Title" data-practice="Welcome to the Pioneer University IT Gadgets Fair 2026 planning meeting.">
+      <div class="slide-inner">
+        <div class="banner"><img id="bannerImg" alt="Banner" onerror="this.parentElement.style.display='none'"></div>
+        <div class="header">
+          <div class="header-eyebrow">LAN3107 · Essential Workplace Communication: Effective Oral Interaction</div>
+          <h1>EAII Practice 4:<br><span>IT Gadgets Fair 2026</span></h1>
+        </div>
+        <div class="presenter-tag">Presented by Rebecca Tang</div>
+        <div style="text-align:center;margin-top:18px"><button class="play-all-btn" onclick="goTo(1)">Start ▶</button></div>
       </div>
-    </div>
+    </section>
 
-    <div class="task-section">
-      <h3 data-cn="議程">Agenda</h3>
-      <div class="agenda-box">
-        <ol style="padding-left:22px;">
-          <li data-cn="會議開始">Open the meeting</li>
-          <li data-cn="展覽日期">Fair date</li>
-          <li>
-            <span style="font-weight:600;" data-cn="展覽的安排">Arrangements of the fair</span>
-            <p style="margin-top:4px; font-weight:600; color:#2c4a8f;" data-cn="可能的安排：">Possible arrangements:</p>
-            <ul style="padding-left:20px;">
-              <li data-cn="校內場地">On-campus venue</li>
-              <li data-cn="展出產品的類型">Types of gadgets exhibited</li>
-              <li data-cn="學生特別優惠">Special offers for students</li>
-              <li data-cn="宣傳禮物">Promotional gifts</li>
-            </ul>
-          </li>
-          <li>
-            <span style="font-weight:600;" data-cn="其他事項">AOB</span>
-            <p style="margin-top:4px; font-weight:600; color:#2c4a8f;" data-cn="通知學生的方法：">Ways to inform students:</p>
-            <ul style="padding-left:20px;">
-              <li data-cn="大量學生電郵">Mass student emails</li>
-              <li data-cn="SMS">SMS</li>
-            </ul>
-          </li>
-          <li data-cn="會議結束">Close the meeting</li>
-        </ol>
+    <!-- 2 · User guide -->
+    <section class="slide" data-title="User guide" data-nomic="1">
+      <div class="slide-inner">
+        <div class="tab2-guide user-guide"><h2 data-cn="使用指南" data-tc="使用指南">User Guide</h2>
+          <ul>
+            <li data-cn="切换幻灯片：使用 ◀ ▶（或键盘方向键、触屏滑动），也可从菜单选择幻灯片。" data-tc="切換幻燈片：使用 ◀ ▶（或鍵盤方向鍵、觸屏滑動），也可從選單選擇幻燈片。"><strong>Navigate:</strong> use ◀ ▶ (or the arrow keys, or swipe) to move between slides, or pick a slide from the menu.</li>
+            <li data-cn="收听：选择「播放全部」或喇叭按钮，收听讨论内容。" data-tc="收聽：選擇「播放全部」或喇叭按鈕，收聽討論內容。"><strong>Listen:</strong> choose <em>Play All</em> or a speaker button to listen to the discussion.</li>
+            <li data-cn="播放控制：使用「暂停」「停止」及「速度」菜单调整播放。" data-tc="播放控制：使用「暫停」「停止」及「速度」選單調整播放。"><strong>Playback:</strong> use <em>Pause</em>, <em>Stop</em> and the <em>Speed</em> menu to adjust playback.</li>
+            <li data-cn="语言注释：将鼠标移到（或轻按）编号标记，查看语言说明。" data-tc="語言註釋：將滑鼠移到（或輕按）編號標記，查看語言說明。"><strong>Language notes:</strong> hover over (or tap) a numbered marker for its language explanation.</li>
+            <li data-cn="单词发音：将鼠标移到单词上即可听到发音；触屏设备请轻按单词。" data-tc="單詞發音：將滑鼠移到單詞上即可聽到發音；觸屏設備請輕按單詞。"><strong>Word pronunciation:</strong> hover over a word to hear it; tap a word on a touch screen.</li>
+            <li data-cn="发音追踪：播放对话（「播放全部」或喇叭按钮）时，正在朗读的单词会以黄色高亮显示，已读过的单词会变淡，方便你一边听一边跟读。高亮根据音频长度估算，可能略有偏差。" data-tc="發音追蹤：播放對話（「播放全部」或喇叭按鈕）時，正在朗讀的單詞會以黃色高亮顯示，已讀過的單詞會變淡，方便你一邊聽一邊跟讀。高亮根據音頻長度估算，可能略有偏差。"><strong>Pronunciation tracer:</strong> while a line is read aloud (with <em>Play All</em> or a speaker button), the word being spoken is highlighted in yellow and the words already read are shaded, so you can follow the pronunciation word by word. The highlight is timed from the clip length, so it may be slightly off.</li>
+            <li data-cn="沟通功能：留意对话中每一句上方显示的沟通功能。" data-tc="溝通功能：留意對話中每一句上方顯示的溝通功能。"><strong>Functions:</strong> read the communicative function shown above each line of the conversation.</li>
+            <li data-cn="翻译：打开底部工具栏的「中文翻译」开关，并选择「简体」或「繁體」，即可显示简体或繁体中文翻译（包括本使用指南）。" data-tc="翻譯：打開底部工具列的「中文翻譯」開關，並選擇「簡體」或「繁體」，即可顯示簡體或繁體中文翻譯（包括本使用指南）。"><strong>Translation:</strong> switch on <em>中文翻译 / 翻譯</em> and choose <em>简体</em> (Simplified) or <em>繁體</em> (Traditional) in the bottom toolbar to show the Chinese translations.</li>
+            <li data-cn="口语练习（第6至19张幻灯片）：轻按右下角浮动的 🎤 按钮打开练习窗口，用 ‹ › 选择句子，按窗口内的 🎤 按钮，在提示时允许使用麦克风，然后朗读该句。窗口会显示你的准确度分数及逐词反馈（建议使用 Chrome、Edge 或 Safari）。" data-tc="口語練習（第6至19張幻燈片）：輕按右下角浮動的 🎤 按鈕打開練習視窗，用 ‹ › 選擇句子，按視窗內的 🎤 按鈕，在提示時允許使用麥克風，然後朗讀該句。視窗會顯示你的準確度分數及逐詞反饋（建議使用 Chrome、Edge 或 Safari）。"><strong>Speaking practice (slides 6–19):</strong> tap the floating 🎤 button (bottom right) to open the practice window, choose a line with ‹ ›, press the 🎤 button inside, allow microphone access when asked, and read the line aloud. Your accuracy score and word-by-word feedback will appear in the window (best in Chrome, Edge or Safari).</li>
+          </ul></div>
+        <div style="text-align:center;margin-top:18px"><button class="play-all-btn" onclick="goTo(2)">Next ▶</button></div>
       </div>
-    </div>
+    </section>
+
+    <!-- 3 · Task -->
+    <section class="slide" data-title="Task" data-practice="You are on the information technology team of Pioneer University.">
+      <div class="slide-inner">
+        <div class="task-section">
+            <h2 data-cn="任务概览" data-tc="任務概覽">Task Overview</h2>
+            <p data-cn="你是先锋大学资讯科技团队的成员，先锋大学是香港一所知名大学。你和同事将举行会议，讨论举办 IT 产品展2026的计划。你应该：" data-tc="你是先鋒大學資訊科技團隊的成員，先鋒大學是香港一所知名大學。你和同事將舉行會議，討論舉辦 IT 產品展2026的計劃。你應該：">You are on the information technology team of <strong>Pioneer University</strong>, a prestigious university in Hong Kong. You and your colleagues are going to hold a meeting to discuss the launch of the <strong>IT Gadgets Fair 2026</strong>. You should:</p>
+            <ul>
+                <li data-cn="就各议程项目提出你自己的建议" data-tc="就各議程項目提出你自己的建議">give your own suggestion(s) on the agenda items</li>
+                <li data-cn="解释你提出建议的理由" data-tc="解釋你提出建議的理由">explain the reason(s) for your suggestion(s)</li>
+                <li data-cn="积极聆听，并透过表达喜好、同意或不同意来回应他人的建议" data-tc="積極聆聽，並透過表達喜好、同意或不同意來回應他人的建議">listen actively and respond to others' suggestions by expressing preferences, agreement, or disagreement</li>
+                <li data-cn="就议程第2至4项达成共识" data-tc="就議程第2至4項達成共識">reach a consensus on agenda items 2–4</li>
+            </ul>
+            <p data-cn="作为一组，你们必须涵盖以下所有议程项目。" data-tc="作為一組，你們必須涵蓋以下所有議程項目。">As a group, you must cover all the agenda items below.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · Meeting details + agenda -->
+    <section class="slide" data-title="Meeting details and agenda" data-practice="Arrangements of the IT Gadgets Fair 2026.">
+      <div class="slide-inner">
+        <div class="task-section" style="text-align:center;">
+            <h2 data-cn="会议详情" data-tc="會議詳情">Meeting Details</h2>
+            <div class="meeting-meta">
+                <span class="m-university">Pioneer University</span>
+                <span data-cn="资讯科技团队" data-tc="資訊科技團隊">Information Technology Team</span>
+                <span data-cn="12月16日20--年 下午2时30分 会议室" data-tc="12月16日20--年 下午2時30分 會議室">16 December 20-- at 2:30 pm in the Meeting Room</span>
+            </div>
+        </div>
+        <div class="task-section">
+            <h2 data-cn="议程" data-tc="議程">Agenda</h2>
+            <ol style="padding-left:22px;">
+                <li data-cn="会议开始" data-tc="會議開始">Open the meeting</li>
+                <li data-cn="展览日期" data-tc="展覽日期">Fair date</li>
+                <li>
+                    <span data-cn="展览的安排" data-tc="展覽的安排">Arrangements of the fair</span>
+                    <div class="task-box">
+                        <p data-cn="可能的安排：" data-tc="可能的安排："><strong>Possible arrangements:</strong></p>
+                        <ul>
+                            <li data-cn="校内场地" data-tc="校內場地">On-campus venue</li>
+                            <li data-cn="展出产品的类型" data-tc="展出產品的類型">Types of gadgets exhibited</li>
+                            <li data-cn="学生特别优惠" data-tc="學生特別優惠">Special offers for students</li>
+                            <li data-cn="宣传礼物" data-tc="宣傳禮物">Promotional gifts</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <span data-cn="其他事项" data-tc="其他事項">AOB</span>
+                    <div class="task-box">
+                        <p data-cn="通知学生的方法：" data-tc="通知學生的方法："><strong>Ways to inform students:</strong></p>
+                        <ul>
+                            <li data-cn="大量学生电邮" data-tc="大量學生電郵">Mass student emails</li>
+                            <li data-cn="SMS" data-tc="SMS">SMS</li>
+                        </ul>
+                    </div>
+                </li>
+                <li data-cn="会议结束" data-tc="會議結束">Close the meeting</li>
+            </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · Possible response intro -->
+    <section class="slide" data-title="Possible response" data-practice="Good morning, everyone. Welcome to the meeting today.">
+      <div class="slide-inner">
+        <div class="hero-banner">
+            <h2 data-cn="IT 产品展 2026 筹备会议" data-tc="IT 產品展 2026 籌備會議">IT Gadgets Fair 2026 Planning Meeting</h2>
+            <p data-cn="讨论展览日期、校内展览安排（场地、展出产品、学生优惠、宣传礼物）及通知学生的方法。" data-tc="討論展覽日期、校內展覽安排（場地、展出產品、學生優惠、宣傳禮物）及通知學生的方法。">A group discussion on the fair date, on-campus arrangements, student offers, promotional gifts, and channels to inform students.</p>
+            <div class="agenda-chips">
+                <span class="chip">📋 Opening &amp; Agenda</span>
+                <span class="chip">📅 Fair Date</span>
+                <span class="chip">💻 Fair Arrangements</span>
+                <span class="chip">📣 Ways to Inform Students (AOB)</span>
+                <span class="chip">✅ Closing</span>
+            </div>
+        </div>
+
+        <div class="legend">
+            <span class="lbl" data-cn="高亮颜色图例" data-tc="高亮顏色圖例">Highlight colour key</span>
+            <span class="chip m">Modal verb + bare infinitive</span>
+            <span class="chip c">Contraction</span>
+            <span class="chip h">Cohesive device</span>
+            <span class="chip g">Making suggestions</span>
+            <span class="chip r">Giving reasons</span>
+            <span class="chip n">1st conditional</span>
+            <span class="chip a">Showing agreement</span>
+            <span class="chip e">Elaborating opinions</span>
+            <span class="chip ex">Giving examples</span>
+            <span class="chip pref">Expressing preference</span>
+            <span class="chip resp">Asking for response</span>
+            <span class="chip coll">Collocation / verb pattern</span>
+            <span class="chip lex">Phrasal verb</span>
+            <span class="chip form">Grammar / expression pattern</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="dlgAnchor"></div>
+
+    <!-- Language features -->
+    <section class="slide" data-title="Language features" data-practice="Students can surely buy the gadgets at a cheaper price.">
+      <div class="slide-inner">
+        <div class="task-section">
+            <h2 data-cn="语言特点" data-tc="語言特點">Language Features</h2>
+            <p class="note-block" data-cn="编号标记显示对话中语言运用的解释（情态动词＋动词原形、连接词、缩写、建议句式等）。✗ 标记错误形式（例如 can + bought），应使用动词原形（例如 can buy）。" data-tc="編號標記顯示對話中語言運用的解釋（情態動詞＋動詞原形、連接詞、縮寫、建議句式等）。✗ 標記錯誤形式（例如 can + bought），應使用動詞原形（例如 can buy）。">Numbered markers in the conversation show explanations of the use of language (modal verbs + bare infinitive, cohesive devices, contractions, suggestion patterns, etc.). A <span class="cross">✗</span> marks the <em>incorrect</em> form (e.g. <code>can + bought</code>), which should be the bare infinitive (e.g. <code>can buy</code>).</p>
+        </div>
+        <div class="task-section"><h2 data-cn="沟通功能与常用语" data-tc="溝通功能與常用語">Communicative Functions &amp; Useful Devices</h2><p class="note-block" data-cn="沟通功能（例如提出建议、表示同意、提出理由）以每轮发言上方的「斜体蓝字」显示。" data-tc="溝通功能（例如提出建議、表示同意、提出理由）以每輪發言上方的「斜體藍字」顯示。">Communicative functions (e.g. making suggestions, showing agreement, giving reasons) are highlighted in the <em>italic blue</em> line above each speaker's turn.</p>
+          <div class="cf-grid"><div class="cf-card">
+                    <h3 data-cn="连接词／转接语" data-tc="連接詞／轉接語">Cohesive devices / Linking words</h3>
+                    <ul>
+                        <li data-cn="此外／再者／另外" data-tc="此外／再者／另外">Besides / Moreover / Furthermore</li>
+                        <li data-cn="此外／另外" data-tc="此外／另外">In addition / Additionally</li>
+                        <li data-cn="因此／所以／故此" data-tc="因此／所以／故此">Therefore / Thus / Hence / So</li>
+                        <li data-cn="但是／然而" data-tc="但是／然而">But / However</li>
+                    </ul>
+                </div><div class="cf-card">
+                    <h3 data-cn="缩写" data-tc="縮寫">Contractions</h3>
+                    <ul>
+                        <li data-cn="I'm（I am）／It'll（It will）" data-tc="I'm（I am）／It'll（It will）">I'm (I am) / It'll (It will)</li>
+                        <li data-cn="We've（We have）／Let's（Let us）" data-tc="We've（We have）／Let's（Let us）">We've (We have) / Let's (Let us)</li>
+                        <li data-cn="That's（That is）／You're（You are）" data-tc="That's（That is）／You're（You are）">That's (That is) / You're (You are)</li>
+                    </ul>
+                </div><div class="cf-card">
+                    <h3 data-cn="思考词（语气填充）" data-tc="思考詞（語氣填充）">Thinking words (air fillers)</h3>
+                    <p>Well… &nbsp;Ummm… &nbsp;uhhhh…</p>
+                </div><div class="cf-card cf-wide">
+                    <h3 data-cn="情态动词" data-tc="情態動詞">Modal verbs</h3>
+                    <div class="modal-grid">
+                        <div data-cn="能力：can, could" data-tc="能力：can, could"><strong>Ability:</strong> can, could</div>
+                        <div data-cn="可能性：may, might" data-tc="可能性：may, might"><strong>Possibility:</strong> may, might</div>
+                        <div data-cn="许可：Can, May" data-tc="許可：Can, May"><strong>Permission:</strong> Can, May</div>
+                        <div data-cn="责任：must, have to" data-tc="責任：must, have to"><strong>Obligation:</strong> must, have to</div>
+                        <div data-cn="禁止：Can't, Mustn't" data-tc="禁止：Can't, Mustn't"><strong>Prohibition:</strong> Can't, Mustn't</div>
+                        <div data-cn="提供：Will, Would" data-tc="提供：Will, Would"><strong>Offers:</strong> Will, Would</div>
+                        <div data-cn="建议：Shall, Should" data-tc="建議：Shall, Should"><strong>Suggestions:</strong> Shall, Should</div>
+                        <div data-cn="请求：Could, Would" data-tc="請求：Could, Would"><strong>Requests:</strong> Could, Would</div>
+                        <div data-cn="未来可能性：Will, Shall" data-tc="未來可能性：Will, Shall"><strong>Future Possibility:</strong> Will, Shall</div>
+                        <div data-cn="过去可能性：Could have, Would have" data-tc="過去可能性：Could have, Would have"><strong>Past Probability:</strong> Could have, Would have</div>
+                    </div>
+                    <p class="cf-note" data-cn="＋行动动词（动词原形）＋宾语（名词子句），例如：Students can buy the gadgets at a cheaper price." data-tc="＋行動動詞（動詞原形）＋受詞（名詞子句），例如：Students can buy the gadgets at a cheaper price.">+ action verb (bare infinitive) + object (noun clause), e.g. <em>Students can buy the gadgets at a cheaper price.</em></p>
+                </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grammar and sentence patterns -->
+    <section class="slide" data-title="Grammar and sentence patterns" data-practice="I suggest sending these emails two weeks before the commencement date of the fair.">
+      <div class="slide-inner">
+        <div class="task-section"><h2 data-cn="语法与句型结构" data-tc="語法與句型結構">Grammar and Sentence Patterns</h2>
+          <div class="cf-grid"><div class="cf-card cf-wide">
+                    <h3 data-cn="情态动词＋动词原形" data-tc="情態動詞＋動詞原形">Modal verb + bare infinitive</h3>
+                    <div class="form-row">
+                        <div><span class="cross">✗</span> Students can surely <span class="hi-bad">bought / buying</span> the gadgets at a cheaper price.</div>
+                        <div><span class="tick">✓</span> Students can surely <span class="hi-good">buy</span> the gadgets at a cheaper price.</div>
+                        <div><span class="cross">✗</span> Can we now <span class="hi-bad">decided / deciding</span> on the fair date?</div>
+                        <div><span class="tick">✓</span> Can we now <span class="hi-good">decide</span> on the fair date?</div>
+                    </div>
+                </div><div class="cf-card cf-wide">
+                    <h3 data-cn="提出建议（行动动词：suggest + propose + recommend）" data-tc="提出建議（行動動詞：suggest + propose + recommend）">Making suggestions <span class="tag">(action verbs: suggest + propose + recommend)</span></h3>
+                    <div class="form-row">
+                        <div data-cn="I suggest / propose / recommend to watch a K-pop concert. ✗" data-tc="I suggest / propose / recommend to watch a K-pop concert. ✗"><span class="cross">✗</span> I suggest / propose / recommend <span class="hi-bad">to watch a K-pop concert</span>.</div>
+                        <div data-cn="I suggest / propose / recommend watching a K-pop concert. ✓" data-tc="I suggest / propose / recommend watching a K-pop concert. ✓"><span class="tick">✓</span> I suggest / propose / recommend <span class="hi-good">watching a K-pop concert</span>.</div>
+                        <div><span class="tick">✓</span> I recommend <span class="hi-good">giving / that we (should) give</span> special offers for the students.</div>
+                        <div><span class="tick">✓</span> How about / What about <span class="hi-good">holding</span> the fair at the Campus Central Square?</div>
+                    </div>
+                </div><div class="cf-card cf-wide">
+                    <h3 data-cn="条件与因果句型" data-tc="條件與因果句型">Sentence structures</h3>
+                    <ul>
+                        <li data-cn="第一类条件句（1st conditional）：If + S + V（现在式）, S + will + 动词原形（例如：If a student obtains a GPA of 4 or above, they will receive a $200 cash coupon.）" data-tc="第一類條件句（1st conditional）：If + S + V（現在式）, S + will + 動詞原形（例如：If a student obtains a GPA of 4 or above, they will receive a $200 cash coupon.）"><strong>1st conditional:</strong> <em>If</em> + S + V (present simple), S + <em>will</em> + bare infinitive (e.g. <em>If a student obtains a GPA of 4 or above, they will receive a $200 cash coupon.</em>)</li>
+                        <li data-cn="因果关系：Since / Because / As + S + V + O, S + V + O." data-tc="因果關係：Since / Because / As + S + V + O, S + V + O."><strong>Cause &amp; effect:</strong> <em>Since / Because / As</em> + S + V + O, S + V + O.</li>
+                    </ul>
+                </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcomes -->
+    <section class="slide" data-title="Meeting outcomes" data-practice="We have decided to send mass student emails and SMS messages.">
+      <div class="slide-inner">
+        <div class="summary-card">
+            <h3 data-cn="会议成果总结" data-tc="會議成果總結">Meeting Outcomes</h3>
+            <div class="summary-items">
+                <div class="summary-item" data-cn="展览日期：将八月下旬及十二月两个方案呈交管理团队决定" data-tc="展覽日期：將八月下旬及十二月兩個方案呈交管理團隊決定">
+                    <strong>📅 Fair Date</strong>
+                    Present mid-to-late August and December options to the management team
+                </div>
+                <div class="summary-item" data-cn="场地及产品：于 Campus Central Square 举行，重点推广及售卖平板电脑" data-tc="場地及產品：於 Campus Central Square 舉行，重點推廣及售賣平板電腦">
+                    <strong>📍 Venue &amp; Gadgets</strong>
+                    Hold the fair at Campus Central Square focusing on promoting tablets
+                </div>
+                <div class="summary-item" data-cn="学生优惠及宣传礼物：按学业成绩派发现金券（GPA 4或以上获 $200）；宣传礼物留待下次会议讨论" data-tc="學生優惠及宣傳禮物：按學業成績派發現金券（GPA 4或以上獲 $200）；宣傳禮物留待下次會議討論">
+                    <strong>🎁 Offers &amp; Gifts</strong>
+                    GPA-based cash coupons ($200 for GPA ≥ 4); promotional gifts deferred to next meeting
+                </div>
+                <div class="summary-item" data-cn="通知学生的方法（其他事项）：发送大量学生电邮、请班导师口头通知及发送 SMS 讯息" data-tc="通知學生的方法（其他事項）：發送大量學生電郵、請班導師口頭通知及發送 SMS 訊息">
+                    <strong>📣 Informing Students (AOB)</strong>
+                    Mass student emails (2 weeks prior), class tutors' verbal announcements, and SMS messages
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video slide (no microphone) -->
+    <section class="slide" data-title="Video" data-nomic="1">
+      <div class="slide-inner">
+        <div class="task-section">
+            <h2 data-cn="示范对话影片" data-tc="示範對話影片">Sample Conversation Video</h2>
+            <p data-cn="观看一个关于举办 IT 产品展2026的会议。" data-tc="觀看一個關於舉辦 IT 產品展2026的會議。">Watch a meeting about launching the IT Gadgets Fair 2026.</p>
+        </div>
+        <div class="video-single">
+          <div class="video-placeholder">
+            <div class="vp-icon">🎬</div>
+            <div class="vp-title" data-cn="影片即将推出" data-tc="影片即將推出">Video coming soon</div>
+            <div data-cn="IT 产品展 2026 示范会议影片将于稍后上传。" data-tc="IT 產品展 2026 示範會議影片將於稍後上傳。">The sample meeting video for IT Gadgets Fair 2026 will be available soon.</div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <!-- ============ TAB 2: POSSIBLE RESPONSE ============ -->
-  <div class="tab-content" id="tab-1">
-    <h1 data-cn="模擬回應">Possible Response</h1>
-    <p style="color:#666; margin-bottom:16px;" data-cn="建議的會議對話（完整答案）。每輪發言上方的「斜體藍字」列明溝通功能；「綠色標籤」解釋每輪發言中語言的使用。">
-      Suggested meeting conversation (full answer). Communicative functions are shown in the
-      <em>italic blue</em> line above each turn; <strong>green tags</strong> explain the use of
-      language in each turn.
-    </p>
-    <div class="legend">
-      <span class="lbl" data-cn="高亮顏色圖例">Highlight colour key</span>
-      <span class="chip m">Modal verb + bare infinitive</span>
-      <span class="chip c">Contraction</span>
-      <span class="chip h">Cohesive device</span>
-      <span class="chip g">Making suggestions</span>
-      <span class="chip r">Giving reasons</span>
-      <span class="chip n">1st conditional</span>
+  <div class="now-playing" id="nowPlaying">
+    <div class="now-playing-label">Now Playing</div>
+    <div class="now-playing-text" id="nowPlayingText">—</div>
+  </div>
+
+  <div class="toolbar">
+    <div class="nav">
+      <button class="nav-btn" id="prevBtn" aria-label="Previous slide">◀</button>
+      <select id="jump" class="speed-select" aria-label="Jump to slide"></select>
+      <button class="nav-btn" id="nextBtn" aria-label="Next slide">▶</button>
     </div>
-    <p style="color:#666; margin:0 0 12px;" data-cn="將鼠標移到對話中任何高亮項目上，即可查看其解釋。">Hover over any <mark class="lang-hl m">highlighted item</mark> in the script to see its explanation.</p>
-    <div class="player-controls">
+    <div class="playback-controls">
       <button class="play-all-btn" onclick="playAll()">▶ Play All</button>
       <button class="pause-btn" onclick="pausePlay()">⏸ Pause</button>
       <button class="stop-btn" onclick="stopPlay()">⏹ Stop</button>
-      <span class="speed-label">Speed</span>
-      <select class="speed-select" onchange="setSpeed(this.value)">
-        <option value="0.75">0.75×</option>
-        <option value="1" selected>1×</option>
-        <option value="1.25">1.25×</option>
-        <option value="1.5">1.5×</option>
+      <span class="speed-label">Speed:</span>
+      <select class="speed-select" onchange="setSpeed(this.value)" aria-label="Playback speed">
+        <option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option>
+        <option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option>
       </select>
     </div>
-    <div class="now-playing" id="nowPlaying">
-      <div class="now-playing-label">Now Playing</div>
-      <div class="now-playing-text" id="nowPlayingText">—</div>
-    </div>
-    <div id="dialogueBody"></div>
-
-    <h2 style="margin-top:30px;" data-cn="語言特點">Language Features</h2>
-    <p style="color:#666; margin-bottom:16px;" data-cn="對話中的綠色標籤顯示語言的運用解釋（情態動詞＋不定式、連接詞、縮寫、建議句式等）。✗ 標記錯誤形式（例如 can + bought），應為不定式（例如 can buy）。">
-      Green tags in the conversation show <strong>explanations of the use of language</strong>
-      (modal verbs + bare infinitive, cohesive devices, contractions, suggestion patterns, etc.).
-      A <span class="xv" style="font-weight:700;">✗</span> marks the <strong>incorrect</strong> form
-      (e.g. <em>can + bought</em>), which should be the bare infinitive (e.g. <em>can buy</em>).
-    </p>
-
-    <div class="feature-box">
-      <h3 data-cn="粗體字顯示的語言功能">Language functions in bold print</h3>
-      <p data-cn="溝通功能（例如提出建議、表示同意、提出理由）以每輪發言上方的「斜體藍字」顯示。">Communicative functions (e.g. making suggestions, showing agreement, giving reasons) are highlighted in the <strong>italic blue</strong> line above each speaker's turn.</p>
-    </div>
-
-    <div class="feature-box">
-      <h3 data-cn="連接詞／轉接語">Cohesive devices / Linking words</h3>
-      <ul>
-        <li data-cn="此外／再者／另外">Besides / Moreover / Furthermore</li>
-        <li data-cn="此外／另外">In addition / Additionally</li>
-        <li data-cn="因此／所以／故此／所以">Therefore / Thus / Hence / So</li>
-        <li data-cn="但是／然而">But / However</li>
-      </ul>
-    </div>
-
-    <div class="feature-box">
-      <h3 data-cn="縮寫">Contractions</h3>
-      <p data-cn="I'm（I am）／It'll（It will）／We've（We have）／Let's（Let us）／That's（That is）">I'm (I am) / It'll (It will) / We've (We have) / Let's (Let us) / That's (That is)</p>
-    </div>
-
-    <div class="feature-box">
-      <h3 data-cn="思考詞（語氣填充）">Thinking words (air fillers)</h3>
-      <p data-cn="Well… Ummm… uhhhh…">Well… Ummm… uhhhh…</p>
-    </div>
-
-    <div class="feature-box">
-      <h3 data-cn="情態動詞">Modal verbs</h3>
-      <ul>
-        <li data-cn="能力：can　可能性：may, might"><strong>Ability:</strong> can &nbsp; <strong>Possibility:</strong> may, might</li>
-        <li data-cn="許可：Can, May　責任：must, have to"><strong>Permission:</strong> Can, May &nbsp; <strong>Obligation:</strong> must, have to</li>
-        <li data-cn="禁止：Can't, Mustn't　提供：Will, Would"><strong>Prohibition:</strong> Can't, Mustn't &nbsp; <strong>Offers:</strong> Will, Would</li>
-        <li data-cn="建議：Shall, Should　請求：Could, Would"><strong>Suggestions:</strong> Shall, Should &nbsp; <strong>Requests:</strong> Could, Would</li>
-        <li data-cn="未來可能性：Will, Shall　過去可能性：Could have, Would have"><strong>Future Possibility:</strong> Will, Shall &nbsp; <strong>Past Probability:</strong> Could have, Would have</li>
-      </ul>
-      <p style="margin-top:6px;" data-cn="＋行動動詞（不定式）＋受詞（名詞子句），例如：Students can buy the gadgets at a cheaper price.">+ action verb (bare infinitive) + object (noun clause), e.g. Students can buy the gadgets at a cheaper price.</p>
-    </div>
-
-    <div class="feature-box">
-      <h3 data-cn="提出建議（行動動詞：suggest + propose + recommend）">Making suggestions (action verbs: suggest + propose + recommend)</h3>
-      <p data-cn="I suggest / propose / recommend to watch a K-pop concert. ✗">I suggest / propose / recommend <s>to watch a K-pop concert</s>. &nbsp;✗</p>
-      <p data-cn="I suggest / propose / recommend watching a K-pop concert. ✓">I suggest / propose / recommend <strong>watching a K-pop concert</strong>. &nbsp;✓</p>
-    </div>
-  </div>
-
-  <!-- ============ TAB 3: VIDEO ============ -->
-  <div class="tab-content" id="tab-2">
-    <h1 data-cn="示範對話影片">Sample Conversation Video</h1>
-    <p style="color:#666; margin-bottom:16px;" data-cn="觀看一個關於舉辦 IT 產品展2026的會議。">Watch a meeting about launching the IT Gadgets Fair 2026.</p>
-    <div class="video-box">
-      <div class="video-placeholder" data-cn="影片即將推出">Video coming soon</div>
+    <div class="cn-controls">
+      <label class="cn-toggle"><input id="cnToggle" type="checkbox" onchange="toggleAllCN(this.checked)"><span id="cnToggleLabel">中文翻译</span></label>
+      <div class="cn-lang-switch" role="group" aria-label="Chinese translation script">
+        <button type="button" class="cn-lang-btn active" data-lang="sc" onclick="setCNLang('sc')" title="Simplified Chinese (简体中文)">简体</button>
+        <button type="button" class="cn-lang-btn" data-lang="tc" onclick="setCNLang('tc')" title="Traditional Chinese (繁體中文)">繁體</button>
+      </div>
     </div>
   </div>
 </div>
 
-<script>
-(function() {
+<div id="languageTooltip" class="language-tooltip" role="tooltip" hidden></div>
+<div id="toast" class="toast" hidden></div>
 
-var DIALOGUE = [
-  { sp: "D", fn: "Greetings \u00b7 Welcoming participants \u00b7 Opening the meeting", t: "Good morning, everyone. Welcome to the meeting today. Shall we start the meeting now? / Let's start now.", f: "D1.mp3", cn: "各位，早晨好。歡迎出席今天的會議。我們現在開始好嗎？／我們現在開始吧。" },
-  { sp: "All", t: "Yes. / Sure. / Certainly. (more polite)", f: "ALL1.mp3", cn: "好。／當然可以。／好的。（更禮貌）" },
-  { sp: "C", fn: "Introducing the agenda", t: "Has everyone received (formal) / got (informal) a copy of the agenda?", f: "C1.mp3", cn: "大家都有議程的副本嗎？" },
-  { sp: "All", t: "Yes. / We do. Thanks.", f: "ALL2.mp3", cn: "有。／我們有。謝謝。" },
-  { sp: "B", fn: "Purpose of the meeting", t: "Great / Terrific! The aim / purpose of today's meeting is to discuss the launch of IT Gadgets Fair 2026 in our university.", f: "B1.mp3", cn: "很好／太棒了！今天會議的目的是／今天的會議旨在討論在我們大學舉辦 IT 產品展2026的計劃。" },
-  { sp: "A", fn: "Introducing the agenda", t: "We will cover three agenda items: fair date, arrangements of the fair, and any other business that you would like to discuss.", hi: [ { m: "will cover", l: "Modal verb + bare infinitive" }, { m: "would like to discuss", l: "Modal verb + bare infinitive" } ], f: "A1.mp3", cn: "我們會涵蓋三個議程項目：展覽日期、展覽的安排，以及你們想討論的任何其他事項。" },
-  { sp: "D", fn: "Making suggestions + Giving reasons", t: "We'll start with the fair date. I propose holding the fair in May for two weeks since / because / as it is the semester 2 break. Students are more relaxed after their exams (examinations). They'll be (will be) in a good mood to do some shopping. Moreover, there're (are) still five months ahead, so we'll have (will have) sufficient preparation time.", hi: [ { m: "We'll", l: "Contraction (We will)" }, { m: "I propose holding", l: "Making suggestions (propose + V-ing)" }, { m: "since / because / as", l: "Giving reasons (S + V + O)" }, { m: "They'll be", l: "Contraction (They will)" }, { m: "Moreover", l: "Cohesive device" }, { m: "there're", l: "Contraction (There are)" }, { m: "we'll have", l: "Contraction (We will)" } ], f: "D2.mp3", cn: "我們先從展覽日期開始。我建議在五月舉行展覽，為期兩星期，因為這是學期二的假期。學生考完試後會比較輕鬆，也會有心情去購物。而且，距離現在還有五個月，我們有充足的準備時間。" },
-  { sp: "C", fn: "Showing disagreement \u00b7 Making a counter-proposal \u00b7 Elaborating opinions", t: "I'm afraid that's not the way I see it. The break after semester 2 is short. It's not worth doing lots of preparation and holding the fair for just two weeks. We may consider mid to late August instead. It is the ideal time for our students to think of buying new IT gadgets for use in the next academic year, such as tablets. The fair can last three weeks. Do you agree with me / What do you think?", hi: [ { m: "I'm", l: "Contraction (I am)" }, { m: "that's", l: "Contraction (That is)" }, { m: "It's", l: "Contraction (It is)" }, { m: "may consider", l: "Modal verb + bare infinitive" }, { m: "can last", l: "Modal verb + bare infinitive" } ], f: "C2.mp3", cn: "恐怕我不這樣看。學期二的假期很短。不值得花大量準備工夫去舉行一個只有兩星期的展覽。我們可以考慮改為八月下旬。那時正是學生考慮為下一個學年購買新 IT 產品（例如平板電腦）的理想時機。展覽可以持續三星期。你們同意我嗎？／你們怎麼看？" },
-  { sp: "B", fn: "Showing agreement \u00b7 Making suggestions", t: "That's an excellent idea. It's definitely a suitable time. Scheduling it in December is another possible option. There are usually more discounts and special offers near the Christmas time. Students can surely buy the gadgets at a cheaper price.", hi: [ { m: "That's", l: "Contraction (That is)" }, { m: "It's", l: "Contraction (It is)" }, { m: "can surely buy", l: "Modal verb + bare infinitive (NOT can + bought \u2717 / can + buying \u2717)" } ], f: "B2.mp3", cn: "這是個很好的主意。這肯定是合適的時間。安排在十二月是另一個可行選擇。臨近聖誕通常有更多折扣和特別優惠。學生肯定可以以更便宜的價格買到產品。" },
-  { sp: "A", fn: "Showing agreement \u00b7 Stating preferences \u00b7 Making suggestions \u00b7 Sharing your views", t: "Absolutely! I'd (I) prefer this option to August. Could we also consider September? Some students won't be back till semester 1 begins. I believe that more students can come to (attend) the fair if we choose September.", hi: [ { m: "I'd", l: "Contraction (I would)" }, { m: "Could we also consider", l: "Modal verb + bare infinitive" }, { m: "won't", l: "Contraction (will not)" }, { m: "can come to", l: "Modal verb + bare infinitive" } ], f: "A2.mp3", cn: "絕對同意！我較喜歡這個選擇多於八月。我們也可以考慮九月嗎？有些學生要等到學期一開始才回來。我相信如果選擇九月，會有更多學生可以參加展覽。" },
-  { sp: "C", fn: "Partial agreement \u00b7 Giving reasons \u00b7 Making a counter-proposal", t: "That's a possibility (possible), but I don't think September is a feasible suggestion. All campus staff are busy when semester 1 begins. I don't think we can have any spare manpower (staffing) for the fair. Mid to late August is a more practical idea.", f: "C3.mp3", cn: "這是有可能的，但我認為九月不是可行的建議。學期一開始時所有校園職員都很忙。我不認為我們有任何額外人手負責展覽。八月下旬是更實際的想法。" },
-  { sp: "D", fn: "Showing uncertainty \u00b7 Drawing consensus", t: "Ok, so we've come up with a few suggestions. Can we now decide on the fair date? It seems mid to late August and December is the most agreeable suggestion. Can we all agree to present (that we should) present this option to the management team?", hi: [ { m: "we've come up", l: "Contraction (we have come up)" }, { m: "Can we now decide", l: "Modal verb + bare infinitive (NOT can + decided \u2717 / can + deciding \u2717)" }, { m: "we should", l: "Modal verb + bare infinitive" } ], f: "D3.mp3", cn: "好吧，我們已提出了幾個建議。我們現在可以決定展覽日期嗎？八月下旬和十二月似乎是最受歡迎的建議。我們能否一致同意把這個選擇呈交管理團隊？" },
-  { sp: "All", t: "Sure. / We can. / Let's do that. / Certainly. / Yes / Why not!? / Can't be better!", f: "ALL3.mp3", cn: "好。／可以。／就那樣做吧。／當然可以。／好啊，為什麼不呢！／再好不過了！" },
-  { sp: "C", fn: "Switching topic", t: "Excellent! Let's move onto the second item on the agenda.", hi: [ { m: "Let's", l: "Contraction (Let us)" } ], f: "C4.mp3", cn: "很好！我們繼續討論第二項議程。" },
-  { sp: "B", fn: "Inviting opinions", t: "May I have your opinions on the arrangements of the fair?", hi: [ { m: "May I have", l: "Modal verb + bare infinitive" } ], f: "B3.mp3", cn: "我可以聽取你們對展覽安排的意見嗎？" },
-  { sp: "A", fn: "Making suggestions + Giving reasons \u00b7 Highlighting the benefit outcome", t: "For the on-campus venue, how about holding the fair at the Campus Central Square? Since it is in the middle of the campus, students can reach it conveniently. Moreover, the spacious open area would allow us to set up booths according to different types of IT products sold.", hi: [ { m: "how about holding", l: "Making suggestions (how about + V-ing)" }, { m: "Since it is", l: "Giving reasons (cohesive device)" }, { m: "can reach", l: "Modal verb + bare infinitive" }, { m: "Moreover", l: "Cohesive device" }, { m: "would allow", l: "Modal verb + bare infinitive" } ], f: "A3.mp3", cn: "關於校內場地，在 Campus Central Square 舉行展覽如何？由於它位於校園中央，學生可以方便地到達。而且，寬敞的開放空間讓我們可以按照不同類型的 IT 產品設置攤位。" },
-  { sp: "D", fn: "Strong agreement \u00b7 Making suggestions \u00b7 Elaborating opinions", t: "I agree with you entirely. Campus Central Square is where our students must pass by every day. Regarding / In terms of the types of gadgets exhibited, I would propose selling tablets. From the next academic year onwards, students need to use e-books in their English lessons. If they have one, it would be more convenient for them to attempt in-class tasks. Moreover, I recommend / giving (that we should give) special offers for the students as well.", hi: [ { m: "must pass", l: "Modal verb + bare infinitive (obligation)" }, { m: "I would propose selling", l: "Making suggestions (propose + V-ing)" }, { m: "would be more convenient", l: "Modal verb + bare infinitive" }, { m: "Moreover", l: "Cohesive device" }, { m: "I recommend / giving (that we should give)", l: "Making suggestions (recommend + V-ing)" } ], f: "D4.mp3", cn: "我完全同意你。Campus Central Square 是我們學生每天必經之地。關於展出產品類型，我建議售賣平板電腦。由下一個學年開始，學生需要在英文課堂使用電子書。如果他們有平板電腦，嘗試課堂任務會更方便。而且，我也建議為學生提供特別優惠。" },
-  { sp: "B", fn: "Showing agreement \u00b7 Giving a condition (1st conditional)", t: "You're right. Perhaps we should give them cash coupons according to their academic results. For instance, if a student obtains a GPA of 4 or above, they will receive a $200 cash coupon. This way, it would be beneficial to both the students themselves and the hardware wholesaler.", hi: [ { m: "You're", l: "Contraction (You are)" }, { m: "we should give", l: "Modal verb + bare infinitive (NOT should + gave \u2717 / should + giving \u2717)" }, { m: "if a student obtains", l: "Giving a condition (1st conditional)" }, { m: "they will receive", l: "1st conditional result (will + bare infinitive)" }, { m: "would be beneficial", l: "Modal verb + bare infinitive" } ], f: "B4.mp3", cn: "你說得對。也許我們應該按學業成績向他們派發現金券。例如，如果學生的 GPA 達4或以上，他們會收到二百元現金券。這樣，對學生本身和硬件批發商都有利。" },
-  { sp: "All", t: "Sure. / Fantastic. / Exactly.", f: "ALL4.mp3", cn: "好。／太好了。／正是。" },
-  { sp: "C", fn: "Making suggestions", t: "May I propose another idea? What about distributing promotional gifts to our students? We could design gifts with our university logo. A mouse pad would be very practical to them.", hi: [ { m: "May I propose", l: "Making suggestions (propose + ...)" }, { m: "What about distributing", l: "Making suggestions (what about + V-ing)" }, { m: "could design", l: "Modal verb + bare infinitive (NOT could + designed \u2717 / could + designing \u2717)" }, { m: "would be very practical", l: "Modal verb + bare infinitive" } ], f: "C5.mp3", cn: "我可以提出另一個主意嗎？向學生派發宣傳禮物如何？我們可以設計印有大學標誌的禮物。滑鼠墊對他們來說會很實用。" },
-  { sp: "A", fn: "Partial agreement \u00b7 Making suggestions \u00b7 Giving own opinion", t: "I see your point, but most students use notebook computers or tablets, so they do not need a mouse pad. Shall we give out a USB stick instead? Students can use it to store e-books and their handouts. It is also a useful tool for handling their assignments and group projects. I believe that every student will welcome it.", hi: [ { m: "Shall we give out", l: "Making suggestions (shall + V; NOT shall + gave \u2717 / shall + giving \u2717)" }, { m: "can use", l: "Modal verb + bare infinitive" }, { m: "will welcome", l: "Modal verb + bare infinitive" } ], f: "A4.mp3", cn: "我明白你的觀點，但大多數學生使用筆記型電腦或平板電腦，所以他們不需要滑鼠墊。我們派發 USB 手指如何？學生可以用它儲存電子書和筆記。它也是處理作業和小組項目的有用工具。我相信每個學生都會歡迎它。" },
-  { sp: "D", fn: "Partial agreement + Giving reasons", t: "I see your point, but the cost of producing a massive number of USB sticks is high, and I think the gift cannot achieve the promotional effect as anticipated.", f: "D5.mp3", cn: "我明白你的觀點，但生產大量 USB 手指的成本很高，而且我認為這禮物不能達到預期的宣傳效果。" },
-  { sp: "C", fn: "Drawing consensus", t: "Can we decide on the fair arrangements now? Do you agree that we should hold the fair at the Campus Central Square, focusing on promoting tablets and distributing coupons to students?", hi: [ { m: "Can we decide", l: "Modal verb + bare infinitive (NOT can + decided \u2717 / can + deciding \u2717)" }, { m: "we should hold", l: "Modal verb + bare infinitive" } ], f: "C6.mp3", cn: "我們現在可以決定展覽安排嗎？你們同意我們在 Campus Central Square 舉行展覽、重點推廣平板電腦並向學生派發現金券嗎？" },
-  { sp: "All", t: "Yes. / Sure. / Great.", f: "ALL5.mp3", cn: "好。／當然可以。／太好了。" },
-  { sp: "B", fn: "Revisiting the agenda item in the next meeting", t: "Since we cannot reach a consensus on promotional gifts, let's discuss it further in our next meeting.", hi: [ { m: "Since", l: "Cohesive device" }, { m: "let's discuss", l: "Contraction (Let us discuss)" } ], f: "B5.mp3", cn: "由於我們未能就宣傳禮物達成共識，讓我們在下一次會議進一步討論。" },
-  { sp: "All", t: "Yes. / Sure. / Of course.", f: "ALL6.mp3", cn: "好。／當然可以。／好的。" },
-  { sp: "A", fn: "Switching topic \u2192 next agenda item", t: "Great! Is there any other business that you'd like (would like) to discuss?", f: "A5.mp3", cn: "很好！你們有沒有其他事項想討論？" },
-  { sp: "C", fn: "Initiating the discussion \u00b7 Making suggestions", t: "Yes. I would like to discuss ways to inform students of the fair. An effective way is sending out mass student emails. I suggest sending these emails two weeks before the commencement date of the fair. Do you think it is feasible?", hi: [ { m: "would like to discuss", l: "Modal verb + bare infinitive" }, { m: "I suggest sending", l: "Making suggestions (suggest + V-ing / gerund)" } ], f: "C7.mp3", cn: "有。我想討論向學生宣傳展覽的方法。一個有效的方法是發送大量學生電郵。我建議在展覽開始前兩星期發送這些電郵。你們認為可行嗎？" },
-  { sp: "D", fn: "Making a counter-offer \u00b7 Giving explanations \u00b7 Making comparisons", t: "Your idea is good, but can we also ask class tutors to inform students verbally besides mass student emails? This way, students who do not usually check emails could also be informed. These two channels are comparatively more efficient than just sending emails or putting up posters.", f: "D6.mp3", cn: "你的主意不錯，但除了大量學生電郵外，我們也可以請班導師口頭通知學生嗎？這樣，通常不查看電郵的學生也能收到通知。這兩個渠道比只發送電郵或張貼海報更有效。" },
-  { sp: "B", fn: "Showing agreement", t: "Fantastic! We will adopt both ways to notify students then. Do you all agree?", f: "B6.mp3", cn: "太好了！那麼我們會同時採用兩種方式通知學生。你們都同意嗎？" },
-  { sp: "All", t: "Yes. / Sure. / Marvellous.", f: "ALL7.mp3", cn: "好。／當然可以。／好極了。" },
-  { sp: "A", fn: "Making suggestions \u00b7 Giving explanations & highlighting potential benefits", t: "Shall we consider sending SMS to students? In my opinion, this is the most direct way to inform students. I reckon all students read SMS messages on their mobile phones every day. Even if they miss both the mass email and the tutor's announcement, we can ensure we haven't missed anyone.", f: "A6.mp3", cn: "我們可以考慮向學生發送 SMS 嗎？我認為這是最直接通知學生的方法。我相信所有學生每天都會閱讀手機上的 SMS 訊息。即使他們錯過大量電郵和導師的宣佈，我們也可以確保沒有遺漏任何人。" },
-  { sp: "B", fn: "Showing agreement", t: "Absolutely! Let's send SMS messages which incorporate information about the fair date, venue and special offers.", hi: [ { m: "Let's send", l: "Contraction (Let us send)" } ], f: "B7.mp3", cn: "絕對同意！讓我們發送包含展覽日期、場地和特別優惠資料的 SMS 訊息。" },
-  { sp: "D", fn: "Showing agreement \u00b7 Inviting opinions", t: "You're right. Let's (Let us) present this idea to the management too. Any other suggestions?", f: "D7.mp3", cn: "你說得對。讓我們也把這個想法呈交管理層。還有其他建議嗎？" },
-  { sp: "All", t: "No. / I don't. / Not right now.", f: "ALL8.mp3", cn: "沒有。／我沒有。／暫時沒有。" },
-  { sp: "A", fn: "Making a summary", t: "So, we have decided to send mass student emails, and we are going to send SMS messages and seek class tutors' help to inform their students.", f: "A7.mp3", cn: "那麼，我們已決定發送大量學生電郵，並會發送 SMS 訊息，同時尋求班導師協助通知他們的學生。" },
-  { sp: "D", t: "Well, I think that's all we need to discuss today. We've (have) made decisions to be presented to the management. Is there anything you'd like to add?", hi: [ { m: "that's", l: "Contraction (That is)" }, { m: "We've", l: "Contraction (We have)" }, { m: "you'd", l: "Contraction (you would)" } ], f: "D8.mp3", cn: "好吧，我想今天我們要討論的就是這些。我們已作出決定，準備呈交管理層。各位有沒有其他補充？" },
-  { sp: "All", t: "No. / I don't. / Not right now. / Not for me / Not for this moment.", f: "ALL9.mp3", cn: "沒有。／我沒有。／暫時沒有。／我不需要。／這一刻沒有。" },
-  { sp: "B", fn: "Thanking participants \u00b7 Closing the meeting", t: "That's good! I think we can finish here. Thank you (Thanks) very much for coming today, everybody. Your ideas are brilliant!", hi: [ { m: "That's", l: "Contraction (That is)" }, { m: "can finish", l: "Modal verb + bare infinitive (NOT can + finished \u2717 / can + finishing \u2717)" } ], f: "B8.mp3", cn: "很好！我想我們可以到此結束。非常感謝各位今天出席，你們的主意很棒！" }
+<script>
+const DIALOGUE = [
+  {
+    sp: "D",
+    fn: "Greetings · Welcoming participants · Opening the meeting",
+    t: "Good morning, everyone. Welcome to the meeting today. Shall we start the meeting now? / Let's start now.",
+    hi: [
+      { m: "Good morning, everyone. Welcome to the meeting today", l: "yellow", exp: "Communicative purpose — Greetings · Welcoming participants · Opening the meeting." },
+      { m: "Shall we start", l: "Making suggestions", exp: "Making suggestions — \"Shall we\" + base verb (\"start\") makes a polite suggestion to begin the meeting together." },
+      { m: "Let's start", l: "Contraction (Let us)", exp: "Contraction — \"Let's\" = \"Let us\". \"Let's\" + base verb (\"start\") proposes doing something together." }
+    ],
+    f: "D1.mp3",
+    cn: "D：各位，早上好。欢迎出席今天的会议。我们现在开始好吗？／我们现在开始吧。",
+    tc: "D：各位，早晨好。歡迎出席今天的會議。我們現在開始好嗎？／我們現在開始吧。"
+  },
+  {
+    sp: "All",
+    t: "Yes. / Sure. / Certainly. (more polite)",
+    hi: [
+      { m: "Certainly", l: "Showing agreement", exp: "Showing agreement — \"Certainly\" is a more polite and formal way to agree than \"Yes\" or \"Sure\"." }
+    ],
+    f: "ALL1.mp3",
+    cn: "All：好。／当然可以。／好的。（更礼貌）",
+    tc: "All：好。／當然可以。／好的。（更禮貌）"
+  },
+  {
+    sp: "C",
+    fn: "Introducing the agenda",
+    t: "Has everyone received (formal) / got (informal) a copy of the agenda?",
+    hi: [
+      { m: "Has everyone received", l: "Grammar / expression pattern", exp: "Question grammar — \"everyone\" is singular, so use singular verb \"Has\" + past participle (\"received\" is formal; \"got\" is informal)." },
+      { m: "a copy of the agenda", l: "Collocation", exp: "Collocation — \"a copy of the agenda\" refers to the meeting outline distributed to participants." }
+    ],
+    f: "C1.mp3",
+    cn: "C：大家都有议程的副本吗？",
+    tc: "C：大家都有議程的副本嗎？"
+  },
+  {
+    sp: "All",
+    t: "Yes. / We do. Thanks.",
+    f: "ALL2.mp3",
+    cn: "All：有。／我们有。谢谢。",
+    tc: "All：有。／我們有。謝謝。"
+  },
+  {
+    sp: "B",
+    fn: "Purpose of the meeting",
+    t: "Great / Terrific! The aim / purpose of today's meeting is to discuss the launch of IT Gadgets Fair 2026 in our university.",
+    hi: [
+      { m: "The aim / purpose of today's meeting is to discuss", l: "yellow", exp: "Communicative purpose — Stating the purpose of the meeting. Pattern: \"The aim / purpose of today's meeting is to\" + base verb (\"discuss\")." },
+      { m: "the launch of IT Gadgets Fair 2026", l: "Collocation", exp: "Collocation — \"the launch of\" + event name refers to starting or holding an event." }
+    ],
+    f: "B1.mp3",
+    cn: "B：很好／太棒了！今天会议的目的是／今天的会议旨在讨论在我们大学举办 IT 产品展2026的计划。",
+    tc: "B：很好／太棒了！今天會議的目的是／今天的會議旨在討論在我們大學舉辦 IT 產品展2026的計劃。"
+  },
+  {
+    sp: "A",
+    fn: "Introducing the agenda",
+    t: "We will cover three agenda items: fair date, arrangements of the fair, and any other business that you would like to discuss.",
+    hi: [
+      { m: "will cover", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"will\" + base verb \"cover\" introduces the agenda items for the meeting." },
+      { m: "three agenda items", l: "Collocation", exp: "Collocation — \"cover agenda items\" means discuss the topics listed on the agenda." },
+      { m: "any other business", l: "Grammar / expression pattern", exp: "Meeting expression — \"any other business\" (AOB) refers to additional matters not listed as main items on the agenda." },
+      { m: "would like to discuss", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"would like\" + \"to\" + base verb \"discuss\" is a polite way to invite topics." }
+    ],
+    f: "A1.mp3",
+    cn: "A：我们会涵盖三个议程项目：展览日期、展览的安排，以及你们想讨论的任何其他事项。",
+    tc: "A：我們會涵蓋三個議程項目：展覽日期、展覽的安排，以及你們想討論的任何其他事項。"
+  },
+  {
+    sp: "D",
+    fn: "Making suggestions + Giving reasons",
+    t: "We'll start with the fair date. I propose holding the fair in May for two weeks since / because / as it is the semester 2 break. Students are more relaxed after their exams (examinations). They'll be (will be) in a good mood to do some shopping. Moreover, there're (are) still five months ahead, so we'll have (will have) sufficient preparation time.",
+    hi: [
+      { m: "We'll", l: "Contraction (We will)", exp: "Contraction — \"We'll\" = \"We will\"." },
+      { m: "I propose holding", l: "Making suggestions (propose + V-ing)", exp: "Making suggestions — \"propose\" + V-<strong>ing</strong> (gerund): \"I propose holding\" introduces a suggestion (NOT <em>propose to hold</em> ✗)." },
+      { m: "since / because / as", l: "Giving reasons (S + V + O)", exp: "<strong>Giving reasons</strong> — \"since / because / as\" + S + V + O introduces the reason for holding the fair in May." },
+      { m: "They'll be", l: "Contraction (They will)", exp: "Contraction — \"They'll\" = \"They will\", followed by bare infinitive \"be\"." },
+      { m: "in a good mood", l: "Collocation", exp: "Collocation — \"in a good mood\" means feeling happy and relaxed." },
+      { m: "Moreover", l: "Cohesive device", exp: "Cohesive device — \"Moreover\" adds a further supporting reason." },
+      { m: "there're", l: "Contraction (There are)", exp: "Contraction — \"there're\" = \"there are\" (used in spoken English before a plural noun phrase)." },
+      { m: "we'll have", l: "Contraction (We will)", exp: "Contraction — \"we'll\" = \"we will\" + bare infinitive \"have\"." },
+      { m: "sufficient preparation time", l: "Collocation", exp: "Collocation — \"sufficient preparation time\" means enough time to get everything ready." }
+    ],
+    f: "D2.mp3",
+    cn: "D：我们先从展览日期开始。我建议在五月举行展览，为期两星期，因为这是学期二的假期。学生考完试后会比较轻松，也会有心情去购物。而且，距离现在还有五个月，我们有充足的准备时间。",
+    tc: "D：我們先從展覽日期開始。我建議在五月舉行展覽，為期兩星期，因為這是學期二的假期。學生考完試後會比較輕鬆，也會有心情去購物。而且，距離現在還有五個月，我們有充足的準備時間。"
+  },
+  {
+    sp: "C",
+    fn: "Showing disagreement · Making a counter-proposal · Elaborating opinions",
+    t: "I'm afraid that's not the way I see it. The break after semester 2 is short. It's not worth doing lots of preparation and holding the fair for just two weeks. We may consider mid to late August instead. It is the ideal time for our students to think of buying new IT gadgets for use in the next academic year, such as tablets. The fair can last three weeks. Do you agree with me / What do you think?",
+    hi: [
+      { m: "I'm", l: "Contraction (I am)", exp: "Contraction — \"I'm\" = \"I am\"." },
+      { m: "that's", l: "Contraction (That is)", exp: "Contraction — \"that's\" = \"that is\"." },
+      { m: "not the way I see it", l: "Grammar / expression pattern", exp: "Polite disagreement — \"I'm afraid that's not the way I see it\" softens a disagreement in workplace meetings." },
+      { m: "It's", l: "Contraction (It is)", exp: "Contraction — \"It's\" = \"It is\"." },
+      { m: "worth doing", l: "Collocation / verb pattern", exp: "Verb pattern — \"be worth\" + V-<strong>ing</strong> (\"doing\" / \"holding\") expresses whether an action justifies the effort." },
+      { m: "may consider", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"may\" + base verb \"consider\" politely proposes an alternative option." },
+      { m: "such as tablets", l: "Giving examples", exp: "Giving examples — \"such as\" introduces a concrete example of IT gadgets." },
+      { m: "can last", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"can\" + base verb \"last\" states possibility." },
+      { m: "Do you agree with me / What do you think?", l: "Asking for response", exp: "Asking for response — invites other participants to share their views on the counter-proposal." }
+    ],
+    f: "C2.mp3",
+    cn: "C：恐怕我不这样看。学期二的假期很短。不值得花大量准备工夫去举行一个只有两星期的展览。我们可以考虑改为八月下旬。那时正是学生考虑为下一个学年购买新 IT 产品（例如平板电脑）的理想时机。展览可以持续三星期。你们同意我吗？／你们怎么看？",
+    tc: "C：恐怕我不這樣看。學期二的假期很短。不值得花大量準備工夫去舉行一個只有兩星期的展覽。我們可以考慮改為八月下旬。那時正是學生考慮為下一個學年購買新 IT 產品（例如平板電腦）的理想時機。展覽可以持續三星期。你們同意我嗎？／你們怎麼看？"
+  },
+  {
+    sp: "B",
+    fn: "Showing agreement · Making suggestions",
+    t: "That's an excellent idea. It's definitely a suitable time. Scheduling it in December is another possible option. There are usually more discounts and special offers near the Christmas time. Students can surely buy the gadgets at a cheaper price.",
+    hi: [
+      { m: "That's", l: "Contraction (That is)", exp: "Contraction — \"That's\" = \"That is\"." },
+      { m: "an excellent idea", l: "Showing agreement", exp: "Showing agreement — \"That's an excellent idea\" expresses strong agreement with the previous speaker." },
+      { m: "It's", l: "Contraction (It is)", exp: "Contraction — \"It's\" = \"It is\"." },
+      { m: "Scheduling it in December", l: "Grammar / expression pattern", exp: "Grammar — a gerund phrase (\"Scheduling it in December\") acts as the subject of the sentence to introduce an alternative suggestion." },
+      { m: "can surely buy", l: "Modal verb + bare infinitive (NOT can + bought ✗ / can + buying ✗)", exp: "Modal verb + bare infinitive — \"can\" + adverb \"surely\" + bare infinitive \"buy\" (NOT <em>can + bought</em> ✗ or <em>can + buying</em> ✗)." },
+      { m: "at a cheaper price", l: "Collocation", exp: "Collocation — \"at a cheaper / lower price\" is used with \"buy\" or \"sell\"." }
+    ],
+    f: "B2.mp3",
+    cn: "B：这是个很好的主意。这肯定是合适的时间。安排在十二月是另一个可行选择。临近圣诞通常有更多折扣和特别优惠。学生肯定可以以更便宜的价格买到产品。",
+    tc: "B：這是個很好的主意。這肯定是合適的時間。安排在十二月是另一個可行選擇。臨近聖誕通常有更多折扣和特別優惠。學生肯定可以以更便宜的價格買到產品。"
+  },
+  {
+    sp: "A",
+    fn: "Showing agreement · Stating preferences · Making suggestions · Sharing your views",
+    t: "Absolutely! I'd (I) prefer this option to August. Could we also consider September? Some students won't be back till semester 1 begins. I believe that more students can come to (attend) the fair if we choose September.",
+    hi: [
+      { m: "Absolutely!", l: "Showing agreement", exp: "Showing agreement — \"Absolutely!\" expresses enthusiastic agreement." },
+      { m: "I'd", l: "Contraction (I would)", exp: "Contraction — \"I'd\" = \"I would\"." },
+      { m: "prefer this option to August", l: "Expressing preference", exp: "Expressing preference — \"prefer A to B\" compares two options and states which one you like more." },
+      { m: "Could we also consider", l: "Modal verb + bare infinitive", exp: "Making suggestions / Modal verb + bare infinitive — \"Could we also consider\" + noun phrase politely suggests another option." },
+      { m: "won't", l: "Contraction (will not)", exp: "Contraction — \"won't\" = \"will not\"." },
+      { m: "can come to", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"can\" + base verb \"come to\" (\"attend\" is a more formal alternative)." },
+      { m: "if we choose September", l: "1st conditional", exp: "1st conditional — \"more students can come… if we choose September\" (modal/future result + <em>if</em> + present simple condition)." }
+    ],
+    f: "A2.mp3",
+    cn: "A：绝对同意！我较喜欢这个选择多于八月。我们也可以考虑九月吗？有些学生要等到学期一开始才回来。我相信如果选择九月，会有更多学生可以参加展览。",
+    tc: "A：絕對同意！我較喜歡這個選擇多於八月。我們也可以考慮九月嗎？有些學生要等到學期一開始才回來。我相信如果選擇九月，會有更多學生可以參加展覽。"
+  },
+  {
+    sp: "C",
+    fn: "Partial agreement · Giving reasons · Making a counter-proposal",
+    t: "That's a possibility (possible), but I don't think September is a feasible suggestion. All campus staff are busy when semester 1 begins. I don't think we can have any spare manpower (staffing) for the fair. Mid to late August is a more practical idea.",
+    hi: [
+      { m: "That's", l: "Contraction (That is)", exp: "Contraction — \"That's\" = \"That is\"." },
+      { m: "a possibility (possible), but", l: "Grammar / expression pattern", exp: "Partial agreement — acknowledges the other speaker's point (\"That's a possibility\") before introducing a reservation with \"but\"." },
+      { m: "feasible suggestion", l: "Collocation", exp: "Collocation — \"feasible suggestion\" means a suggestion that is workable and achievable in practice." },
+      { m: "can have", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"can\" + base verb \"have\"." },
+      { m: "spare manpower", l: "Collocation", exp: "Collocation — \"spare manpower\" (or \"spare staffing\") means extra staff available to take on additional work." }
+    ],
+    f: "C3.mp3",
+    cn: "C：这是有可能的，但我认为九月不是可行的建议。学期一开始时所有校园职员都很忙。我不认为我们有任何额外人手负责展览。八月下旬是更实际的想法。",
+    tc: "C：這是有可能的，但我認為九月不是可行的建議。學期一開始時所有校園職員都很忙。我不認為我們有任何額外人手負責展覽。八月下旬是更實際的想法。"
+  },
+  {
+    sp: "D",
+    fn: "Showing uncertainty · Drawing consensus",
+    t: "Ok, so we've come up with a few suggestions. Can we now decide on the fair date? It seems mid to late August and December is the most agreeable suggestion. Can we all agree to present (that we should) present this option to the management team?",
+    hi: [
+      { m: "we've come up", l: "Contraction (we have come up)", exp: "Contraction & Phrasal verb — \"we've\" = \"we have\"; \"come up with\" means think of or produce suggestions." },
+      { m: "Can we now decide", l: "Modal verb + bare infinitive (NOT can + decided ✗ / can + deciding ✗)", exp: "Modal verb + bare infinitive — \"Can we now decide\" (NOT <em>can + decided</em> ✗ or <em>can + deciding</em> ✗) moves the group towards a decision." },
+      { m: "Can we all agree", l: "yellow", exp: "Meeting procedure — Drawing consensus by checking whether all participants agree." },
+      { m: "we should", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"agree that we should present\" uses \"should\" + base verb \"present\"." }
+    ],
+    f: "D3.mp3",
+    cn: "D：好吧，我们已提出了几个建议。我们现在可以决定展览日期吗？八月下旬和十二月似乎是最受欢迎的建议。我们能否一致同意把这个选择呈交管理团队？",
+    tc: "D：好吧，我們已提出了幾個建議。我們現在可以決定展覽日期嗎？八月下旬和十二月似乎是最受歡迎的建議。我們能否一致同意把這個選擇呈交管理團隊？"
+  },
+  {
+    sp: "All",
+    t: "Sure. / We can. / Let's do that. / Certainly. / Yes / Why not!? / Can't be better!",
+    hi: [
+      { m: "Let's do that", l: "Showing agreement", exp: "Showing agreement / Contraction — \"Let's\" = \"Let us\"; \"Let's do that\" confirms the group decision." }
+    ],
+    f: "ALL3.mp3",
+    cn: "All：好。／可以。／就那样做吧。／当然可以。／好啊，为什么不呢！／再好不过了！",
+    tc: "All：好。／可以。／就那樣做吧。／當然可以。／好啊，為什麼不呢！／再好不過了！"
+  },
+  {
+    sp: "C",
+    fn: "Switching topic",
+    t: "Excellent! Let's move onto the second item on the agenda.",
+    hi: [
+      { m: "Let's", l: "Contraction (Let us)", exp: "Contraction — \"Let's\" = \"Let us\"." },
+      { m: "move onto the second item on the agenda", l: "Phrasal verb", exp: "Phrasal verb & Meeting procedure — \"move on to\" transitions the discussion to the next agenda item." }
+    ],
+    f: "C4.mp3",
+    cn: "C：很好！我们继续讨论第二项议程。",
+    tc: "C：很好！我們繼續討論第二項議程。"
+  },
+  {
+    sp: "B",
+    fn: "Inviting opinions",
+    t: "May I have your opinions on the arrangements of the fair?",
+    hi: [
+      { m: "May I have", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"May I have\" is a polite, formal way to invite opinions." },
+      { m: "opinions on", l: "Collocation", exp: "Collocation — \"opinions on\" + topic asks what participants think about a specific subject." }
+    ],
+    f: "B3.mp3",
+    cn: "B：我可以听取你们对展览安排的意见吗？",
+    tc: "B：我可以聽取你們對展覽安排的意見嗎？"
+  },
+  {
+    sp: "A",
+    fn: "Making suggestions + Giving reasons · Highlighting the benefit outcome",
+    t: "For the on-campus venue, how about holding the fair at the Campus Central Square? Since it is in the middle of the campus, students can reach it conveniently. Moreover, the spacious open area would allow us to set up booths according to different types of IT products sold.",
+    hi: [
+      { m: "how about holding", l: "Making suggestions (how about + V-ing)", exp: "Making suggestions — \"how about\" + V-<strong>ing</strong> (gerund): \"how about holding\" proposes an option (NOT <em>how about hold</em> ✗)." },
+      { m: "Since it is", l: "Giving reasons (cohesive device)", exp: "Giving reasons — \"Since\" + S + V introduces the reason at the start of the sentence." },
+      { m: "can reach", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"can\" + base verb \"reach\" expresses ability/possibility." },
+      { m: "Moreover", l: "Cohesive device", exp: "Cohesive device — \"Moreover\" adds a second advantage of the venue." },
+      { m: "would allow", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"would\" + base verb \"allow\" highlights a positive benefit outcome." },
+      { m: "set up booths", l: "Phrasal verb", exp: "Phrasal verb & Collocation — \"set up booths\" means erect or arrange exhibition stalls." }
+    ],
+    f: "A3.mp3",
+    cn: "A：关于校内场地，在 Campus Central Square 举行展览如何？由于它位于校园中央，学生可以方便地到达。而且，宽敞的开放空间让我们能够按照不同类型的 IT 产品设置摊位。",
+    tc: "A：關於校內場地，在 Campus Central Square 舉行展覽如何？由於它位於校園中央，學生可以方便地到達。而且，寬敞的開放空間讓我們可以按照不同類型的 IT 產品設置攤位。"
+  },
+  {
+    sp: "D",
+    fn: "Strong agreement · Making suggestions · Elaborating opinions",
+    t: "I agree with you entirely. Campus Central Square is where our students must pass by every day. Regarding / In terms of the types of gadgets exhibited, I would propose selling tablets. From the next academic year onwards, students need to use e-books in their English lessons. If they have one, it would be more convenient for them to attempt in-class tasks. Moreover, I recommend / giving (that we should give) special offers for the students as well.",
+    hi: [
+      { m: "I agree with you entirely", l: "Showing agreement", exp: "Showing agreement — \"I agree with you entirely\" expresses strong, complete agreement." },
+      { m: "must pass", l: "Modal verb + bare infinitive (obligation)", exp: "Modal verb + bare infinitive — \"must\" + base verb \"pass\" expresses strong certainty/necessity." },
+      { m: "Regarding / In terms of", l: "Cohesive device", exp: "Cohesive device / Prepositional phrase — \"Regarding\" or \"In terms of\" introduces a specific sub-topic on the agenda." },
+      { m: "I would propose selling", l: "Making suggestions (propose + V-ing)", exp: "Making suggestions — \"would propose\" + V-<strong>ing</strong> (\"selling\") politely puts forward a suggestion." },
+      { m: "If they have one", l: "1st conditional", exp: "Conditional clause — \"If they have one, it would be more convenient…\" explains the practical benefit for students." },
+      { m: "would be more convenient", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"would\" + base verb \"be\" describes the positive result." },
+      { m: "Moreover", l: "Cohesive device", exp: "Cohesive device — \"Moreover\" adds an additional suggestion." },
+      { m: "I recommend / giving (that we should give)", l: "Making suggestions (recommend + V-ing)", exp: "Making suggestions — \"recommend\" + V-<strong>ing</strong> (\"giving\") OR \"recommend that\" + S + \"(should) give\" (NOT <em>recommend to give</em> ✗)." }
+    ],
+    f: "D4.mp3",
+    cn: "D：我完全同意你。Campus Central Square 是我们学生每天必经之地。关于展出产品类型，我建议售卖平板电脑。由下一个学年开始，学生需要在英文课堂使用电子书。如果他们有平板电脑，完成课堂任务会更方便。而且，我也建议为学生提供特别优惠。",
+    tc: "D：我完全同意你。Campus Central Square 是我們學生每天必經之地。關於展出產品類型，我建議售賣平板電腦。由下一個學年開始，學生需要在英文課堂使用電子書。如果他們有平板電腦，嘗試課堂任務會更方便。而且，我也建議為學生提供特別優惠。"
+  },
+  {
+    sp: "B",
+    fn: "Showing agreement · Giving a condition (1st conditional)",
+    t: "You're right. Perhaps we should give them cash coupons according to their academic results. For instance, if a student obtains a GPA of 4 or above, they will receive a $200 cash coupon. This way, it would be beneficial to both the students themselves and the hardware wholesaler.",
+    hi: [
+      { m: "You're", l: "Contraction (You are)", exp: "Contraction — \"You're\" = \"You are\"; \"You're right\" affirms the previous speaker's point." },
+      { m: "we should give", l: "Modal verb + bare infinitive (NOT should + gave ✗ / should + giving ✗)", exp: "Modal verb + bare infinitive — \"should\" + base verb \"give\" (NOT <em>should + gave</em> ✗ or <em>should + giving</em> ✗)." },
+      { m: "For instance", l: "Giving examples", exp: "Giving examples — \"For instance\" introduces a specific example to illustrate the proposal." },
+      { m: "if a student obtains", l: "Giving a condition (1st conditional)", exp: "1st conditional (condition) — \"if\" + present simple (\"obtains\") sets the academic requirement." },
+      { m: "they will receive", l: "1st conditional result (will + bare infinitive)", exp: "1st conditional (result) — \"will\" + bare infinitive (\"receive\") states the guaranteed reward when the condition is met." },
+      { m: "would be beneficial", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"would\" + base verb \"be\" + \"beneficial to\" explains the mutual benefit." }
+    ],
+    f: "B4.mp3",
+    cn: "B：你说得对。也许我们应该按学业成绩向他们派发现金券。例如，如果学生的 GPA 达4或以上，他们会收到二百元现金券。这样，对学生本身和硬件批发商都有利。",
+    tc: "B：你說得對。也許我們應該按學業成績向他們派發現金券。例如，如果學生的 GPA 達4或以上，他們會收到二百元現金券。這樣，對學生本身和硬件批發商都有利。"
+  },
+  {
+    sp: "All",
+    t: "Sure. / Fantastic. / Exactly.",
+    f: "ALL4.mp3",
+    cn: "All：好。／太好了。／正是。",
+    tc: "All：好。／太好了。／正是。"
+  },
+  {
+    sp: "C",
+    fn: "Making suggestions",
+    t: "May I propose another idea? What about distributing promotional gifts to our students? We could design gifts with our university logo. A mouse pad would be very practical to them.",
+    hi: [
+      { m: "May I propose", l: "Making suggestions (propose + ...)", exp: "Making suggestions / Modal verb + bare infinitive — \"May I\" + base verb \"propose\" politely asks to introduce a new idea." },
+      { m: "What about distributing", l: "Making suggestions (what about + V-ing)", exp: "Making suggestions — \"What about\" + V-<strong>ing</strong> (gerund): \"What about distributing\" suggests an action." },
+      { m: "could design", l: "Modal verb + bare infinitive (NOT could + designed ✗ / could + designing ✗)", exp: "Modal verb + bare infinitive — \"could\" + base verb \"design\" (NOT <em>could + designed</em> ✗ or <em>could + designing</em> ✗)." },
+      { m: "would be very practical", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"would\" + base verb \"be\" elaborates on why the gift is useful." }
+    ],
+    f: "C5.mp3",
+    cn: "C：我可以提出另一个主意吗？向学生派发宣传礼物如何？我们可以设计印有大学标志的礼物。鼠标垫对他们来说会很实用。",
+    tc: "C：我可以提出另一個主意嗎？向學生派發宣傳禮物如何？我們可以設計印有大學標誌的禮物。滑鼠墊對他們來說會很實用。"
+  },
+  {
+    sp: "A",
+    fn: "Partial agreement · Making suggestions · Giving own opinion",
+    t: "I see your point, but most students use notebook computers or tablets, so they do not need a mouse pad. Shall we give out a USB stick instead? Students can use it to store e-books and their handouts. It is also a useful tool for handling their assignments and group projects. I believe that every student will welcome it.",
+    hi: [
+      { m: "I see your point, but", l: "Grammar / expression pattern", exp: "Partial agreement — \"I see your point, but…\" politely acknowledges the other speaker's idea before disagreeing." },
+      { m: "Shall we give out", l: "Making suggestions (shall + V; NOT shall + gave ✗ / shall + giving ✗)", exp: "Making suggestions / Phrasal verb — \"Shall we\" + bare infinitive \"give out\" (distribute; NOT <em>shall + gave</em> ✗ or <em>shall + giving</em> ✗)." },
+      { m: "can use", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"can\" + base verb \"use\" explains how students benefit from the item." },
+      { m: "for handling", l: "Preposition: by + V-ing/(gerund)", exp: "Preposition + gerund — after the preposition \"for\", use V-<strong>ing</strong> (\"handling\") to describe the function of a tool." },
+      { m: "will welcome", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"will\" + base verb \"welcome\" expresses a confident prediction." }
+    ],
+    f: "A4.mp3",
+    cn: "A：我明白你的观点，但大多数学生使用笔记本电脑或平板电脑，所以他们不需要鼠标垫。我们派发 U 盘如何？学生可以用它储存电子书和讲义。它也是处理作业和小组项目的有用工具。我相信每个学生都会欢迎它。",
+    tc: "A：我明白你的觀點，但大多數學生使用筆記型電腦或平板電腦，所以他們不需要滑鼠墊。我們派發 USB 手指如何？學生可以用它儲存電子書和筆記。它也是處理作業和小組項目的有用工具。我相信每個學生都會歡迎它。"
+  },
+  {
+    sp: "D",
+    fn: "Partial agreement + Giving reasons",
+    t: "I see your point, but the cost of producing a massive number of USB sticks is high, and I think the gift cannot achieve the promotional effect as anticipated.",
+    hi: [
+      { m: "I see your point, but", l: "Grammar / expression pattern", exp: "Partial agreement — \"I see your point, but…\" softens a counter-argument." },
+      { m: "of producing", l: "Preposition: by + V-ing/(gerund)", exp: "Preposition + gerund — \"the cost of producing\" uses \"of\" + V-<strong>ing</strong>." },
+      { m: "cannot achieve", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"cannot\" + base verb \"achieve\"." },
+      { m: "promotional effect", l: "Collocation", exp: "Collocation — \"achieve the promotional effect\" means produce the desired publicity result." }
+    ],
+    f: "D5.mp3",
+    cn: "D：我明白你的观点，但生产大量 U 盘的成本很高，而且我认为这礼物不能达到预期的宣传效果。",
+    tc: "D：我明白你的觀點，但生產大量 USB 手指的成本很高，而且我認為這禮物不能達到預期的宣傳效果。"
+  },
+  {
+    sp: "C",
+    fn: "Drawing consensus",
+    t: "Can we decide on the fair arrangements now? Do you agree that we should hold the fair at the Campus Central Square, focusing on promoting tablets and distributing coupons to students?",
+    hi: [
+      { m: "Can we decide", l: "Modal verb + bare infinitive (NOT can + decided ✗ / can + deciding ✗)", exp: "Modal verb + bare infinitive — \"Can we decide\" (NOT <em>can + decided</em> ✗ or <em>can + deciding</em> ✗) initiates consensus." },
+      { m: "Do you agree that", l: "yellow", exp: "Meeting procedure — Drawing consensus by summarizing agreed points and asking for confirmation." },
+      { m: "we should hold", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"should\" + base verb \"hold\" states the proposed group decision." },
+      { m: "focusing on promoting", l: "Collocation / verb pattern", exp: "Verb pattern — \"focus on\" is followed by a gerund (\"promoting\" and \"distributing\")." }
+    ],
+    f: "C6.mp3",
+    cn: "C：我们现在可以决定展览安排吗？你们同意我们在 Campus Central Square 举行展览、重点推广平板电脑并向学生派发现金券吗？",
+    tc: "C：我們現在可以決定展覽安排嗎？你們同意我們在 Campus Central Square 舉行展覽、重點推廣平板電腦並向學生派發現金券嗎？"
+  },
+  {
+    sp: "All",
+    t: "Yes. / Sure. / Great.",
+    f: "ALL5.mp3",
+    cn: "All：好。／当然可以。／太好了。",
+    tc: "All：好。／當然可以。／太好了。"
+  },
+  {
+    sp: "B",
+    fn: "Revisiting the agenda item in the next meeting",
+    t: "Since we cannot reach a consensus on promotional gifts, let's discuss it further in our next meeting.",
+    hi: [
+      { m: "Since", l: "Cohesive device", exp: "Giving reasons / Cohesive device — \"Since\" + S + V explains why the item is being deferred." },
+      { m: "reach a consensus on", l: "Collocation", exp: "Collocation — \"reach a consensus on\" means come to a shared agreement about a topic." },
+      { m: "let's discuss", l: "Contraction (Let us discuss)", exp: "Contraction — \"let's\" = \"let us\" + bare infinitive \"discuss\"." }
+    ],
+    f: "B5.mp3",
+    cn: "B：由于我们未能就宣传礼物达成共识，让我们在下一次会议进一步讨论。",
+    tc: "B：由於我們未能就宣傳禮物達成共識，讓我們在下一次會議進一步討論。"
+  },
+  {
+    sp: "All",
+    t: "Yes. / Sure. / Of course.",
+    f: "ALL6.mp3",
+    cn: "All：好。／当然可以。／好的。",
+    tc: "All：好。／當然可以。／好的。"
+  },
+  {
+    sp: "A",
+    fn: "Switching topic → next agenda item",
+    t: "Great! Is there any other business that you'd like (would like) to discuss?",
+    hi: [
+      { m: "Is there any other business", l: "yellow", exp: "Meeting procedure — Inviting Any Other Business (AOB) before closing the meeting." },
+      { m: "you'd like", l: "Contraction (you would)", exp: "Contraction & Modal verb — \"you'd like\" = \"you would like\" + to-infinitive (\"to discuss\")." }
+    ],
+    f: "A5.mp3",
+    cn: "A：很好！你们有没有其他事项想讨论？",
+    tc: "A：很好！你們有沒有其他事項想討論？"
+  },
+  {
+    sp: "C",
+    fn: "Initiating the discussion · Making suggestions",
+    t: "Yes. I would like to discuss ways to inform students of the fair. An effective way is sending out mass student emails. I suggest sending these emails two weeks before the commencement date of the fair. Do you think it is feasible?",
+    hi: [
+      { m: "would like to discuss", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"would like\" + \"to\" + base verb \"discuss\" politely introduces an AOB topic." },
+      { m: "inform students of", l: "Collocation / verb pattern", exp: "Verb pattern — \"inform\" + someone + \"of\" + noun phrase means officially tell them about something." },
+      { m: "sending out", l: "Phrasal verb", exp: "Phrasal verb — \"send out\" means distribute or dispatch to many recipients." },
+      { m: "I suggest sending", l: "Making suggestions (suggest + V-ing / gerund)", exp: "Making suggestions — \"suggest\" + V-<strong>ing</strong> (gerund): \"I suggest sending\" (NOT <em>suggest to send</em> ✗)." },
+      { m: "Do you think it is feasible?", l: "Asking for response", exp: "Asking for response — invites colleagues to evaluate whether the suggestion is practical." }
+    ],
+    f: "C7.mp3",
+    cn: "C：有。我想讨论向学生宣传展览的方法。一个有效的方法是发送大量学生电邮。我建议在展览开始前两星期发送这些电邮。你们认为可行吗？",
+    tc: "C：有。我想討論向學生宣傳展覽的方法。一個有效的方法是發送大量學生電郵。我建議在展覽開始前兩星期發送這些電郵。你們認為可行嗎？"
+  },
+  {
+    sp: "D",
+    fn: "Making a counter-offer · Giving explanations · Making comparisons",
+    t: "Your idea is good, but can we also ask class tutors to inform students verbally besides mass student emails? This way, students who do not usually check emails could also be informed. These two channels are comparatively more efficient than just sending emails or putting up posters.",
+    hi: [
+      { m: "can we also ask", l: "Making suggestions", exp: "Making suggestions / Modal verb + bare infinitive — \"can we also ask\" proposes an additional channel." },
+      { m: "besides", l: "Cohesive device", exp: "Cohesive device / Preposition — \"besides\" means in addition to." },
+      { m: "could also be informed", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive (passive) — \"could\" + \"also\" + \"be informed\" explains the benefit." },
+      { m: "comparatively more efficient than", l: "Elaborating opinions", exp: "Making comparisons — \"comparatively more efficient than\" compares the effectiveness of different promotional channels." },
+      { m: "putting up posters", l: "Phrasal verb", exp: "Phrasal verb — \"put up posters\" means display or stick posters on walls/boards." }
+    ],
+    f: "D6.mp3",
+    cn: "D：你的主意不错，但除了大量学生电邮外，我们也可以请班导师口头通知学生吗？这样，通常不查看电邮的学生也能收到通知。这两个渠道比只发送电邮或张贴海报更有效。",
+    tc: "D：你的主意不錯，但除了大量學生電郵外，我們也可以請班導師口頭通知學生嗎？這樣，通常不查看電郵的學生也能收到通知。這兩個渠道比只發送電郵或張貼海報更有效。"
+  },
+  {
+    sp: "B",
+    fn: "Showing agreement",
+    t: "Fantastic! We will adopt both ways to notify students then. Do you all agree?",
+    hi: [
+      { m: "Fantastic!", l: "Showing agreement", exp: "Showing agreement — \"Fantastic!\" expresses strong approval." },
+      { m: "will adopt", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"will\" + base verb \"adopt\" confirms the action." },
+      { m: "Do you all agree?", l: "Asking for response", exp: "Asking for response / Drawing consensus — checks that everyone agrees with adopting both methods." }
+    ],
+    f: "B6.mp3",
+    cn: "B：太好了！那么我们会同时采用两种方式通知学生。你们都同意吗？",
+    tc: "B：太好了！那麼我們會同時採用兩種方式通知學生。你們都同意嗎？"
+  },
+  {
+    sp: "All",
+    t: "Yes. / Sure. / Marvellous.",
+    f: "ALL7.mp3",
+    cn: "All：好。／当然可以。／好极了。",
+    tc: "All：好。／當然可以。／好極了。"
+  },
+  {
+    sp: "A",
+    fn: "Making suggestions · Giving explanations & highlighting potential benefits",
+    t: "Shall we consider sending SMS to students? In my opinion, this is the most direct way to inform students. I reckon all students read SMS messages on their mobile phones every day. Even if they miss both the mass email and the tutor's announcement, we can ensure we haven't missed anyone.",
+    hi: [
+      { m: "Shall we consider sending", l: "Making suggestions", exp: "Making suggestions — \"Shall we\" + base verb \"consider\" + V-<strong>ing</strong> (\"sending\") proposes an additional method." },
+      { m: "In my opinion", l: "Elaborating opinions", exp: "Opinion phrase — \"In my opinion\" signals a personal view." },
+      { m: "Even if", l: "Cohesive device", exp: "Cohesive device / Conditional linker — \"Even if\" introduces an extreme case to show why SMS is a reliable backup." },
+      { m: "can ensure", l: "Modal verb + bare infinitive", exp: "Modal verb + bare infinitive — \"can\" + base verb \"ensure\" highlights the benefit outcome." },
+      { m: "haven't", l: "Contraction (have not)", exp: "Contraction — \"haven't\" = \"have not\"." }
+    ],
+    f: "A6.mp3",
+    cn: "A：我们可以考虑向学生发送 SMS 吗？我认为这是最直接通知学生的方法。我相信所有学生每天都会阅读手机上的 SMS 讯息。即使他们错过大量电邮和导师的宣布，我们也可以确保没有遗漏任何人。",
+    tc: "A：我們可以考慮向學生發送 SMS 嗎？我認為這是最直接通知學生的方法。我相信所有學生每天都會閱讀手機上的 SMS 訊息。即使他們錯過大量電郵和導師的宣佈，我們也可以確保沒有遺漏任何人。"
+  },
+  {
+    sp: "B",
+    fn: "Showing agreement",
+    t: "Absolutely! Let's send SMS messages which incorporate information about the fair date, venue and special offers.",
+    hi: [
+      { m: "Absolutely!", l: "Showing agreement", exp: "Showing agreement — \"Absolutely!\" expresses strong agreement." },
+      { m: "Let's send", l: "Contraction (Let us send)", exp: "Contraction — \"Let's\" = \"Let us\" + bare infinitive \"send\"." },
+      { m: "which incorporate information", l: "Elaborating opinions", exp: "Relative clause & Collocation — \"which incorporate information about…\" specifies what details the SMS messages should include." }
+    ],
+    f: "B7.mp3",
+    cn: "B：绝对同意！让我们发送包含展览日期、场地和特别优惠资料的 SMS 讯息。",
+    tc: "B：絕對同意！讓我們發送包含展覽日期、場地和特別優惠資料的 SMS 訊息。"
+  },
+  {
+    sp: "D",
+    fn: "Showing agreement · Inviting opinions",
+    t: "You're right. Let's (Let us) present this idea to the management too. Any other suggestions?",
+    hi: [
+      { m: "You're right", l: "Showing agreement", exp: "Showing agreement / Contraction — \"You're\" = \"You are\"; confirms agreement." },
+      { m: "Let's", l: "Contraction (Let us)", exp: "Contraction — \"Let's\" = \"Let us\"." },
+      { m: "present this idea to the management", l: "Collocation", exp: "Collocation — \"present an idea to the management\" means formally submit it for approval." },
+      { m: "Any other suggestions?", l: "Asking for response", exp: "Asking for response — checks if anyone has further ideas before summarizing." }
+    ],
+    f: "D7.mp3",
+    cn: "D：你说得对。让我们也把这个想法呈交管理层。还有其他建议吗？",
+    tc: "D：你說得對。讓我們也把這個想法呈交管理層。還有其他建議嗎？"
+  },
+  {
+    sp: "All",
+    t: "No. / I don't. / Not right now.",
+    f: "ALL8.mp3",
+    cn: "All：没有。／我没有。／暂时没有。",
+    tc: "All：沒有。／我沒有。／暫時沒有。"
+  },
+  {
+    sp: "A",
+    fn: "Making a summary",
+    t: "So, we have decided to send mass student emails, and we are going to send SMS messages and seek class tutors' help to inform their students.",
+    hi: [
+      { m: "So, we have decided to", l: "yellow", exp: "Meeting procedure — Making a summary of the decisions reached under AOB using present perfect (\"have decided to\")." },
+      { m: "are going to send", l: "Grammar / expression pattern", exp: "Future plan — \"be going to\" + base verb (\"send\" / \"seek\") states the agreed action plan." },
+      { m: "seek class tutors' help", l: "Collocation", exp: "Collocation — \"seek someone's help\" is a formal way to say ask for someone's assistance." }
+    ],
+    f: "A7.mp3",
+    cn: "A：那么，我们已决定发送大量学生电邮，并会发送 SMS 讯息，同时寻求班导师协助通知他们的学生。",
+    tc: "A：那麼，我們已決定發送大量學生電郵，並會發送 SMS 訊息，同時尋求班導師協助通知他們的學生。"
+  },
+  {
+    sp: "D",
+    fn: "Winding up",
+    t: "Well, I think that's all we need to discuss today. We've (have) made decisions to be presented to the management. Is there anything you'd like to add?",
+    hi: [
+      { m: "that's", l: "Contraction (That is)", exp: "Contraction — \"that's\" = \"that is\"." },
+      { m: "We've", l: "Contraction (We have)", exp: "Contraction — \"We've\" = \"We have\"." },
+      { m: "made decisions", l: "Collocation", exp: "Collocation — \"make decisions\" (\"made decisions\") means reach official conclusions." },
+      { m: "you'd", l: "Contraction (you would)", exp: "Contraction — \"you'd\" = \"you would\"." },
+      { m: "Is there anything you'd like to add?", l: "Asking for response", exp: "Meeting procedure — Winding up by giving participants a final chance to speak." }
+    ],
+    f: "D8.mp3",
+    cn: "D：好吧，我想今天我们要讨论的就是这些。我们已作出决定，准备呈交管理层。各位有没有其他补充？",
+    tc: "D：好吧，我想今天我們要討論的就是這些。我們已作出決定，準備呈交管理層。各位有沒有其他補充？"
+  },
+  {
+    sp: "All",
+    t: "No. / I don't. / Not right now. / Not for me / Not for this moment.",
+    f: "ALL9.mp3",
+    cn: "All：没有。／我没有。／暂时没有。／我不需要。／这一刻没有。",
+    tc: "All：沒有。／我沒有。／暫時沒有。／我不需要。／這一刻沒有。"
+  },
+  {
+    sp: "B",
+    fn: "Thanking participants · Closing the meeting",
+    t: "That's good! I think we can finish here. Thank you (Thanks) very much for coming today, everybody. Your ideas are brilliant!",
+    hi: [
+      { m: "That's", l: "Contraction (That is)", exp: "Contraction — \"That's\" = \"That is\"." },
+      { m: "can finish", l: "Modal verb + bare infinitive (NOT can + finished ✗ / can + finishing ✗)", exp: "Modal verb + bare infinitive — \"can\" + base verb \"finish\" (NOT <em>can + finished</em> ✗ or <em>can + finishing</em> ✗) closes the meeting positively." },
+      { m: "Thank you (Thanks) very much for coming", l: "yellow", exp: "Meeting procedure — Thanking participants and closing the meeting. After preposition \"for\", use V-<strong>ing</strong> (\"coming\")." }
+    ],
+    f: "B8.mp3",
+    cn: "B：很好！我想我们可以到此结束。非常感谢各位今天出席，你们的主意很棒！",
+    tc: "B：很好！我想我們可以到此結束。非常感謝各位今天出席，你們的主意很棒！"
+  }
 ];
 
-function renderDialogue() {
-  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-  function colorOf(label) {
-    if (/contraction/i.test(label)) return 'c';
-    if (/modal/i.test(label)) return 'm';
-    if (/suggest|propose|recommend|how about|what about/i.test(label)) return 'g';
-    if (/cohesive/i.test(label)) return 'h';
-    if (/conditional/i.test(label)) return 'n';
-    if (/reason/i.test(label)) return 'r';
-    return 'm';
-  }
-  var html = '<table class="dialogue-table"><thead><tr>'
-    + '<th>Student</th><th>Conversation (language items highlighted)</th><th>Language explanations</th><th>Communicative functions</th>'
-    + '</tr></thead><tbody>';
-  DIALOGUE.forEach(function(ut) {
-    var text = ut.t, spans = [];
-    (ut.hi || []).forEach(function(h) {
-      var idx = text.indexOf(h.m);
-      if (idx >= 0) spans.push({ s: idx, e: idx + h.m.length, l: h.l });
+let languageTagNumber = 0;
+
+function renderDialogue(list, offset) {
+    languageTagNumber = 0;
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+    function colorOf(label) {
+        if (/contraction/i.test(label)) return 'c';
+        if (/phrasal verb/i.test(label)) return 'lex';
+        if (/collocation|verb pattern/i.test(label)) return 'coll';
+        if (/modal/i.test(label)) return 'm';
+        if (/giving reasons|since \(s\+v\+o\)|reason/i.test(label)) return 'r';
+        if (/suggest|propose|recommend|how about|what about|what if/i.test(label)) return 'g';
+        if (/cohesive|although|however|therefore|whereas|building on|in that case|besides|moreover|even if/i.test(label)) return 'h';
+        if (/conditional/i.test(label)) return 'n';
+        if (/agreement|agree/i.test(label)) return 'a';
+        if (/elaborat/i.test(label)) return 'e';
+        if (/meeting|agenda|purpose|summar|winding|closing|opening|attention/i.test(label)) return 'y';
+        if (/yellow/i.test(label)) return 'y';
+        if (/preposition|by \+ gerund/i.test(label)) return 'prep';
+        if (/asking for response/i.test(label)) return 'resp';
+        if (/giving examples/i.test(label)) return 'ex';
+        if (/expressing preference/i.test(label)) return 'pref';
+        if (/grammar|reference words|adjective pattern|comparative|purpose|fixed expression|opinion phrase|concession|hedging|question phrase|signpost|meeting expression|time expression|polite disagreement|polite request|linker|conditional clause/i.test(label)) return 'form';
+        return 'm';
+    }
+    function wordify(value) {
+        return esc(value).replace(/(\S+)/g, function(token) {
+            return '<span class="word" data-word="' + token + '">' + token + '</span>';
+        });
+    }
+    function renderRange(text, rangeStart, rangeEnd, candidates) {
+        var within = candidates.filter(function(sp) { return sp.s >= rangeStart && sp.e <= rangeEnd; });
+        var top = within.filter(function(sp) {
+            return !within.some(function(other) {
+                return other !== sp && other.s <= sp.s && other.e >= sp.e && (other.s !== sp.s || other.e !== sp.e);
+            });
+        });
+        var seen = {};
+        top = top.filter(function(sp) {
+            var key = sp.s + '-' + sp.e;
+            if (seen[key]) return false;
+            seen[key] = true;
+            return true;
+        });
+        top.sort(function(a, b) { return a.s - b.s; });
+        var out = '', pos = rangeStart;
+        top.forEach(function(sp) {
+            var startAt = Math.max(sp.s, pos);
+            out += wordify(text.substring(pos, startAt));
+            var inner = renderRange(text, startAt, sp.e, candidates.filter(function(c) { return c !== sp; }));
+            var markerNumber = ++languageTagNumber;
+            var explanationHtml = sp.exp || esc(sp.explanation);
+            out += '<mark class="lang-hl ' + colorOf(sp.l) + '">' + inner + '<button type="button" class="explain-marker" data-explanation="' + esc(explanationHtml) + '" aria-label="Show explanation ' + markerNumber + '">' + markerNumber + '</button></mark>';
+            pos = sp.e;
+        });
+        out += wordify(text.substring(pos, rangeEnd));
+        return out;
+    }
+    var html = '<table class="dialogue-table"><thead><tr>'
+        + '<th>Student</th><th>Conversation (language items highlighted)</th>'
+        + '</tr></thead><tbody>';
+    list.forEach(function(ut, li) {
+        var text = ut.t, spans = [];
+        function addSpan(start, end, label, expHtml) {
+            var explanation = label;
+            if (/^yellow$/i.test(label)) explanation = ut.fn ? 'Communicative purpose — ' + ut.fn.replace(/\n/g, ' · ') : 'Meeting language — acknowledges a point or helps organise the discussion.';
+            else if (/^meeting procedures$/i.test(label)) explanation = ut.fn ? 'Meeting procedure — ' + ut.fn.replace(/\n/g, ' · ') : 'Meeting language — helps organise the discussion.';
+            var existing = spans.find(function(sp) { return sp.s === start && sp.e === end; });
+            if (existing) {
+                if (expHtml && (!existing.exp || existing.exp.indexOf(expHtml) < 0)) {
+                    existing.exp = (existing.exp ? existing.exp + ' ' : '') + expHtml;
+                } else if (existing.explanation.indexOf(explanation) < 0) {
+                    existing.explanation += ' ' + explanation;
+                }
+            } else {
+                spans.push({ s: start, e: end, l: label, explanation: explanation, exp: expHtml || '' });
+            }
+        }
+        (ut.hi || []).forEach(function(h) {
+            var idx = text.indexOf(h.m);
+            if (idx < 0) return;
+            if (h.hl) {
+                var subIdx = h.m.indexOf(h.hl);
+                if (subIdx >= 0) { addSpan(idx + subIdx, idx + subIdx + h.hl.length, h.l, h.exp); return; }
+            }
+            addSpan(idx, idx + h.m.length, h.l, h.exp);
+        });
+        var hl = renderRange(text, 0, text.length, spans);
+        var fnLabel = ut.fn ? '<div class="fn-label">' + esc(ut.fn) + '</div>' : '';
+        var role = ut.sp === 'All' ? 'ALL' : ut.sp;
+        var btn = '<button class="speaker-btn role-' + role + '" onclick="play(\'' + ut.f + '\', this)" title="Play">'
+            + role + '<div class="audio-pulse"></div></button>';
+        html += (fnLabel ? '<tr class="fn-row"><td colspan="2" class="c-fnrow">' + fnLabel + '</td></tr>' : '') + '<tr class="script-row" data-i="' + (offset + li) + '" data-file="' + ut.f + '">'
+            + '<td class="c-stu">' + btn + '</td>'
+            + '<td class="c-script"><span class="script-text" data-cn="' + esc(ut.cn || '') + '" data-tc="' + esc(ut.tc || ut.cn || '') + '">' + hl + '</span></td>'
+            + '</tr>';
     });
-    spans.sort(function(a, b) { return a.s - b.s; });
-    var clean = [], last = -1;
-    spans.forEach(function(sp) { if (sp.s >= last) { clean.push(sp); last = sp.e; } });
-    var hl = '', pos = 0;
-    clean.forEach(function(sp) {
-      hl += esc(text.substring(pos, sp.s))
-        + '<mark class="lang-hl ' + colorOf(sp.l) + '" title="' + esc(sp.l) + '">'
-        + esc(text.substring(sp.s, sp.e)) + '</mark>';
-      pos = sp.e;
-    });
-    hl += esc(text.substring(pos));
-    var exps = [];
-    (ut.hi || []).forEach(function(h) { exps.push('<span class="exp-item">' + esc(h.l) + '</span>'); });
-    var role = ut.sp === 'All' ? 'ALL' : ut.sp;
-    var label = role;
-    var btn = '<button class="speaker-btn role-' + role + '" onclick="play(\'' + ut.f + '\', this)" title="Play">'
-      + label + '<div class="audio-pulse"></div></button>';
-    html += '<tr class="script-row" data-file="' + ut.f + '">'
-      + '<td class="c-stu">' + btn + '</td>'
-      + '<td class="c-script"><span class="script-text" data-cn="' + esc(ut.cn || '') + '">' + hl + '</span></td>'
-      + '<td class="c-exp">' + (exps.length ? exps.join(' ') : '<span class="muted">&mdash;</span>') + '</td>'
-      + '<td class="c-fn">' + (ut.fn ? esc(ut.fn) : '<span class="muted">&mdash;</span>') + '</td>'
-      + '</tr>';
-  });
-  html += '</tbody></table>';
-  document.getElementById('dialogueBody').innerHTML = html;
+    html += '</tbody></table>';
+    return html;
 }
 
-window.switchTab = function(i) {
-  var contents = document.querySelectorAll('.tab-content');
-  var buttons = document.querySelectorAll('.tab-btn');
-  contents.forEach(function(c) { c.classList.remove('active'); });
-  buttons.forEach(function(b) { b.classList.remove('active'); });
-  contents[i].classList.add('active');
-  buttons[i].classList.add('active');
+let currentCNLang = 'sc';
+
+function initTranslations() {
+    document.querySelectorAll('.slide [data-cn]').forEach(el => {
+        if (el.dataset.cnProcessed) return;
+        el.dataset.cnProcessed = '1';
+        const trans = document.createElement('div');
+        trans.className = 'cn-translation';
+        trans.dataset.sc = el.dataset.cn || '';
+        trans.dataset.tc = el.dataset.tc || el.dataset.cn || '';
+        trans.textContent = currentCNLang === 'tc' ? trans.dataset.tc : trans.dataset.sc;
+        el.after(trans);
+    });
+}
+
+function initLanguageTooltips() {
+    const dialogue = document.getElementById('deck');
+    const tooltip = document.getElementById('languageTooltip');
+    let activeMark = null;
+    let pinned = false;
+    let lastPointerType = 'mouse';
+
+    function positionTooltip(mark) {
+        tooltip.innerHTML = mark.dataset.explanation;
+        tooltip.hidden = false;
+        const phrase = mark.getBoundingClientRect();
+        const bubble = tooltip.getBoundingClientRect();
+        const left = Math.max(12, Math.min(phrase.left + phrase.width / 2 - bubble.width / 2, window.innerWidth - bubble.width - 12));
+        let top = phrase.top - bubble.height - 10;
+        if (top < 8) top = phrase.bottom + 10;
+        if (top + bubble.height > window.innerHeight - 8) top = Math.max(8, window.innerHeight - bubble.height - 8);
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+    }
+
+    function showTooltip(mark, keepOpen) {
+        if (!mark || !mark.dataset.explanation) return;
+        if (activeMark && activeMark !== mark) activeMark.removeAttribute('aria-describedby');
+        activeMark = mark;
+        pinned = Boolean(keepOpen);
+        mark.setAttribute('aria-describedby', 'languageTooltip');
+        positionTooltip(mark);
+    }
+
+    function hideTooltip() {
+        if (activeMark) activeMark.removeAttribute('aria-describedby');
+        activeMark = null;
+        pinned = false;
+        tooltip.hidden = true;
+    }
+
+    dialogue.addEventListener('pointerover', event => {
+        lastPointerType = event.pointerType || 'mouse';
+        if (lastPointerType === 'touch') return;
+        const mark = event.target.closest('.explain-marker[data-explanation]');
+        if (mark && dialogue.contains(mark)) showTooltip(mark, false);
+    });
+
+    dialogue.addEventListener('pointerout', event => {
+        if (lastPointerType === 'touch' || pinned) return;
+        const mark = event.target.closest('.explain-marker[data-explanation]');
+        if (mark && dialogue.contains(mark) && !mark.contains(event.relatedTarget)) hideTooltip();
+    });
+
+    dialogue.addEventListener('focusin', event => {
+        const mark = event.target.closest('.explain-marker[data-explanation]');
+        if (mark && dialogue.contains(mark)) showTooltip(mark, false);
+    });
+
+    dialogue.addEventListener('focusout', () => {
+        if (!pinned) hideTooltip();
+    });
+
+    dialogue.addEventListener('pointerdown', event => {
+        lastPointerType = event.pointerType || 'mouse';
+    });
+
+    dialogue.addEventListener('click', event => {
+        const mark = event.target.closest('.explain-marker[data-explanation]');
+        if (!mark || !dialogue.contains(mark)) {
+            if (lastPointerType === 'touch') hideTooltip();
+            return;
+        }
+        if (lastPointerType === 'touch') {
+            if (activeMark === mark && pinned) hideTooltip();
+            else showTooltip(mark, true);
+        }
+    });
+
+    document.addEventListener('pointerdown', event => {
+        if (activeMark && !activeMark.contains(event.target) && !tooltip.contains(event.target)) hideTooltip();
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && activeMark) hideTooltip();
+    });
+
+    window.addEventListener('resize', () => {
+        if (activeMark) positionTooltip(activeMark);
+    });
+    window.addEventListener('scroll', () => {
+        if (activeMark) positionTooltip(activeMark);
+    }, true);
+}
+
+const pronunciationMap = {
+    'IT': 'I T',
+    'SMS': 'S M S',
+    'USB': 'U S B',
+    'GPA': 'G P A',
+    'AOB': 'A O B',
+    'e-books': 'ee books',
+    'e-book': 'ee book'
 };
 
-// ---- Audio player ----
-var currentAudio = null;
-var currentBtn = null;
-var playAllTimer = null;
-var speed = 1;
+let hoverSpeakTimer = null;
 
-function getAllBtns() {
-  return Array.prototype.slice.call(document.querySelectorAll('.speaker-btn'));
+function preferredEnglishVoice() {
+    const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    const english = voices.filter(v => /^en([-_]|$)/i.test(v.lang || ''));
+    return english.find(v => /natural|neural|premium|enhanced|siri|ava|samantha|serena|daniel/i.test(v.name))
+        || english.find(v => /google|microsoft|apple/i.test(v.name))
+        || english.find(v => /en[-_]GB|en[-_]US/i.test(v.lang))
+        || english[0] || null;
 }
 
-function clearRowActive() {
-  document.querySelectorAll('.script-row.active').forEach(function(r) { r.classList.remove('active'); });
+/* ===================== Deck runtime ===================== */
+let currentAudio = null;
+let currentBtn = null;
+let speed = 1;
+const PA = { active: false, paused: false, idx: 0, btns: [], timer: null };
+let slides = [];
+let cur = 0;
+
+function esc2(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.hidden = false;
+    clearTimeout(toast._t); toast._t = setTimeout(() => { t.hidden = true; }, 3200);
 }
 
-function clearNowPlaying() {
-  var np = document.getElementById('nowPlaying');
-  np.classList.remove('active');
-  document.getElementById('nowPlayingText').textContent = '\u2014';
+/* ---------- Responsive scale ---------- */
+function applyScale() {
+    const host = document.getElementById('slides');
+    const w = host.clientWidth, h = host.clientHeight;
+    let z = 1;
+    if (w >= 700 && h >= 420) z = Math.max(1, Math.min(w / 1000, h / 700, 1.75));
+    document.getElementById('deck').style.setProperty('--z', z.toFixed(2));
+}
+window.addEventListener('resize', applyScale);
+
+/* ---------- Navigation ---------- */
+function slideIndexOf(el) { return slides.indexOf(el.closest('.slide')); }
+
+function goTo(i, keepAudio) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    if (!keepAudio) { stopPlay(); stopMic(); }
+    slides[cur].classList.remove('active');
+    slides[cur].querySelectorAll('video').forEach(v => v.pause());
+    cur = i;
+    slides[cur].classList.add('active');
+    slides[cur].scrollTop = 0;
+    document.getElementById('languageTooltip').hidden = true;
+    if (micModal) { closeMic(); micFab.hidden = !slides[cur].dataset.mic; }
+    document.getElementById('jump').value = String(cur);
+    document.getElementById('prevBtn').disabled = cur === 0;
+    document.getElementById('nextBtn').disabled = cur === slides.length - 1;
+    document.getElementById('progressBar').style.width = ((cur + 1) / slides.length * 100) + '%';
+    try { history.replaceState(null, '', '#' + (cur + 1)); } catch (e) {}
 }
 
-function clearWordTrack() {
-  document.querySelectorAll('.word-wrap .word.active').forEach(function(w) { w.classList.remove('active'); });
-  document.querySelectorAll('.script-text[data-orig-html]').forEach(function(el) {
-    el.innerHTML = el.dataset.origHtml;
-    delete el.dataset.origHtml;
-  });
+function initNav() {
+    const jump = document.getElementById('jump');
+    slides.forEach((s, i) => {
+        const o = document.createElement('option');
+        o.value = String(i); o.textContent = (i + 1) + '. ' + (s.dataset.title || 'Slide');
+        jump.appendChild(o);
+    });
+    jump.addEventListener('change', () => goTo(parseInt(jump.value, 10)));
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(cur - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(cur + 1));
+    document.addEventListener('keydown', e => {
+        if (/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+        if (micOpen()) return;
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') goTo(cur + 1);
+        else if (e.key === 'ArrowLeft' || e.key === 'PageUp') goTo(cur - 1);
+        else if (e.key === 'Home') goTo(0);
+        else if (e.key === 'End') goTo(slides.length - 1);
+    });
+    let x0 = null, y0 = 0;
+    const host = document.getElementById('slides');
+    host.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    host.addEventListener('touchend', e => {
+        if (x0 === null) return;
+        const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+        x0 = null;
+        if (Math.abs(dx) > 70 && Math.abs(dy) < 50 && !e.target.closest('video,.mic-panel')) goTo(cur + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+    const start = parseInt((location.hash || '').slice(1), 10);
+    goTo(start >= 1 && start <= slides.length ? start - 1 : 0, true);
 }
 
-function startWordTrack(btn, audio) {
-  var row = btn.closest('.script-row');
-  if (!row) return;
-  var textEl = row.querySelector('.script-text');
-  if (!textEl) return;
-
-  textEl.dataset.origHtml = textEl.innerHTML;
-  var text = textEl.textContent.trim();
-  var words = text.split(/\s+/);
-  var wordWrap = document.createElement('span');
-  wordWrap.className = 'word-wrap';
-  wordWrap.innerHTML = words.map(function(w) { return '<span class="word">' + w + '</span>'; }).join(' ');
-  textEl.innerHTML = '';
-  textEl.appendChild(wordWrap);
-  var wordSpans = textEl.querySelectorAll('.word');
-
-  var lastIdx = -1;
-  var handler = function() {
-    var dur = audio.duration;
-    if (!dur || isNaN(dur)) return;
-    var pct = audio.currentTime / dur;
-    var idx = Math.min(Math.floor(pct * words.length), words.length - 1);
-    if (idx !== lastIdx) {
-      if (lastIdx >= 0) wordSpans[lastIdx].classList.remove('active');
-      wordSpans[idx].classList.add('active');
-      lastIdx = idx;
+/* ---------- Dialogue → slides (one mp3 per line: DIALOGUE[i].f) ---------- */
+function buildDialogueSlides() {
+    const anchor = document.getElementById('dlgAnchor');
+    const size = 3;
+    const chunks = [];
+    for (let i = 0; i < DIALOGUE.length; i += size) chunks.push([i, DIALOGUE.slice(i, i + size)]);
+    if (chunks.length > 1 && chunks[chunks.length - 1][1].length === 1) {
+        const last = chunks.pop();
+        chunks[chunks.length - 1][1].push(last[1][0]);
     }
-  };
-  audio.addEventListener('timeupdate', handler);
-  audio.addEventListener('ended', function() {
-    audio.removeEventListener('timeupdate', handler);
-    if (textEl.dataset.origHtml !== undefined) {
-      textEl.innerHTML = textEl.dataset.origHtml;
-      delete textEl.dataset.origHtml;
-    }
-  }, { once: true });
+    chunks.forEach((c, n) => {
+        const sec = document.createElement('section');
+        sec.className = 'slide';
+        sec.dataset.dialogue = '1';
+        sec.dataset.title = 'Discussion ' + (n + 1) + '/' + chunks.length;
+        sec.innerHTML = '<div class="slide-inner"><div class="slide-head"><div class="eyebrow">Possible Response</div>'
+            + '<h2>Discussion ' + (n + 1) + ' / ' + chunks.length + '</h2></div>'
+            + '<div class="dlg">' + renderDialogue(c[1], c[0]) + '</div></div>';
+        anchor.before(sec);
+    });
+    anchor.remove();
 }
 
-function setNowPlaying(btn) {
-  var row = btn.closest('.script-row');
-  if (!row) return;
-  document.querySelectorAll('.script-row.active').forEach(function(r) { r.classList.remove('active'); });
-  row.classList.add('active');
-  row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  var textEl = row.querySelector('.script-text');
-  if (textEl) {
-    var np = document.getElementById('nowPlaying');
-    var npText = document.getElementById('nowPlayingText');
-    npText.textContent = textEl.textContent.trim();
-    np.classList.add('active');
-  }
+/* ---------- Words: make all slide text hoverable ---------- */
+function wordifyStatic() {
+    const SKIP = /^(SCRIPT|STYLE|BUTTON|SELECT|OPTION|VIDEO|TEXTAREA|SOURCE)$/;
+    slides.forEach(slide => {
+        const walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT, {
+            acceptNode(n) {
+                if (!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                const p = n.parentElement;
+                if (!p || SKIP.test(p.tagName)) return NodeFilter.FILTER_REJECT;
+                if (p.closest('.word, .dialogue-table, .cn-translation, .mic-panel, .vcap, .explain-marker')) return NodeFilter.FILTER_REJECT;
+                return NodeFilter.FILTER_ACCEPT;
+            }
+        });
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(n => {
+            const frag = document.createDocumentFragment();
+            n.nodeValue.split(/(\s+)/).forEach(part => {
+                if (!part) return;
+                if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+                const sp = document.createElement('span');
+                sp.className = 'word'; sp.dataset.word = part; sp.textContent = part;
+                frag.appendChild(sp);
+            });
+            n.parentNode.replaceChild(frag, n);
+        });
+    });
 }
 
-function stopCurrentAudio() {
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    currentAudio = null;
-  }
-  if (currentBtn) { currentBtn.classList.remove('playing'); currentBtn = null; }
+/* ---------- Hover-a-word pronunciation (speech synthesis) ---------- */
+function speakHoveredWord(wordEl) {
+    clearTimeout(hoverSpeakTimer);
+    hoverSpeakTimer = setTimeout(() => {
+        const raw = wordEl.dataset.word || wordEl.textContent;
+        const word = raw.replace(/^[^A-Za-z0-9']+|[^A-Za-z0-9'’-]+$/g, '');
+        if (!word || !window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+        if (MIC.listening) return;
+        if (currentAudio && !currentAudio.paused) pausePlay();
+        speechSynthesis.cancel();
+        document.querySelectorAll('.word.speaking').forEach(el => el.classList.remove('speaking'));
+        const utterance = new SpeechSynthesisUtterance(pronunciationMap[raw] || pronunciationMap[word] || word);
+        const voice = preferredEnglishVoice();
+        if (voice) utterance.voice = voice;
+        utterance.lang = voice ? voice.lang : 'en-GB';
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        wordEl.classList.add('speaking');
+        utterance.onend = utterance.onerror = () => wordEl.classList.remove('speaking');
+        speechSynthesis.speak(utterance);
+    }, 280);
 }
 
-window.play = function(file, btn) {
-  stopCurrentAudio();
-  clearPlayAll();
+function initWordPronunciation() {
+    [document.getElementById('slides'), micModal].forEach(bindWordPronunciation);
+}
+function bindWordPronunciation(root) {
+    root.addEventListener('pointerover', event => {
+        if (event.pointerType === 'touch') return;
+        const word = event.target.closest('.word');
+        if (word && !word.contains(event.relatedTarget)) speakHoveredWord(word);
+    });
+    root.addEventListener('pointerout', event => {
+        if (event.pointerType !== 'touch' && event.target.closest('.word')) clearTimeout(hoverSpeakTimer);
+    });
+    root.addEventListener('click', event => {
+        const word = event.target.closest('.word');
+        if (word) speakHoveredWord(word);
+    });
+}
 
-  var audio = new Audio('audio/' + file);
-  audio.playbackRate = speed;
-  currentAudio = audio;
-  currentBtn = btn;
-  btn.classList.add('playing');
-  setNowPlaying(btn);
-  startWordTrack(btn, audio);
-  audio.play().catch(function(e) {
-    console.warn('Audio not found: audio/' + file);
-    btn.classList.remove('playing');
-    clearNowPlaying();
-    clearWordTrack();
-  });
-  audio.addEventListener('ended', function() {
-    btn.classList.remove('playing');
-    clearRowActive();
-    clearNowPlaying();
-    clearWordTrack();
-    currentBtn = null;
-    currentAudio = null;
-  });
-};
+/* ---------- Audio engine (hard-coded mp3 per line: audio/<file>) ---------- */
+function getAllBtns() { return [...document.querySelectorAll('.speaker-btn')]; }
 
-window.playAll = function() {
-  var btns = getAllBtns();
-  var idx = 0;
-
-  function playNext() {
-    if (idx >= btns.length) {
-      currentBtn = null;
-      return;
-    }
-    var btn = btns[idx];
-    var row = btn.closest('.script-row');
-    var file = row ? row.getAttribute('data-file') : null;
-    if (!file) { idx++; playNext(); return; }
-
-    stopCurrentAudio();
-    var audio = new Audio('audio/' + file);
+function startClip(btn) {
+    stopMic();
+    const row = btn.closest('.script-row');
+    const file = row.dataset.file;
+    const audio = new Audio('audio/' + file);
     audio.playbackRate = speed;
-    currentAudio = audio;
-    currentBtn = btn;
+    currentAudio = audio; currentBtn = btn;
     btn.classList.add('playing');
     setNowPlaying(btn);
     startWordTrack(btn, audio);
-
-    audio.play().catch(function(e) {
-      btn.classList.remove('playing');
-      idx++;
-      playNext();
-      return;
-    });
-    audio.addEventListener('ended', function() {
-      btn.classList.remove('playing');
-      clearRowActive();
-      clearWordTrack();
-      idx++;
-      playAllTimer = setTimeout(function() {
-        clearNowPlaying();
-        playNext();
-      }, 600);
-    });
-  }
-  clearPlayAll();
-  playNext();
-};
-
-function clearPlayAll() {
-  if (playAllTimer) {
-    clearTimeout(playAllTimer);
-    playAllTimer = null;
-  }
+    let done = false;
+    const finish = failed => {
+        if (done) return; done = true;
+        btn.classList.remove('playing');
+        clearRowActive(); clearWordTrack();
+        if (currentBtn === btn) currentBtn = null;
+        if (failed) toast('Audio file not found: audio/' + file);
+        if (PA.active && !PA.paused) {
+            PA.idx++;
+            PA.timer = setTimeout(() => { clearNowPlaying(); paNext(); }, failed ? 0 : 600);
+        } else if (!PA.active) clearNowPlaying();
+    };
+    audio.addEventListener('ended', () => finish(false));
+    audio.addEventListener('error', () => finish(true));
+    audio.play().catch(e => { if (e && e.name === 'NotAllowedError') { toast('Tap a speaker button to start audio.'); finish(false); } });
 }
 
-window.pausePlay = function() {
-  if (currentAudio && !currentAudio.paused) {
-    currentAudio.pause();
-    if (currentBtn) currentBtn.classList.remove('playing');
-  }
-  clearPlayAll();
-};
-
-window.stopPlay = function() {
-  stopCurrentAudio();
-  clearPlayAll();
-  clearRowActive();
-  clearWordTrack();
-  clearNowPlaying();
-};
-
-window.setSpeed = function(val) {
-  speed = parseFloat(val);
-  if (currentAudio) currentAudio.playbackRate = speed;
-};
-
-window.toggleAllCN = function(show) {
-  document.querySelector('.container').classList.toggle('cn-active', show);
-};
-
-function initTranslations() {
-  document.querySelectorAll('.tab-content [data-cn]').forEach(function(el) {
-    if (el.dataset.cnProcessed) return;
-    el.dataset.cnProcessed = '1';
-    var trans = document.createElement('div');
-    trans.className = 'cn-translation';
-    trans.textContent = el.dataset.cn;
-    el.after(trans);
-  });
+function play(file, btn) {
+    const same = currentBtn === btn && currentAudio && !currentAudio.paused;
+    stopPlay();
+    if (same) return;
+    startClip(btn);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  renderDialogue();
-  initTranslations();
+function paNext() {
+    clearTimeout(PA.timer);
+    if (!PA.active || PA.paused) return;
+    if (PA.idx >= PA.btns.length) { PA.active = false; clearNowPlaying(); return; }
+    const btn = PA.btns[PA.idx];
+    goTo(slideIndexOf(btn), true);
+    startClip(btn);
+}
+
+function playAll() {
+    const resumable = currentAudio && currentBtn && currentAudio.paused && !currentAudio.ended && currentAudio.currentTime > 0;
+    if (resumable) {
+        PA.btns = getAllBtns(); PA.idx = PA.btns.indexOf(currentBtn); PA.active = true; PA.paused = false;
+        currentBtn.classList.add('playing');
+        currentAudio.play();
+        return;
+    }
+    if (PA.active && PA.paused) { PA.paused = false; paNext(); return; }
+    stopPlay();
+    PA.btns = getAllBtns();
+    const first = slides[cur].querySelector('.speaker-btn');
+    PA.idx = first ? PA.btns.indexOf(first) : 0;
+    PA.active = true; PA.paused = false;
+    paNext();
+}
+
+function pausePlay() {
+    if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        if (currentBtn) currentBtn.classList.remove('playing');
+    }
+    if (PA.active) { PA.paused = true; clearTimeout(PA.timer); }
+}
+
+function stopPlay() {
+    clearTimeout(PA.timer);
+    PA.active = false; PA.paused = false;
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        if (currentBtn) currentBtn.classList.remove('playing');
+    }
+    currentAudio = null; currentBtn = null;
+    clearRowActive(); clearWordTrack(); clearNowPlaying();
+}
+
+function setSpeed(val) {
+    speed = parseFloat(val);
+    if (currentAudio) currentAudio.playbackRate = speed;
+}
+
+/* ---------- Pronunciation tracer (word highlighting follows the audio) ---------- */
+function wordTraceWeight(token) {
+    const w = token.toLowerCase().replace(/[^a-z]/g, '');
+    let syl = 1;
+    if (w) {
+        const m = w.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '').replace(/^y/, '').match(/[aeiouy]{1,2}/g);
+        syl = Math.max(1, m ? m.length : 1);
+    }
+    let weight = syl * 3 + 1;
+    if (/[.?!]["')\]]?$/.test(token)) weight += 4;
+    else if (/[,;:\u2014]["')\]]?$/.test(token)) weight += 2;
+    return weight;
+}
+let wordTraceRaf = 0;
+function startWordTrack(btn, audio) {
+    cancelAnimationFrame(wordTraceRaf);
+    const row = btn.closest('.script-row');
+    if (!row) return;
+    const textEl = row.querySelector('.script-text');
+    if (!textEl) return;
+    const words = Array.from(textEl.querySelectorAll('.word'));
+    if (!words.length) return;
+    const weights = words.map(w => wordTraceWeight(w.textContent));
+    const total = weights.reduce((x, y) => x + y, 0);
+    const cum = []; let run = 0;
+    weights.forEach(w => { run += w; cum.push(run / total); });
+    let lastIdx = -1;
+    const paint = () => {
+        const dur = audio.duration;
+        if (dur && isFinite(dur)) {
+            const pct = Math.min(1, audio.currentTime / dur);
+            let idx = cum.findIndex(c => pct <= c);
+            if (idx < 0) idx = words.length - 1;
+            if (idx !== lastIdx) {
+                words.forEach((w, i) => { w.classList.toggle('active', i === idx); w.classList.toggle('read', i < idx); });
+                lastIdx = idx;
+            }
+        }
+        if (!audio.paused && !audio.ended) wordTraceRaf = requestAnimationFrame(paint);
+    };
+    const kick = () => { cancelAnimationFrame(wordTraceRaf); wordTraceRaf = requestAnimationFrame(paint); };
+    audio.addEventListener('play', kick);
+    audio.addEventListener('playing', kick);
+    audio.addEventListener('seeked', paint);
+    audio.addEventListener('loadedmetadata', paint);
+    audio.addEventListener('ended', () => cancelAnimationFrame(wordTraceRaf), { once: true });
+}
+function clearWordTrack() {
+    cancelAnimationFrame(wordTraceRaf);
+    document.querySelectorAll('.script-text .word.active, .script-text .word.read').forEach(w => w.classList.remove('active', 'read'));
+}
+
+function setNowPlaying(btn) {
+    const row = btn.closest('.script-row');
+    if (!row) return;
+    document.querySelectorAll('.script-row.active').forEach(r => r.classList.remove('active'));
+    row.classList.add('active');
+    selectTarget(row);
+    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const textEl = row.querySelector('.script-text');
+    if (textEl) {
+        document.getElementById('nowPlayingText').textContent = textEl.textContent.trim();
+        document.getElementById('nowPlaying').classList.add('active');
+    }
+}
+function clearRowActive() { document.querySelectorAll('.script-row.active').forEach(r => r.classList.remove('active')); }
+function clearNowPlaying() {
+    document.getElementById('nowPlaying').classList.remove('active');
+    document.getElementById('nowPlayingText').textContent = '—';
+}
+
+/* ---------- Chinese translation toggle & script selector ---------- */
+function toggleAllCN(show) {
+    document.getElementById('deck').classList.toggle('cn-active', show);
+    const cb = document.getElementById('cnToggle');
+    if (cb && cb.checked !== show) cb.checked = show;
+}
+
+function setCNLang(lang) {
+    currentCNLang = lang === 'tc' ? 'tc' : 'sc';
+    document.querySelectorAll('.cn-translation').forEach(el => {
+        el.textContent = currentCNLang === 'tc' ? (el.dataset.tc || el.dataset.sc) : el.dataset.sc;
+    });
+    document.querySelectorAll('.cn-lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === currentCNLang);
+    });
+    const lbl = document.getElementById('cnToggleLabel');
+    if (lbl) lbl.textContent = currentCNLang === 'tc' ? '中文翻譯' : '中文翻译';
+    const cb = document.getElementById('cnToggle');
+    if (cb && !cb.checked) toggleAllCN(true);
+}
+
+/* ===================== Microphone: pronunciation feedback ===================== */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const MIC = { rec: null, listening: false, panel: null };
+const NUMW = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+
+function tok(t) {
+    return t.toLowerCase().replace(/[’‘]/g, "'").replace(/\([^)]*\)/g, ' ').replace(/[-–—/]/g, ' ')
+        .replace(/[^a-z0-9'\s]/g, ' ').split(/\s+/).filter(Boolean)
+        .map(w => w.replace(/^'+|'+$/g, '')).filter(Boolean)
+        .map(w => (/^\d+$/.test(w) && +w <= 20) ? NUMW[+w] : w);
+}
+function lev(a, b) {
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+}
+function sim(a, b) {
+    if (a === b || a.replace(/'/g, '') === b.replace(/'/g, '')) return 1;
+    return (1 - lev(a, b) / Math.max(a.length, b.length)) >= 0.7 ? 0.5 : 0;
+}
+function subCost(a, b) { const s = sim(a, b); return s === 1 ? 0 : s === 0.5 ? 0.4 : 1.5; }
+
+function align(T, H) {
+    const n = T.length, m = H.length;
+    const D = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
+    for (let i = 1; i <= n; i++) D[i][0] = i;
+    for (let j = 1; j <= m; j++) D[0][j] = j;
+    for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++)
+        D[i][j] = Math.min(D[i - 1][j - 1] + subCost(T[i - 1], H[j - 1]), D[i - 1][j] + 1, D[i][j - 1] + 1);
+    const res = new Array(n), extras = [];
+    let i = n, j = m;
+    while (i > 0 || j > 0) {
+        if (i > 0 && j > 0 && Math.abs(D[i][j] - (D[i - 1][j - 1] + subCost(T[i - 1], H[j - 1]))) < 1e-9) {
+            const s = sim(T[i - 1], H[j - 1]);
+            res[i - 1] = { w: T[i - 1], status: s === 1 ? 'ok' : s === 0.5 ? 'close' : 'wrong', heard: H[j - 1] };
+            i--; j--;
+        } else if (i > 0 && Math.abs(D[i][j] - (D[i - 1][j] + 1)) < 1e-9) {
+            res[i - 1] = { w: T[i - 1], status: 'missed' }; i--;
+        } else { extras.unshift(H[j - 1]); j--; }
+    }
+    return { res, extras };
+}
+function scoreOf(a, n) {
+    let pts = 0;
+    a.res.forEach(r => { if (r.status === 'ok') pts += 1; else if (r.status === 'close') pts += 0.5; });
+    return Math.round(100 * Math.max(0, pts - 0.25 * a.extras.length) / n);
+}
+
+function targetTextOf(slide) {
+    if (slide.dataset.dialogue) {
+        const row = slide.querySelector('.script-row.target') || slide.querySelector('.script-row');
+        return row ? DIALOGUE[+row.dataset.i].t.replace(/\([^)]*\)/g, '').trim() : '';
+    }
+    return slide.dataset.practice || '';
+}
+
+let micFab = null, micModal = null, micPanel = null;
+
+function makeMicUI() {
+    micFab = document.createElement('button');
+    micFab.type = 'button'; micFab.className = 'mic-fab'; micFab.hidden = true;
+    micFab.title = 'Practise your pronunciation'; micFab.setAttribute('aria-label', 'Open pronunciation practice');
+    micFab.textContent = '🎤';
+    document.getElementById('slides').appendChild(micFab);
+
+    micModal = document.createElement('div');
+    micModal.className = 'mic-modal'; micModal.hidden = true;
+    micModal.innerHTML = '<div class="mic-backdrop"></div>'
+        + '<div class="mic-panel" role="dialog" aria-modal="true" aria-label="Pronunciation practice">'
+        + '<button type="button" class="mic-close" aria-label="Close">×</button>'
+        + '<div class="mic-lines"><button type="button" class="mic-step mic-prev" aria-label="Previous line">‹</button>'
+        + '<span class="mic-linecount"></span><button type="button" class="mic-step mic-next" aria-label="Next line">›</button>'
+        + '<button type="button" class="mic-listen">🔊 Listen</button></div>'
+        + '<div class="mic-top"><button type="button" class="mic-btn" aria-label="Record your pronunciation" title="Record">🎤</button>'
+        + '<div class="mic-target"><span class="mic-label">Say this</span><span class="mic-target-text"></span></div></div>'
+        + '<div class="mic-status"></div>'
+        + '<div class="mic-result" hidden><div class="score-row"><div class="score-ring"><span></span></div>'
+        + '<div class="score-meta"><strong></strong><small></small></div></div>'
+        + '<div class="word-feedback"></div><ul class="mic-tips"></ul>'
+        + '<div class="mic-note">Feedback comes from your browser’s speech recognition, so it shows how clearly each word was understood.</div></div></div>';
+    document.getElementById('deck').appendChild(micModal);
+    micPanel = micModal.querySelector('.mic-panel');
+
+    micFab.addEventListener('click', openMic);
+    micModal.querySelector('.mic-backdrop').addEventListener('click', closeMic);
+    micModal.querySelector('.mic-close').addEventListener('click', closeMic);
+    micPanel.querySelector('.mic-btn').addEventListener('click', () => toggleMic(slides[cur], micPanel));
+    micPanel.querySelector('.mic-prev').addEventListener('click', () => stepLine(-1));
+    micPanel.querySelector('.mic-next').addEventListener('click', () => stepLine(1));
+    micPanel.querySelector('.mic-listen').addEventListener('click', () => {
+        const row = slides[cur].querySelector('.script-row.target');
+        const btn = row && row.querySelector('.speaker-btn');
+        if (btn) { stopPlay(); startClip(btn); }
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !micModal.hidden) closeMic(); });
+}
+function micOpen() { return micModal && !micModal.hidden; }
+function openMic() {
+    stopPlay();
+    micModal.hidden = false;
+    refreshPanel(slides[cur]);
+    micPanel.querySelector('.mic-btn').focus();
+}
+function closeMic() {
+    stopMic();
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    if (micModal) micModal.hidden = true;
+}
+function stepLine(d) {
+    const rows = [...slides[cur].querySelectorAll('.script-row')];
+    const i = rows.findIndex(r => r.classList.contains('target'));
+    const n = Math.max(0, Math.min(rows.length - 1, (i < 0 ? 0 : i) + d));
+    if (rows[n]) { selectTarget(rows[n], true); rows[n].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+}
+function refreshPanel(slide) {
+    if (!micPanel || slide !== slides[cur]) return;
+    const rows = [...slide.querySelectorAll('.script-row')];
+    const i = rows.findIndex(r => r.classList.contains('target'));
+    micPanel.querySelector('.mic-lines').style.display = rows.length ? '' : 'none';
+    micPanel.querySelector('.mic-linecount').textContent = rows.length ? 'Line ' + (Math.max(i, 0) + 1) + ' of ' + rows.length : '';
+    micPanel.querySelector('.mic-prev').disabled = i <= 0;
+    micPanel.querySelector('.mic-next').disabled = i >= rows.length - 1;
+    micPanel.querySelector('.mic-target-text').textContent = targetTextOf(slide);
+    micPanel.querySelector('.mic-status').textContent = 'Press the mic and read the sentence aloud.';
+    micPanel.querySelector('.mic-result').hidden = true;
+}
+function selectTarget(row, force) {
+    const slide = row.closest('.slide');
+    if (!slide) return;
+    if (row.classList.contains('target') && !force) return;
+    slide.querySelectorAll('.script-row.target').forEach(r => r.classList.remove('target'));
+    row.classList.add('target');
+    if (MIC.listening) stopMic();
+    refreshPanel(slide);
+}
+
+function stopMic() {
+    if (MIC.rec) { try { MIC.rec.abort(); } catch (e) {} }
+    MIC.rec = null; MIC.listening = false;
+    document.querySelectorAll('.mic-btn.listening').forEach(b => b.classList.remove('listening'));
+}
+
+function toggleMic(slide, panel) {
+    const status = panel.querySelector('.mic-status');
+    if (MIC.listening) { try { MIC.rec.stop(); } catch (e) {} return; }
+    if (!SR) { status.textContent = 'Speech recognition isn’t available in this browser. Please use Chrome, Edge or Safari.'; return; }
+    const target = targetTextOf(slide);
+    const T = tok(target);
+    if (!T.length) return;
+    stopPlay();
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    panel.querySelector('.mic-result').hidden = true;
+    const rec = new SR();
+    rec.lang = 'en-GB'; rec.interimResults = true; rec.maxAlternatives = 5; rec.continuous = false;
+    let finalRes = null, errored = false;
+    const btn = panel.querySelector('.mic-btn');
+    rec.onstart = () => { MIC.listening = true; btn.classList.add('listening'); status.textContent = 'Listening… read the sentence aloud.'; };
+    rec.onresult = e => {
+        const r = e.results[e.results.length - 1];
+        if (r.isFinal) finalRes = r;
+        else status.textContent = 'Listening… ' + r[0].transcript;
+    };
+    rec.onerror = e => {
+        errored = true;
+        const msg = {
+            'not-allowed': 'Microphone access is blocked. Allow it in your browser’s address bar and try again.',
+            'service-not-allowed': 'Microphone access is blocked. Allow it in your browser settings and try again.',
+            'no-speech': 'I didn’t hear anything. Move closer to the microphone and try again.',
+            'audio-capture': 'No microphone was found.',
+            'network': 'The speech service couldn’t be reached. Check your internet connection.',
+            'aborted': ''
+        }[e.error];
+        status.textContent = msg === undefined ? 'Recognition error: ' + e.error : msg;
+    };
+    rec.onend = () => {
+        btn.classList.remove('listening');
+        const wasThis = MIC.rec === rec;
+        MIC.listening = false; if (wasThis) MIC.rec = null;
+        if (!wasThis) return;
+        if (finalRes) evaluate(panel, T, finalRes);
+        else if (!errored) status.textContent = 'I didn’t catch that. Press the mic and try again.';
+    };
+    MIC.rec = rec;
+    try { rec.start(); } catch (e) { status.textContent = 'Could not start the microphone. Please try again.'; MIC.rec = null; }
+}
+
+function evaluate(panel, T, result) {
+    let best = null;
+    for (let k = 0; k < result.length; k++) {
+        const H = tok(result[k].transcript);
+        const a = align(T, H);
+        const sc = scoreOf(a, T.length);
+        if (!best || sc > best.sc) best = { a, sc, text: result[k].transcript, conf: result[k].confidence };
+    }
+    const grade = best.sc >= 90 ? ['Excellent!', '#2e9e4f'] : best.sc >= 75 ? ['Good job', '#6aa84f']
+        : best.sc >= 50 ? ['Getting there', '#d4a043'] : ['Try again', '#c0392b'];
+    const box = panel.querySelector('.mic-result');
+    const ring = box.querySelector('.score-ring');
+    ring.style.setProperty('--pct', best.sc); ring.style.setProperty('--rc', grade[1]);
+    ring.querySelector('span').textContent = best.sc + '%';
+    box.querySelector('.score-meta strong').textContent = grade[0];
+    const confTxt = best.conf ? ' · recognition confidence ' + Math.round(best.conf * 100) + '%' : '';
+    box.querySelector('.score-meta small').textContent = 'Heard: “' + best.text.trim() + '”' + confTxt;
+
+    const fb = box.querySelector('.word-feedback');
+    fb.innerHTML = '';
+    best.a.res.forEach(r => {
+        const s = document.createElement('span');
+        s.className = 'word fb fb-' + r.status; s.dataset.word = r.w; s.textContent = r.w;
+        s.title = r.status === 'ok' ? 'Clear' : r.status === 'close' ? 'Close — heard “' + r.heard + '”'
+            : r.status === 'wrong' ? 'Heard “' + r.heard + '”' : 'Not heard';
+        fb.appendChild(s);
+    });
+    best.a.extras.forEach(x => {
+        const s = document.createElement('span');
+        s.className = 'fb fb-extra'; s.textContent = '+ ' + x; s.title = 'Extra word heard';
+        fb.appendChild(s);
+    });
+
+    const tips = [];
+    const wrong = best.a.res.filter(r => r.status === 'wrong' || r.status === 'close');
+    const missed = best.a.res.filter(r => r.status === 'missed');
+    wrong.slice(0, 4).forEach(r => tips.push('“' + r.w + '” sounded like “' + r.heard + '”. Hover over it to hear the model pronunciation.'));
+    if (missed.length) tips.push('Not heard: ' + missed.slice(0, 6).map(r => '“' + r.w + '”').join(', ') + '. Say every word clearly, including short ones.');
+    if (best.a.extras.length) tips.push('Extra words were picked up (' + best.a.extras.slice(0, 4).join(', ') + '). Try to follow the script exactly.');
+    if (best.conf && best.conf < 0.6) tips.push('Recognition confidence was low — speak a little more slowly and clearly, or move closer to the microphone.');
+    if (best.sc >= 90) tips.push('Great clarity! Now play the audio and try to match its rhythm and stress.');
+    box.querySelector('.mic-tips').innerHTML = tips.map(t => '<li>' + esc2(t) + '</li>').join('');
+    box.hidden = false;
+    panel.querySelector('.mic-status').textContent = 'Press the mic to try again.';
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+/* ---------- Boot ---------- */
+document.addEventListener('DOMContentLoaded', function () {
+    var bImg = document.getElementById('bannerImg'); if (bImg) bImg.src = 'banner.png';
+    buildDialogueSlides();
+    slides = [...document.querySelectorAll('#slides > .slide')];
+    wordifyStatic();
+    initTranslations();
+    initLanguageTooltips();
+    slides.forEach((s, i) => { if (!s.dataset.nomic && i >= 5 && i <= 18) s.dataset.mic = '1'; });
+    makeMicUI();
+    initWordPronunciation();
+    document.getElementById('slides').addEventListener('click', e => {
+        const row = e.target.closest('.script-row');
+        if (row) selectTarget(row);
+    });
+    slides.forEach(s => { const r = s.querySelector('.script-row'); if (r) r.classList.add('target'); });
+    slides.forEach(s => s.querySelectorAll('video').forEach(v => v.addEventListener('play', () => { stopPlay(); stopMic(); })));
+    applyScale();
+    initNav();
+    if (window.speechSynthesis) speechSynthesis.getVoices();
 });
-
-})();
 </script>
-
 </body>
 </html>
